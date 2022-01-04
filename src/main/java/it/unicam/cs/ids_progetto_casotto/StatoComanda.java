@@ -1,7 +1,8 @@
 package it.unicam.cs.ids_progetto_casotto;
 
-public enum StatoConsumazione {
-    ORDINATO,
+public enum StatoComanda {
+    CREATA,
     IN_PREPARAZIONE,
-    PRONTO,
+    PRONTA,
+    CONSEGNATA
 }

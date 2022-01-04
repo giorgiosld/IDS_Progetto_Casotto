@@ -21,7 +21,11 @@ public class Cameriere extends StaffRistorazione{
         super.getOrdinazione();
     }
 
-    //TODO getStatoComanda after create StatoComanda as enum
+    public StatoComanda getStatoComanda(Comanda comanda){
+        return comanda.getState();
+    }
 
-    //TODO setStatoComanda after create StatoComanda as enum
+    public void setStatoComanda(Comanda comanda, StatoComanda state){
+        comanda.setState(state);
+    }
 }
