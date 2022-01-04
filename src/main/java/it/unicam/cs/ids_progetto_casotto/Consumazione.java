@@ -5,9 +5,9 @@ public abstract class Consumazione {
     protected String nome;
     protected double prezzo;
     protected int quantità;
-    private statoConsumazione state;
+    private StatoConsumazione state;
 
-    public Consumazione(String nome, double prezzo, int quantità, statoConsumazione state){
+    public Consumazione(String nome, double prezzo, int quantità, StatoConsumazione state){
         this.nome = nome;
         this.prezzo = prezzo;
         this.quantità = quantità;
@@ -26,11 +26,11 @@ public abstract class Consumazione {
         return quantità;
     }
 
-    protected void setStatoConsumazione(statoConsumazione state){
+    protected void setStatoConsumazione(StatoConsumazione state){
         this.state = state;
     }
 
-    protected statoConsumazione getState(){
+    protected StatoConsumazione getState(){
         return state;
     }
 }
