@@ -1,5 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto;
 
+import java.util.List;
+
 public class Cameriere extends StaffRistorazione{
 
     public Cameriere(String nome, int idStaff) {
@@ -17,8 +19,13 @@ public class Cameriere extends StaffRistorazione{
     }
 
     @Override
-    public void getOrdinazione() {
-        super.getOrdinazione();
+    public Comanda getOrdinazione(Comanda comanda, ControllerOrdinazione controller) {
+        return super.getOrdinazione(comanda, controller);
+    }
+
+    @Override
+    public List<Comanda> getOrdinazioni(Comanda comanda, ControllerOrdinazione controller) {
+        return super.getOrdinazioni(comanda, controller);
     }
 
     public StatoComanda getStatoComanda(Comanda comanda){

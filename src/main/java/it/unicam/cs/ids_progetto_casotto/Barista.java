@@ -1,5 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto;
 
+import java.util.List;
+
 public class Barista extends StaffRistorazione{
 
     public Barista(String nome, int idStaff) {
@@ -17,11 +19,17 @@ public class Barista extends StaffRistorazione{
     }
 
     @Override
-    public void getOrdinazione() {
-        super.getOrdinazione();
+    public Comanda getOrdinazione(Comanda comanda, ControllerOrdinazione controller) {
+        return super.getOrdinazione(comanda, controller);
+    }
+
+    @Override
+    public List<Comanda> getOrdinazioni(Comanda comanda, ControllerOrdinazione controller) {
+        return super.getOrdinazioni(comanda, controller);
     }
 
     public void setStatoConsumazione(Consumazione consumazione, StatoConsumazione state){
         consumazione.setStatoConsumazione(state);
     }
 }
+
