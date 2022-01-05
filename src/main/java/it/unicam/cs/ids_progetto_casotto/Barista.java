@@ -24,12 +24,10 @@ public class Barista extends StaffRistorazione{
     }
 
     @Override
-    public List<Comanda> getOrdinazioni(Comanda comanda, ControllerOrdinazione controller) {
-        return super.getOrdinazioni(comanda, controller);
+    public List<Comanda> getOrdinazioni(ControllerOrdinazione controller) {
+        return super.getOrdinazioni(controller);
     }
 
-    public void setStatoConsumazione(Consumazione consumazione, StatoConsumazione state){
-        consumazione.setStatoConsumazione(state);
-    }
+
 }
 
