@@ -24,8 +24,8 @@ public class Cameriere extends StaffRistorazione{
     }
 
     @Override
-    public List<Comanda> getOrdinazioni(Comanda comanda, ControllerOrdinazione controller) {
-        return super.getOrdinazioni(comanda, controller);
+    public List<Comanda> getOrdinazioni(ControllerOrdinazione controller) {
+        return super.getOrdinazioni(controller);
     }
 
     public StatoComanda getStatoComanda(Comanda comanda){
