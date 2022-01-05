@@ -36,5 +36,7 @@ public class UtenzaSpiaggia {
 
         return utenzeDisponibili;
     }
+    public String getSoni(
 
+    )
 }
