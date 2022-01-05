@@ -19,9 +19,11 @@ public class UtenzaSpiaggia {
     public int getId(){
         return this.id;
     }
+
     public boolean getDisponibilità(){
         return this.disponibilita;
     }
+
     public boolean setDisponibilita(boolean disponibilita){
        return this.disponibilita=disponibilita;
     }
