@@ -26,10 +26,10 @@ public class Receptionist {
         return id;
     }
 
-    public void visualizzaPrenotazioni(){ //idea che prende dal database quindi vedere se serve la classe prenotazione
-        List<Prenotazione>prenotazioni = database
-                .stream()
-                .collect(Collectors.toList());
-        prenotazioni.forEach(System.out::println);
+    public List<UtenzaSpiaggia> visualizzaPrenotazioni(ControllerUtenze controller){ //lista fai tornare stringa
+      return controller.getUtenze()
+               .stream()
+               .filter(x -> x.getDisponibilita() == false)
+              .collect(Collectors.toList());
     }
 }

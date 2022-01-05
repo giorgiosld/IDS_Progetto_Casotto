@@ -1,18 +1,26 @@
 package it.unicam.cs.ids_progetto_casotto;
 
-import javax.websocket.ClientEndpoint;
+
 import java.util.List;
 
-public class ControllerUtenze extends Cliente implements HandlerDatiUtente{
-//probabilmente Utenze dovrà estendere la classe cliente
+public class ControllerUtenze  implements HandlerDatiUtente{
+
+    //lista utenze
+    List<UtenzaSpiaggia>utenze;
+
+    public ControllerUtenze(List<UtenzaSpiaggia> utenze) {
+        this.utenze = utenze;
+    }
+
+    //
  String prova ;
 
 
-  public String getNomeUtente(){
-      return prova ;
+  public String getNomeUtente(//oggettocliente){
+      return prova;
   }
     public String getCognomeUtente(){
-        return prova
+        return prova;
     }
     public int getEta(){
       return 0;
@@ -24,9 +32,9 @@ public class ControllerUtenze extends Cliente implements HandlerDatiUtente{
       return 0;
     }
 
-    public List<UtenzaSpiaggia> getUtenze(){ //solo quelle libere o tutte
+    public List<UtenzaSpiaggia> getUtenze(){ //solo  o tutte
 
-      List<UtenzaSpiaggia>utenze=
+      return utenze;
 
     }
 
@@ -34,10 +42,12 @@ public class ControllerUtenze extends Cliente implements HandlerDatiUtente{
 
     }
 
-    public setdisponibilitàUtenza(){
+    public void setdisponibilitàUtenza(UtenzaSpiaggia utenza, boolean disponibilita){
+
+        utenza.setDisponibilita(disponibilita);
 
     }
 
     public notificaReceptionist(){}//produttore consumatore o flags?
-
+    //quando prenota manda notifica
 }
