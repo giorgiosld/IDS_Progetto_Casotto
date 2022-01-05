@@ -11,6 +11,7 @@ public class Comanda {
     public double prezzoTotale;
     //chiedere per possibile creazione unico enum
     public StatoComanda state;
+    //aggiungere data alla comanda
 
     //costruttore normale
     public Comanda(int idComanda, List<Consumazione> consumazioni, double prezzoTotale, StatoComanda state){
@@ -59,5 +60,15 @@ public class Comanda {
 
     public List<Consumazione> getConsumazioni() {
         return consumazioni;
+    }
+
+    @Override
+    public String toString() {
+        return "Comanda{" +
+                "idComanda=" + idComanda +
+                ", consumazioni=" + consumazioni +
+                ", prezzoTotale=" + prezzoTotale +
+                ", state=" + state +
+                '}';
     }
 }

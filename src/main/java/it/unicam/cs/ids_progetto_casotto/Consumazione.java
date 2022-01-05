@@ -26,6 +26,7 @@ public abstract class Consumazione {
         return quantità;
     }
 
+    //da cancellare metodo questo e quello sotto PENSARE SE UTILE O MENO
     protected void setStatoConsumazione(StatoConsumazione state){
         this.state = state;
     }

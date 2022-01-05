@@ -19,14 +19,19 @@ public class ControllerOrdinazione {
         return comande;
     }
 
-    //notifica inviata in broadcast o a singolo staff memeber
-    public void notificaStaff(Comanda comanda){
-
+    //notifica inviata in broadcast
+    public String notificaStaff(Comanda comanda){
+        return comanda.toString();
     }
 
     //modificare iniviaImporto piu che prezzo totale richiedere la comanda dal quale si vuole calcolare importo
     //sempluce utilizzo di get PrezzoTotale
-    public double inviaImporto(Comanda comanda){
+    public double inviaImportoComanda(Comanda comanda){
         return comanda.getPrezzoTotale();
+    }
+
+    public Comanda getLastComanda(){
+        Comanda last = comande.get(comande.size() - 1);
+        return last;
     }
 }

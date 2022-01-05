@@ -1,15 +1,14 @@
 package it.unicam.cs.ids_progetto_casotto;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public abstract class StaffRistorazione {
 
     protected String nome;
     protected int idStaff;
+    //arraylist di membri
 
     public StaffRistorazione(String nome, int idStaff){
         this.nome = nome;
@@ -36,10 +35,14 @@ public abstract class StaffRistorazione {
         return comandaFinded;
     }
 
-    //se inteso come tutte le ordinazioni
-    public List<Comanda> getOrdinazioni(Comanda comanda, ControllerOrdinazione controller){
+    //se inteso come tutte le ordinazioni canc Comanda comanda
+    public List<Comanda> getOrdinazioni(ControllerOrdinazione controller){
         List<Comanda> comande = controller.getComande();
         return comande;
     }
 
+    public String getNotify(ControllerOrdinazione controllerOrdinazione){
+        Comanda comanda = controllerOrdinazione.getLastComanda();
+        return controllerOrdinazione.notificaStaff(comanda);
+    }
 }
