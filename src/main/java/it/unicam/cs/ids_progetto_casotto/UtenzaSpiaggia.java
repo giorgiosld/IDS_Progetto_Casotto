@@ -1,38 +1,34 @@
 package it.unicam.cs.ids_progetto_casotto;
 
-import java.util.List;
-
 public class UtenzaSpiaggia {
 
     private int id;
     private boolean disponibilita;
-    private double tariffa;
-    private long postiDisponibili; //vedere se postidisponibili è inteso come numero o "oggetto"
+    private double tariffa; //classe tariffa contenente attività,tempo,prezzo.
+    private int postiOccupabili; //numero
 
-    public UtenzaSpiaggia(int id, boolean disponibilita, double tariffa, long postiDisponibili){
+    public UtenzaSpiaggia(int id, boolean disponibilita, double tariffa, int postiOccupabili){
         this.id=id;
         this.disponibilita=disponibilita;
         this.tariffa=tariffa;
-        this.postiDisponibili=postiDisponibili;
+        this.postiOccupabili =postiOccupabili;
 
     }
     public int getId(){
         return this.id;
     }
-    public boolean getDisponibilità(){
+
+    public boolean getDisponibilita(){
         return this.disponibilita;
     }
+
     public boolean setDisponibilita(boolean disponibilita){
        return this.disponibilita=disponibilita;
     }
 
-    public long getPostiDisponibili(List<UtenzaSpiaggia>Utenze ){
+    public int getPostiOccupabili(){
 
-         long utenzeDisponibili = Utenze.stream()
-                    .filter(u->u.getDisponibilità() == true)
-                    .count();
-
-        return utenzeDisponibili;
+        return this.postiOccupabili;
     }
 
 }
