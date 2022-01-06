@@ -1,20 +1,25 @@
 package it.unicam.cs.ids_progetto_casotto;
 
-
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 
 public class ControllerUtenze  implements HandlerDatiUtente{
 
     //lista utenze
     List<UtenzaSpiaggia>utenze;
+    List<GregorianCalendar> periodi;
 
     public ControllerUtenze(List<UtenzaSpiaggia> utenze) {
         this.utenze = utenze;
+        this.periodi = new ArrayList<>();
     }
 
-    //
- String prova ;
 
+    public List<GregorianCalendar> getPeriodi() {
+        return periodi;
+    }
 
   public String getNomeUtente(//oggettocliente){
       return prova;
@@ -38,8 +43,8 @@ public class ControllerUtenze  implements HandlerDatiUtente{
 
     }
 
-    public prenotaUtenza(UtenzaSpiaggia utenza){
-
+    public Optional<UtenzaSpiaggia> prenotaUtenza(int idUtenza, int idTariffa){
+        return null;
     }
 
     public void setdisponibilitàUtenza(UtenzaSpiaggia utenza, boolean disponibilita){
