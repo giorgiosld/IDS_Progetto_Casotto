@@ -6,11 +6,11 @@ import java.util.Optional;
 
 public class Cliente {
 
-    private String nome;
-    private String cognome;
-    private int eta;
-    private String codiceFiscale;
-    private char sesso;
+    private final String nome;
+    private final String cognome;
+    private final int eta;
+    private final String codiceFiscale;
+    private final char sesso;
     private int idTariffa;
 
     public Cliente(String nome, String cognome, int eta, String codiceFiscale, char sesso, int idTariffa) {
@@ -46,36 +46,32 @@ public class Cliente {
         return idTariffa;
     }
 
-    public List<Attivita> visualizzaAttivita(int anno, int mese, int giorno) {
-        ControllerAttivita controller = new ControllerAttivita();
-        List<Attivita> attivitaVisualizzate = controller.getAttivita(anno, mese, giorno);
-        return attivitaVisualizzate;
+    public void setIdTariffa(int idTariffa) { this.idTariffa = idTariffa; }
+
+    public List<Attivita> visualizzaAttivita(ControllerAttivita controller) {
+        return controller.getAttivita();
     }
 
-    public Optional<Attivita> prenotaAttivita(int anno, int mese, int giorno, String nomeAttivita) {
-        ControllerAttivita controller = new ControllerAttivita();
-        Optional<Attivita> attivitaSelezionata = controller.prenotazioneAttivita(anno, mese, giorno, nomeAttivita);
+    public Optional<Attivita> prenotaAttivita(ControllerAttivita controller, String nomeAttivita) {
+        Optional<Attivita> attivitaSelezionata = controller.prenotazioneAttivita(this.codiceFiscale, nomeAttivita);
         return attivitaSelezionata;
     }
 
-    public List<GregorianCalendar> visualizzaPeriodo() {
-        //TODO
-        return null;
+    public List<GregorianCalendar> visualizzaPeriodo(ControllerUtenze controllerUtenze) {
+        return controllerUtenze.getPeriodi();
     }
 
-    public Optional<UtenzaSpiaggia> prenotaUntenza(int anno, int mese, int giorno, int idUtenza, int idTariffa) {
-        //TODO
-        return Optional.empty();
+    public Optional<UtenzaSpiaggia> prenotaUntenza(ControllerUtenze controllerUtenze, int idUtenza, int idTariffa) {
+        return controllerUtenze.prenotaUtenza(idUtenza, idTariffa);
     }
 
-    public List<Consumazione> visualizzaMenu(String idUtenza) {
-        //TODO
-        return null;
+    public List<Consumazione> visualizzaMenu(ControllerOrdinazione controllerOrdinazione, String idUtenza) {
+        return controllerOrdinazione.getConsumazioni(idUtenza);
     }
 
-    public List<Consumazione> ordinazioneConsumazione(Consumazione ... consumazioni) {
-        //TODO
-        return null;
+    public List<Consumazione> ordinazioneConsumazione(ControllerOrdinazione controllerOrdinazione, Consumazione ... consumazioni) {
+        Comanda c = controllerOrdinazione.creaComanda(consumazioni);
+        return c.getConsumazioni();
     }
 
     public void pagamento(double importoDaPagare) {
