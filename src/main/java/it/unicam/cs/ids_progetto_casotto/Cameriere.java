@@ -28,10 +28,22 @@ public class Cameriere extends StaffRistorazione{
         return super.getOrdinazioni(controller);
     }
 
+    /**
+     * Riceve lo stato della comanda
+     *
+     * @param comanda
+     * @return
+     */
     public StatoComanda getStatoComanda(Comanda comanda){
         return comanda.getState();
     }
 
+    /**
+     * Imposta lo stato della comanda
+     *
+     * @param comanda
+     * @param state
+     */
     public void setStatoComanda(Comanda comanda, StatoComanda state){
         comanda.setState(state);
     }
