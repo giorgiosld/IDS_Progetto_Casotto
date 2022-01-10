@@ -4,26 +4,38 @@ public abstract class Consumazione {
 
     protected String nome;
     protected double prezzo;
-    protected int quantità;
+    protected int quantita;
     private StatoConsumazione state;
 
-    public Consumazione(String nome, double prezzo, int quantità, StatoConsumazione state){
+    public Consumazione(String nome, double prezzo, int quantita, StatoConsumazione state){
         this.nome = nome;
         this.prezzo = prezzo;
-        this.quantità = quantità;
+        this.quantita = quantita;
         this.state = state;
     }
 
+    /**
+     * Ritorna il nome della consumazione
+     * @return nome consumazione
+     */
     public String getNome(){
-        return nome;
+        return this.nome;
     }
 
+    /**
+     * Ritorna il costo del prodotto
+     * @return costo consumazione
+     */
     public double getPrezzo() {
-        return prezzo;
+        return this.prezzo;
     }
 
-    public int getQuantità() {
-        return quantità;
+    /**
+     * Ritorna la quantità di consumazione scelta
+     * @return quantità
+     */
+    public int getQuantita() {
+        return this.quantita;
     }
 
     //da cancellare metodo questo e quello sotto PENSARE SE UTILE O MENO
@@ -32,6 +44,6 @@ public abstract class Consumazione {
     }
 
     protected StatoConsumazione getState(){
-        return state;
+        return this.state;
     }
 }

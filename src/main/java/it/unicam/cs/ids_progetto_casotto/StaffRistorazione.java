@@ -23,10 +23,16 @@ public abstract class StaffRistorazione {
         return idStaff;
     }
 
-    //inteso come tutte le ordinazioni?
+    /**
+     * Ritorna un ordinazione usando l'id della comanda cercata
+     *
+     * @param comanda necessaria per estrapolare l'id da cui cercare
+     * @param controller controller contenente le varie ordinazioni
+     * @return l'ordinazione cercata
+     */
     public Comanda getOrdinazione(Comanda comanda, ControllerOrdinazione controller){
         int idToSearch = comanda.getIdComanda();
-        List<Comanda> comande = new ArrayList<>();
+        List<Comanda> comande;
         comande = controller.getComande();
         Optional<Comanda> toFind = comande.stream()
                 .filter(z -> z.getIdComanda() == idToSearch)
@@ -35,12 +41,18 @@ public abstract class StaffRistorazione {
         return comandaFinded;
     }
 
-    //se inteso come tutte le ordinazioni canc Comanda comanda
+    /**
+     * Ritorna tutte le ordinazioni presenti nel controller
+     *
+     * @param controller controller contenente le ordinazioni
+     * @return una lista contenente le ordinazioni effettuatate
+     */
     public List<Comanda> getOrdinazioni(ControllerOrdinazione controller){
         List<Comanda> comande = controller.getComande();
         return comande;
     }
 
+    //forse inutile
     public String getNotify(ControllerOrdinazione controllerOrdinazione){
         Comanda comanda = controllerOrdinazione.getLastComanda();
         return controllerOrdinazione.notificaStaff(comanda);
