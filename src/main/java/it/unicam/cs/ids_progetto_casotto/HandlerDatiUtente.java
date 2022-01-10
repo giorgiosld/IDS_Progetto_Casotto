@@ -2,13 +2,13 @@ package it.unicam.cs.ids_progetto_casotto;
 
 public interface HandlerDatiUtente {
 
-     String getNomeUtente();
+     String getNomeUtente(Cliente cliente);
 
-     String getCognomeUtente();
+     String getCognomeUtente(Cliente cliente);
 
-     int getEta();
+     int getEta(Cliente cliente);
 
-     String getSesso();
+     char getSesso(Cliente cliente);
 
-     double getTariffa();//pensare al tipo di tariffa
+     Tariffa getTariffa();//pensare al tipo di tariffa
 }

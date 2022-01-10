@@ -30,6 +30,6 @@ public class Receptionist {
       return controller.getUtenze()
                .stream()
                .filter(x -> x.getDisponibilita() == false)
-              .collect(Collectors.toList());
+               .collect(Collectors.toList());
     }
 }
