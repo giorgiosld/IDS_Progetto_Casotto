@@ -29,6 +29,6 @@ public class Receptionist extends Staff{
       return controller.getUtenze()
                .stream()
                .filter(x -> x.getDisponibilita() == false)
-              .collect(Collectors.toList());
+               .collect(Collectors.toList());
     }
 }

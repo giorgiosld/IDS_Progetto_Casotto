@@ -21,23 +21,23 @@ public class ControllerUtenze  implements HandlerDatiUtente{
         return periodi;
     }
 
-  public String getNomeUtente(//oggettocliente){
-      return prova;
+  public String getNomeUtente(Cliente cliente){
+      return cliente.getNome();
   }
-    public String getCognomeUtente(){
-        return prova;
+    public String getCognomeUtente(Cliente cliente){
+        return cliente.getCognome();
     }
-    public int getEta(){
-      return 0;
+    public int getEta(Cliente cliente){
+      return cliente.getEta();
     }
-    public String getSesso(){
-        return prova;
+    public char getSesso(Cliente cliente){
+        return cliente.getSesso();
     }
-    public double getTariffa(){
-      return 0;
+    public Tariffa getTariffa(){
+      return null;
     }
 
-    public List<UtenzaSpiaggia> getUtenze(){ //solo  o tutte
+    public List<UtenzaSpiaggia> getUtenze(){
 
       return utenze;
 
@@ -53,6 +53,8 @@ public class ControllerUtenze  implements HandlerDatiUtente{
 
     }
 
-    public notificaReceptionist(){}//produttore consumatore o flags?
+    public void notificaReceptionist(){
+
+    }//produttore consumatore o flags?
     //quando prenota manda notifica
 }
