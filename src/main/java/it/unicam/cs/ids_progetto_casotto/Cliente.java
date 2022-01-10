@@ -65,6 +65,13 @@ public class Cliente {
         return controllerUtenze.prenotaUtenza(idUtenza, idTariffa);
     }
 
+    /**
+     * Metodo per visualizzare il men&ugrave;
+     *
+     * @param controllerOrdinazione controller dal quale si visualizza il men&ugrave;
+     *
+     * @return lista di consumazioni
+     */
     public List<Consumazione> visualizzaMenu(ControllerOrdinazione controllerOrdinazione) {
         return controllerOrdinazione.getConsumazioni();
     }
