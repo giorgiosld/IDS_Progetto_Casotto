@@ -1,17 +1,16 @@
 package it.unicam.cs.ids_progetto_casotto;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class StaffRistorazione {
+public abstract class StaffRistorazione extends Staff {
 
     protected String nome;
     protected int idStaff;
     //arraylist di membri
 
     public StaffRistorazione(String nome, int idStaff){
-        this.nome = nome;
+        super(nome);
         this.idStaff = idStaff;
     }
 
@@ -52,9 +51,4 @@ public abstract class StaffRistorazione {
         return comande;
     }
 
-    //forse inutile
-    public String getNotify(ControllerOrdinazione controllerOrdinazione){
-        Comanda comanda = controllerOrdinazione.getLastComanda();
-        return controllerOrdinazione.notificaStaff(comanda);
-    }
 }

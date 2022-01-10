@@ -3,15 +3,14 @@ package it.unicam.cs.ids_progetto_casotto;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Receptionist {
-    private String nome;
+public class Receptionist extends Staff{
     private String cognome;
-    private int id;
+    private int idReceptionist;
 
-    public Receptionist(String nome,String cognome,int id){
-        this.nome=nome;
+    public Receptionist(String nome,String cognome,int idReceptionist){
+        super(nome);
         this.cognome=cognome;
-        this.id=id;
+        this.idReceptionist=idReceptionist;
     }
 
     public String getNome() {
@@ -23,7 +22,7 @@ public class Receptionist {
     }
 
     public int getId() {
-        return id;
+        return idReceptionist;
     }
 
     public List<UtenzaSpiaggia> visualizzaPrenotazioni(ControllerUtenze controller){ //lista fai tornare stringa
