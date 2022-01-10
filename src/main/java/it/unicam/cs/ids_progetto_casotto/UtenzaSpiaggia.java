@@ -4,10 +4,10 @@ public class UtenzaSpiaggia {
 
     private int id;
     private boolean disponibilita;
-    private double tariffa; //classe tariffa contenente attività,tempo,prezzo.
+    private Tariffa tariffa; //classe tariffa contenente attività,tempo,prezzo.
     private int postiOccupabili; //numero
 
-    public UtenzaSpiaggia(int id, boolean disponibilita, double tariffa, int postiOccupabili){
+    public UtenzaSpiaggia(int id, boolean disponibilita, Tariffa tariffa, int postiOccupabili){
         this.id=id;
         this.disponibilita=disponibilita;
         this.tariffa=tariffa;
@@ -29,6 +29,9 @@ public class UtenzaSpiaggia {
     public int getPostiOccupabili(){
 
         return this.postiOccupabili;
+    }
+    public Tariffa getTariffa(){
+        return this.tariffa;
     }
 
 }
