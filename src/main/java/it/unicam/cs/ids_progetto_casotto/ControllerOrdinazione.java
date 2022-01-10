@@ -48,7 +48,7 @@ public class ControllerOrdinazione {
      *
      * @return le consumazioni disponibili presenti nel menù
      */
-    public List<Consumazione> getConsumazioni() { return consumazioni.stream().filter(z -> z.getNome()).collect(Collectors.toList()); }
+    public List<Consumazione> getConsumazioni() { return consumazioni; }
 
     /**
      * Notifica ai vari componenti dello staff l'arrivo di una nuova comanda
