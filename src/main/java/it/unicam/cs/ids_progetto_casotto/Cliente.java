@@ -65,8 +65,8 @@ public class Cliente {
         return controllerUtenze.prenotaUtenza(idUtenza, idTariffa);
     }
 
-    public List<Consumazione> visualizzaMenu(ControllerOrdinazione controllerOrdinazione, String idUtenza) {
-        return controllerOrdinazione.getConsumazioni(idUtenza);
+    public List<Consumazione> visualizzaMenu(ControllerOrdinazione controllerOrdinazione) {
+        return controllerOrdinazione.getConsumazioni();
     }
 
     public List<Consumazione> ordinazioneConsumazione(ControllerOrdinazione controllerOrdinazione, Consumazione ... consumazioni) {

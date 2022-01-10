@@ -14,14 +14,26 @@ public abstract class Consumazione {
         this.state = state;
     }
 
+    /**
+     * Ritorna il nome della consumazione
+     * @return nome consumazione
+     */
     public String getNome(){
         return this.nome;
     }
 
+    /**
+     * Ritorna il costo del prodotto
+     * @return costo consumazione
+     */
     public double getPrezzo() {
         return this.prezzo;
     }
 
+    /**
+     * Ritorna la quantità di consumazione scelta
+     * @return quantità
+     */
     public int getQuantita() {
         return this.quantita;
     }

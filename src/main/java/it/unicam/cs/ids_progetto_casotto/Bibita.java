@@ -9,6 +9,11 @@ public class Bibita extends Consumazione{
         this.aperitivo = aperitivo;
     }
 
+    /**
+     * Controlla se si richiede l'aperitivo
+     *
+     * @return true se si vuole aperitivo altrimenti false
+     */
     public boolean isAperitivo() {
         return aperitivo;
     }
