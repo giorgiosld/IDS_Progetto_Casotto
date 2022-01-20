@@ -11,12 +11,12 @@ public class Comanda {
     public List<Consumazione> consumazioni;
     public double prezzoTotale;
     public StatoComanda state;
-    //formato data pensato in questa maniera da controllare il formato se corretto
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private String creazioneComanda;
+    private String orarioCreazione;
 
     /**
      * Crea la comanda
+     *
      *
      * @param consumazioni la lista delle consumaizoni scelte
      * @param prezzoTotale prezzo totale della comanda
@@ -28,7 +28,7 @@ public class Comanda {
         this.consumazioni = consumazioni;
         this.prezzoTotale = prezzoTotale;
         this.state = state;
-        this.creazioneComanda =  dtf.format(LocalDateTime.now());
+        this.orarioCreazione =  dtf.format(LocalDateTime.now());
     }
 
     /**
@@ -42,7 +42,7 @@ public class Comanda {
         Comanda.id++;
         this.consumazioni = consumazioni;
         this.state = state;
-        this.creazioneComanda =  dtf.format(LocalDateTime.now());
+        this.orarioCreazione =  dtf.format(LocalDateTime.now());
     }
 
     /**
@@ -107,8 +107,8 @@ public class Comanda {
      *
      * @return orario creazione comanda
      */
-    public String getCreazioneComanda() {
-        return creazioneComanda;
+    public String getOrarioCreazione() {
+        return orarioCreazione;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class Comanda {
                 ", consumazioni=" + consumazioni +
                 ", prezzoTotale=" + prezzoTotale +
                 ", state=" + state +
-                ", data creazione=" + creazioneComanda +
+                ", data creazione=" + orarioCreazione +
                 '}';
     }
 }

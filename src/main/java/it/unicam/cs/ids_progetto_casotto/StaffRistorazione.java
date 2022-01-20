@@ -45,4 +45,27 @@ public abstract class StaffRistorazione extends Staff {
         return comande;
     }
 
+    /**
+     * Metodo che ritorna lo stato di preparazione di una comanda
+     *
+     * @param controller dove sono memorizzate le comande
+     * @param comanda la comanda alla quale voglio vedere lo stato di preparazione
+     * @return stato di preparazione della comanda
+     */
+    public StatoComanda getStatoComanda(ControllerOrdinazione controller, Comanda comanda){
+        return comanda.getState();
+    }
+
+    /**
+     * Metodo che imposta lo stato di una comanda
+     *
+     * @param controller dove le comande sono memorizzate
+     * @param comanda la comanda da modificare
+     * @param stato lo stato nel quale si vuole mettere la comanda
+     */
+    public void setStatoComanda(ControllerOrdinazione controller, Comanda comanda, StatoComanda stato){
+        List<Comanda> comande = controller.getComande();
+        Comanda comandaToModify = comande.stream().filter(x -> x.equals(comanda)).findFirst().get();
+        comandaToModify.setState(stato);
+    }
 }
