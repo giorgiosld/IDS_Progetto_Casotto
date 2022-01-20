@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Classe che implementa un controller per le ordinazioni. Si possono effettuare varie operazioni tutte ineresnti alla
+ * classe comanda e consumazione.
+ */
 public class ControllerOrdinazione {
 
     private final List<Comanda> comande;

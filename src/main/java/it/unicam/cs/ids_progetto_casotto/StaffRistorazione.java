@@ -3,24 +3,18 @@ package it.unicam.cs.ids_progetto_casotto;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Classe astratta che rappresenta un membro dello staff ristorazione
+ */
 public abstract class StaffRistorazione extends Staff {
 
-    protected String nome;
-    protected int idStaff;
-    //arraylist di membri
 
-    public StaffRistorazione(String nome, int idStaff){
-        super(nome);
-        this.idStaff = idStaff;
+
+
+    public StaffRistorazione(String nome, String cognome){
+        super(nome, cognome);
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public int getIdStaff() {
-        return idStaff;
-    }
 
     /**
      * Ritorna un ordinazione usando l'id della comanda cercata
@@ -29,7 +23,7 @@ public abstract class StaffRistorazione extends Staff {
      * @param controller controller contenente le varie ordinazioni
      * @return l'ordinazione cercata
      */
-    public Comanda getOrdinazione(Comanda comanda, ControllerOrdinazione controller){
+    public Comanda getComanda(Comanda comanda, ControllerOrdinazione controller){
         int idToSearch = comanda.getIdComanda();
         List<Comanda> comande;
         comande = controller.getComande();
@@ -46,7 +40,7 @@ public abstract class StaffRistorazione extends Staff {
      * @param controller controller contenente le ordinazioni
      * @return una lista contenente le ordinazioni effettuatate
      */
-    public List<Comanda> getOrdinazioni(ControllerOrdinazione controller){
+    public List<Comanda> getComande(ControllerOrdinazione controller){
         List<Comanda> comande = controller.getComande();
         return comande;
     }
