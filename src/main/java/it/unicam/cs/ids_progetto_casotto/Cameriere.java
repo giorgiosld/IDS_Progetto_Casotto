@@ -29,26 +29,6 @@ public class Cameriere extends StaffRistorazione{
     }
 
     /**
-     * Riceve lo stato della comanda
-     *
-     * @param comanda
-     * @return
-     */
-    public StatoComanda getStatoComanda(Comanda comanda){
-        return comanda.getState();
-    }
-
-    /**
-     * Imposta lo stato della comanda
-     *
-     * @param comanda
-     * @param state
-     */
-    public void setStatoComanda(Comanda comanda, StatoComanda state){
-        comanda.setState(state);
-    }
-
-    /**
      * Metodo per far creare al cameriere una comanda in cui riceve le consumazioni a voce dal cliente
      *
      * @param controller handler delle ordinazioni in cui salvare la comanda
