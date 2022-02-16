@@ -1,4 +1,8 @@
-package it.unicam.cs.ids_progetto_casotto;
+package it.unicam.cs.ids_progetto_casotto.controller;
+
+import it.unicam.cs.ids_progetto_casotto.model.Cliente;
+import it.unicam.cs.ids_progetto_casotto.model.Tariffa;
+import it.unicam.cs.ids_progetto_casotto.model.UtenzaSpiaggia;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -57,4 +61,10 @@ public class ControllerUtenze  implements HandlerDatiUtente{
 
     }//produttore consumatore o flags?
     //quando prenota manda notifica
+
+    //getçPeriodi
+
+    //prenotaUtenza
+
+    //
 }

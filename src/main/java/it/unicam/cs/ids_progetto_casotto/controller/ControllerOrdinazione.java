@@ -1,4 +1,8 @@
-package it.unicam.cs.ids_progetto_casotto;
+package it.unicam.cs.ids_progetto_casotto.controller;
+
+import it.unicam.cs.ids_progetto_casotto.model.Comanda;
+import it.unicam.cs.ids_progetto_casotto.model.Consumazione;
+import it.unicam.cs.ids_progetto_casotto.model.StatoComanda;
 
 import java.util.ArrayList;
 import java.util.Collections;

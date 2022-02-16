@@ -1,4 +1,6 @@
-package it.unicam.cs.ids_progetto_casotto;
+package it.unicam.cs.ids_progetto_casotto.controller;
+
+import it.unicam.cs.ids_progetto_casotto.model.Attivita;
 
 import java.util.ArrayList;
 import java.util.List;

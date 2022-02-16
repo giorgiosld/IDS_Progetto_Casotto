@@ -1,4 +1,4 @@
-package it.unicam.cs.ids_progetto_casotto;
+package it.unicam.cs.ids_progetto_casotto.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
