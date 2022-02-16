@@ -1,13 +1,13 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-public class UtenzaSpiaggia {
+public class Utenza {
 
     private int id;
     private boolean disponibilita;
     private Tariffa tariffa; //classe tariffa contenente attività,tempo,prezzo.
     private int postiOccupabili; //numero
 
-    public UtenzaSpiaggia(int id, boolean disponibilita, Tariffa tariffa, int postiOccupabili){
+    public Utenza(int id, boolean disponibilita, Tariffa tariffa, int postiOccupabili){
         this.id=id;
         this.disponibilita=disponibilita;
         this.tariffa=tariffa;
