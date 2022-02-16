@@ -27,7 +27,7 @@ public class Receptionist extends Staff{
         return idReceptionist;
     }
 
-    public List<UtenzaSpiaggia> visualizzaPrenotazioni(ControllerUtenze controller){ //lista fai tornare stringa
+    public List<Utenza> visualizzaPrenotazioni(ControllerUtenze controller){ //lista fai tornare stringa
       return controller.getUtenze()
                .stream()
                .filter(x -> x.getDisponibilita() == false)

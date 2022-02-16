@@ -103,7 +103,7 @@ public class Cliente {
      * @return un Optional di tipo UtenzaSpiaggia per indicare se la
      * prenotazione &egrave; avvenuta con successo
      */
-    public Optional<UtenzaSpiaggia> prenotaUntenza(ControllerUtenze controllerUtenze, int idUtenza, int idTariffa) {
+    public Optional<Utenza> prenotaUntenza(ControllerUtenze controllerUtenze, int idUtenza, int idTariffa) {
         return controllerUtenze.prenotaUtenza(idUtenza, idTariffa);
     }
 

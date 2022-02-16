@@ -1,6 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-public class Ombrellone extends UtenzaSpiaggia{
+public class Ombrellone extends Utenza {
 
 
 
