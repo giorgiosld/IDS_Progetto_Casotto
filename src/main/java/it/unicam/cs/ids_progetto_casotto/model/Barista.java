@@ -1,4 +1,6 @@
-package it.unicam.cs.ids_progetto_casotto;
+package it.unicam.cs.ids_progetto_casotto.model;
+
+import it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione;
 
 import java.util.List;
 import java.util.stream.Collectors;

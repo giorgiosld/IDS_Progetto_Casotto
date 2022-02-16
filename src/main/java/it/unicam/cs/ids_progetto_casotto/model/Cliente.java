@@ -1,4 +1,8 @@
-package it.unicam.cs.ids_progetto_casotto;
+package it.unicam.cs.ids_progetto_casotto.model;
+
+import it.unicam.cs.ids_progetto_casotto.controller.ControllerAttivita;
+import it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione;
+import it.unicam.cs.ids_progetto_casotto.controller.ControllerUtenze;
 
 import java.util.GregorianCalendar;
 import java.util.List;

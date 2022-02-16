@@ -1,4 +1,4 @@
-package it.unicam.cs.ids_progetto_casotto;
+package it.unicam.cs.ids_progetto_casotto.model;
 
 public class Lettino extends UtenzaSpiaggia{
 
