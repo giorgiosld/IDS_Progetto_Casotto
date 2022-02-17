@@ -1,11 +1,14 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
+/**
+ * Classe che rappresenta un generica bibita che si trova nel men&ugrave;
+ */
 public class Bibita extends Consumazione{
 
     private boolean aperitivo;
 
-    public Bibita(String nome, double prezzo, int quantità, StatoConsumazione state, boolean aperitivo) {
-        super(nome, prezzo, quantità, state);
+    public Bibita(String nome, double prezzo,  boolean aperitivo) {
+        super(nome, prezzo);
         this.aperitivo = aperitivo;
     }
 

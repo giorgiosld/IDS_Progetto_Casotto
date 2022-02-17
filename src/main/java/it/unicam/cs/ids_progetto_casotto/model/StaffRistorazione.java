@@ -1,73 +1,72 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione;
+import it.unicam.cs.ids_progetto_casotto.controller.IControllerStaffOrdinazione;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Classe astratta che rappresenta un membro dello staff ristorazione
  */
-public abstract class StaffRistorazione extends Staff {
+public abstract class StaffRistorazione extends Persona {
+
+    private StatoOccupazione statoOccupazione;
 
 
-
-
-    public StaffRistorazione(String nome, String cognome){
-        super(nome, cognome);
+    public StaffRistorazione(int id, String nome, String cognome, String dataNascita, char sesso, String email){
+        super(id, nome, cognome, dataNascita, sesso, email);
+        this.statoOccupazione = StatoOccupazione.LIBERO;
     }
 
 
     /**
-     * Ritorna un ordinazione usando l'id della comanda cercata
+     * Ritorna una comanda
      *
-     * @param comanda necessaria per estrapolare l'id da cui cercare
-     * @param controller controller contenente le varie ordinazioni
+     * @param comanda la comanda che si vuole ottenere
+     * @param bar controller contenente le varie ordinazioni
      * @return l'ordinazione cercata
      */
-    public Comanda getComanda(Comanda comanda, ControllerOrdinazione controller){
-        int idToSearch = comanda.getIdComanda();
-        List<Comanda> comande;
-        comande = controller.getComande();
-        Optional<Comanda> toFind = comande.stream()
-                .filter(z -> z.getIdComanda() == idToSearch)
-                .findFirst();
-        Comanda comandaFinded = toFind.get();
-        return comandaFinded;
+    public Comanda getComanda(IControllerStaffOrdinazione bar, Comanda comanda){
+        return bar.getComanda(comanda);
     }
 
     /**
      * Ritorna tutte le ordinazioni presenti nel controller
      *
-     * @param controller controller contenente le ordinazioni
+     * @param bar controller contenente le ordinazioni
      * @return una lista contenente le ordinazioni effettuatate
      */
-    public List<Comanda> getComande(ControllerOrdinazione controller){
-        List<Comanda> comande = controller.getComande();
+    public List<Comanda> getComande(IControllerStaffOrdinazione bar){
+        List<Comanda> comande = bar.getComande();
         return comande;
     }
 
     /**
      * Metodo che ritorna lo stato di preparazione di una comanda
      *
-     * @param controller dove sono memorizzate le comande
+     * @param bar dove sono memorizzate le comande
      * @param comanda la comanda alla quale voglio vedere lo stato di preparazione
      * @return stato di preparazione della comanda
      */
-    public StatoComanda getStatoComanda(ControllerOrdinazione controller, Comanda comanda){
-        return comanda.getState();
+    public StatoComanda getStatoComanda(IControllerStaffOrdinazione bar, Comanda comanda){
+        return bar.getComanda(comanda).getStatoComanda();
     }
 
     /**
      * Metodo che imposta lo stato di una comanda
      *
-     * @param controller dove le comande sono memorizzate
+     * @param bar dove le comande sono memorizzate
      * @param comanda la comanda da modificare
      * @param stato lo stato nel quale si vuole mettere la comanda
      */
-    public void setStatoComanda(ControllerOrdinazione controller, Comanda comanda, StatoComanda stato){
-        List<Comanda> comande = controller.getComande();
-        Comanda comandaToModify = comande.stream().filter(x -> x.equals(comanda)).findFirst().get();
-        comandaToModify.setState(stato);
+    public void setStatoComanda(IControllerStaffOrdinazione bar, Comanda comanda, StatoComanda stato){
+         bar.getComanda(comanda).setStatoComanda(stato);
+    }
+
+    public StatoOccupazione getStatoOccupazione() {
+        return statoOccupazione;
+    }
+
+    public void setStatoOccupazione(StatoOccupazione statoOccupazione) {
+        this.statoOccupazione = statoOccupazione;
     }
 }

@@ -2,12 +2,15 @@ package it.unicam.cs.ids_progetto_casotto.model;
 
 import java.util.List;
 
+/**
+ * Classe che rappresenta un generico piatto che si trova nel men&ugrave;
+ */
 public class Cibo extends Consumazione{
 
     List<String> allergeni;
 
-    public Cibo(String nome, double prezzo, int quantità, StatoConsumazione state, List<String> allergeni) {
-        super(nome, prezzo, quantità, state);
+    public Cibo(String nome, double prezzo, List<String> allergeni) {
+        super(nome, prezzo);
         this.allergeni = allergeni;
     }
 
