@@ -1,6 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
 import it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione;
+import it.unicam.cs.ids_progetto_casotto.controller.IControllerStaffOrdinazione;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,24 +11,10 @@ import java.util.stream.Collectors;
  */
 public class Cameriere extends StaffRistorazione{
 
-    public Cameriere(String nome, String cognome) {
-        super(nome, cognome);
-    }
+    List<Comanda> comandeDaConsegnare;
 
-    @Override
-    public String getNome() {
-        return super.getNome();
-    }
-
-
-    @Override
-    public Comanda getComanda(Comanda comanda, ControllerOrdinazione controller) {
-        return super.getComanda(comanda, controller);
-    }
-
-    @Override
-    public List<Comanda> getComande(ControllerOrdinazione controller) {
-        return super.getComande(controller);
+    public Cameriere(int id, String nome, String cognome, String dataNascita, char sesso, String email) {
+        super(id, nome, cognome, dataNascita, sesso, email);
     }
 
     /**
@@ -36,20 +23,49 @@ public class Cameriere extends StaffRistorazione{
      * @param controller handler delle ordinazioni in cui salvare la comanda
      * @param consumazioni le consumazioni scelte dal cliente e dettate al cameriere
      */
-    public void creaComanda(ControllerOrdinazione controller, Consumazione ... consumazioni){
+    public void creaComanda(ControllerOrdinazione controller, List<Consumazione> consumazioni, Barista barista){
         controller.creaComanda(consumazioni);
     }
 
     /**
      * Metodo che ritorna una lista di comande pronte per la successiva consegna al cliente
      *
-     * @param controller da dove cercare le comande pronte
+     * @param bar da dove cercare le comande pronte
      * @return lista di comande pronte
      */
-    public List<Comanda> visualizzaComandePronte(ControllerOrdinazione controller){
-        List<Comanda> todelivery = controller.getComande().stream()
-                                                        .filter(x -> x.getState() == StatoComanda.PRONTA)
+    public List<Comanda> getComandePronte(IControllerStaffOrdinazione bar){
+        List<Comanda> todelivery = bar.getComande().stream()
+                                                        .filter(x -> x.getStatoComanda() == StatoComanda.PRONTA)
                                                         .collect(Collectors.toList());
         return todelivery;
+    }
+
+    /**
+     * Metodo che aggiunge una comanda da consegnare nella lista del cameriere
+     *
+     * @param comanda la comanda da consegnare
+     */
+    public void aggiungiComandaDaConsegnare(Comanda comanda){
+        this.comandeDaConsegnare.add(comanda);
+    }
+
+    /**
+     * Metodo che cambia lo stato della comanda per porla in consegna
+     *
+     * @param comanda la comanda che sta per essere consegnata
+     */
+    public void consegnaComande(Comanda comanda){
+        comanda.setStatoComanda(StatoComanda.IN_CONSEGNA);
+        this.setStatoOccupazione(StatoOccupazione.OCCUPATO);
+    }
+
+    /**
+     * Metodo che termina il ciclo di vita della comanda
+     *
+     * @param comanda la comanda che è stata consegnata
+     */
+    public void terminaComanda(Comanda comanda){
+        comanda.setStatoComanda(StatoComanda.CONSEGNATA);
+        this.setStatoOccupazione(StatoOccupazione.LIBERO);
     }
 }

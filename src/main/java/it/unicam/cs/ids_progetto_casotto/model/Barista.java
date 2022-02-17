@@ -1,60 +1,58 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione;
-
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Classe che rappresenta un Barista
  */
 public class Barista extends StaffRistorazione{
 
-    public Barista(String nome, String cognome) {
-        super(nome, cognome);
-    }
+    List<Comanda> comandeDaPreparare;
 
-    @Override
-    public String getNome() {
-        return super.getNome();
-    }
-
-
-    @Override
-    public Comanda getComanda(Comanda comanda, ControllerOrdinazione controller) {
-        return super.getComanda(comanda, controller);
-    }
-
-    @Override
-    public List<Comanda> getComande(ControllerOrdinazione controller) {
-        return super.getComande(controller);
+    public Barista(int id, String nome, String cognome, String dataNascita, char sesso, String email) {
+        super(id, nome, cognome, dataNascita, sesso, email);
+        this.comandeDaPreparare = new ArrayList<>();
     }
 
     /**
-     * Metodo che ritorna una lista di comande create per la successiva preparazione di essa
+     * Metodo che permette di visualizzare le comande da preparare
      *
-     * @param controller da dove cercare le comande pronte
-     * @return lista di comande pronte
+     * @return le comande da preparare
      */
-    public List<Comanda> visualizzaComandeCreate(ControllerOrdinazione controller){
-        List<Comanda> toPrepare = controller.getComande().stream()
-                .filter(x -> x.getState() == StatoComanda.CREATA)
-                .collect(Collectors.toList());
-        return toPrepare;
+    public List<Comanda> getComandeDaPreparare(){
+        return this.comandeDaPreparare;
     }
 
     /**
-     * Metodo che ritorna una comanda e la pone in stato di preprazione
+     * Metodo che permette l'aggiunta della comanda da preparare in seguito alla creazione della comanda su {@link it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione}
      *
-     * @param controller dove si trovano memorizzate le comande
-     * @param comanda la comanda alla quale si vuole mettere in stato di preparazione
-     * @return la comanda in stato di preparazione
+     * @param comanda la comanda che è stata notificata
      */
-    public Comanda preparaComanda(ControllerOrdinazione controller, Comanda comanda){
-        List<Comanda> comandeCreate = this.visualizzaComandeCreate(controller);
-        Comanda toPrepare = comandeCreate.stream().filter(x -> comanda.equals(x)).findFirst().get();
-        toPrepare.setState(StatoComanda.IN_PREPARAZIONE);
-        return toPrepare;
+    public void aggiungiComandaDaPreparare(Comanda comanda){
+        this.comandeDaPreparare.add(comanda);
+    }
+
+    /**
+     * Metodo che quando chiamato pone la comanda in preparazione
+     *
+     * @param comanda
+     */
+    public void preparaComanda(Comanda comanda){
+        comanda.setStatoComanda(StatoComanda.IN_PREPARAZIONE);
+        this.setStatoOccupazione(StatoOccupazione.OCCUPATO);
+    }
+
+    /**
+     * Metodo che notifica ad un cameriere che la comanda è pronta per essere consegnata
+     *
+     * @param comanda la comanda alla quale cambiare stato per essere pronta per la consegna
+     * @param cameriere il cameriere che si dovrà occupare della consegna
+     */
+    public void notificaComandaPronta(Comanda comanda, Cameriere cameriere){
+        comanda.setStatoComanda(StatoComanda.PRONTA);
+        this.setStatoOccupazione(StatoOccupazione.LIBERO);
+        cameriere.aggiungiComandaDaConsegnare(comanda);
     }
 }
 

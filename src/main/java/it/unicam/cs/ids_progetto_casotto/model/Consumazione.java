@@ -1,17 +1,16 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
+/**
+ * Classe astratta rappresentante una generica consumazione
+ */
 public abstract class Consumazione {
 
     protected String nome;
     protected double prezzo;
-    protected int quantita;
-    private StatoConsumazione state;
 
-    public Consumazione(String nome, double prezzo, int quantita, StatoConsumazione state){
+    public Consumazione(String nome, double prezzo){
         this.nome = nome;
         this.prezzo = prezzo;
-        this.quantita = quantita;
-        this.state = state;
     }
 
     /**
@@ -30,20 +29,4 @@ public abstract class Consumazione {
         return this.prezzo;
     }
 
-    /**
-     * Ritorna la quantità di consumazione scelta
-     * @return quantità
-     */
-    public int getQuantita() {
-        return this.quantita;
-    }
-
-    //da cancellare metodo questo e quello sotto PENSARE SE UTILE O MENO
-    protected void setStatoConsumazione(StatoConsumazione state){
-        this.state = state;
-    }
-
-    protected StatoConsumazione getState(){
-        return this.state;
-    }
 }
