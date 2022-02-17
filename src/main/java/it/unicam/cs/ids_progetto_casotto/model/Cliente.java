@@ -1,8 +1,13 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import it.unicam.cs.ids_progetto_casotto.controller.ControllerAttivita;
-import it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione;
-import it.unicam.cs.ids_progetto_casotto.controller.IControllerClienteAttività;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.ControllerAttivita;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttività;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.PrenotazioneAttivita;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Consumazione;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.PrenotazioneUtenza;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
