@@ -1,5 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.PrenotazioneAttivitaCliente;
 import it.unicam.cs.ids_progetto_casotto.model.Receptionist;
 
 import java.util.List;
@@ -42,5 +43,5 @@ public interface IHandlerPrenotazioniAttivitaClienti {
      * @return true se viene aggiunta correttamente,
      * false altrimenti
      */
-    PrenotazioneAttivitaCliente aggiungiPrenotazione(PrenotazioneAttivitaCliente prenotazione);
+    boolean aggiungiPrenotazioneAttivita(PrenotazioneAttivitaCliente prenotazione);
 }
