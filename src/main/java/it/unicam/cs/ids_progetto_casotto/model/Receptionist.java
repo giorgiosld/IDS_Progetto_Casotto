@@ -1,6 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
 import it.unicam.cs.ids_progetto_casotto.controller.ControllerUtenze;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
 
 import java.util.List;
 import java.util.stream.Collectors;
