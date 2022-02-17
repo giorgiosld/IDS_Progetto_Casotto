@@ -2,55 +2,23 @@ package it.unicam.cs.ids_progetto_casotto.model;
 
 import it.unicam.cs.ids_progetto_casotto.controller.ControllerAttivita;
 import it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione;
-import it.unicam.cs.ids_progetto_casotto.controller.ControllerUtenze;
+import it.unicam.cs.ids_progetto_casotto.controller.IControllerClienteAttività;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
-public class Cliente {
+public class Cliente extends Persona{
 
-    private final String nome;
-    private final String cognome;
-    private final int eta;
-    private final String codiceFiscale;
-    private final char sesso;
-    private int idTariffa;
+    private final List<PrenotazioneUtenza> utenzePrenotata;
+    private final List<PrenotazioneAttivita> attivitaPrenotata;
 
-    public Cliente(String nome, String cognome, int eta, String codiceFiscale, char sesso, int idTariffa) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.eta = eta;
-        this.codiceFiscale = codiceFiscale;
-        this.sesso = sesso;
-        this.idTariffa = idTariffa;
+    public Cliente(int id, String nome, String cognome, String annoNascita, char sesso, String email) {
+        super(id, nome, cognome, annoNascita, sesso, email);
+        this.utenzePrenotata = new ArrayList<>();
+        this.attivitaPrenotata = new ArrayList<>();
     }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public int getEta() {
-        return eta;
-    }
-
-    public String getCodiceFiscale() {
-        return codiceFiscale;
-    }
-
-    public char getSesso() {
-        return sesso;
-    }
-
-    public int getIdTariffa() {
-        return idTariffa;
-    }
-
-    public void setIdTariffa(int idTariffa) { this.idTariffa = idTariffa; }
 
     /**
      * Metodo che permette di visualizzare le attivit&agrave;
@@ -60,7 +28,7 @@ public class Cliente {
      *
      * @return lista di attivit&agrave; visualizzate
      */
-    public List<Attivita> visualizzaAttivita(ControllerAttivita controller) {
+    public List<Attivita> visualizzaAttivita(IControllerClienteAttività controller) {
         return controller.getAttivita();
     }
 

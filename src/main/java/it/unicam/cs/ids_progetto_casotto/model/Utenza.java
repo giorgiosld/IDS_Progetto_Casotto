@@ -1,37 +1,35 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-public class Utenza {
+/**
+ * Classe che definisce una generica
+ * classe Utenza
+ */
+public abstract class Utenza {
 
     private int id;
-    private boolean disponibilita;
-    private Tariffa tariffa; //classe tariffa contenente attività,tempo,prezzo.
-    private int postiOccupabili; //numero
+    private final int numeroPostiOccupabili;
 
-    public Utenza(int id, boolean disponibilita, Tariffa tariffa, int postiOccupabili){
+    public Utenza(int id, int numeroPostiOccupabili){
         this.id=id;
-        this.disponibilita=disponibilita;
-        this.tariffa=tariffa;
-        this.postiOccupabili =postiOccupabili;
-
+        this.numeroPostiOccupabili = numeroPostiOccupabili;
     }
+
+    /**
+     * Metodo che ritorna l'id
+     * dell'utenza
+     *
+     * @return id dell'utenza
+     */
     public int getId(){
         return this.id;
     }
 
-    public boolean getDisponibilita(){
-        return this.disponibilita;
-    }
-
-    public boolean setDisponibilita(boolean disponibilita){
-       return this.disponibilita=disponibilita;
-    }
-
-    public int getPostiOccupabili(){
-
-        return this.postiOccupabili;
-    }
-    public Tariffa getTariffa(){
-        return this.tariffa;
-    }
-
+    /**
+     * Metodo che ritorna il
+     * numero di posti occupabili
+     *
+     * @return numero di posti
+     * occupabili
+     */
+    public int getNumeroPostiOccupabili(){ return this.numeroPostiOccupabili; }
 }
