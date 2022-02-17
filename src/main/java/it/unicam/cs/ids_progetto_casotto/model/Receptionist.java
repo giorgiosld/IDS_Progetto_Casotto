@@ -4,7 +4,6 @@ import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.Prenotazio
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.PrenotazioneAttivitaCliente;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.IHandlerPrenotazioniUtenzeClienti;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

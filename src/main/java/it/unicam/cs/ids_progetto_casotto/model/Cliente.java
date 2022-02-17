@@ -2,26 +2,27 @@ package it.unicam.cs.ids_progetto_casotto.model;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.ControllerAttivita;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
-import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttivita;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttività;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.ControllerSpiaggia;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.IControllerClienteSpiaggia;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.PrenotazioneAttivita;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Consumazione;
-import it.unicam.cs.ids_progetto_casotto.model.utenza.PrenotazioneUtenza;
-import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
-public class Cliente extends Persona{
+public class Cliente extends Persona implements IClienteUtenza {
 
-    private final List<PrenotazioneUtenza> utenzePrenotata;
+    private final List<PrenotazioneUtenza> utenzePrenotate;
     private final List<PrenotazioneAttivita> attivitaPrenotata;
 
     public Cliente(int id, String nome, String cognome, String annoNascita, char sesso, String email) {
         super(id, nome, cognome, annoNascita, sesso, email);
-        this.utenzePrenotata = new ArrayList<>();
+        this.utenzePrenotate = new ArrayList<>();
         this.attivitaPrenotata = new ArrayList<>();
     }
 
@@ -104,15 +105,47 @@ public class Cliente extends Persona{
         boolean c = controllerOrdinazione.creaComanda(consumazioni);
         return consumazioni;
     }
-
-    /**
-     * Metodo che implementa il pagamento
-     *
-     * @param importoDaPagare valore che indica
-     *                        quanto l'utente deve pagare
-     */
-    public void pagamento(double importoDaPagare) {
-        //TODO
+    //TODO
+    @Override
+    public List<Utenza> visualizzaUtenze(IControllerClienteSpiaggia controller_spiaggia, Periodo periodi) {
+        return null;
     }
+    //TODO
+    @Override
+    public List<Utenza> visualizzaUtenze(IControllerClienteSpiaggia controller_spiaggia, Periodo periodi, FasciaOraria fascia_oraria) {
+        return null;
+    }
+
+    @Override
+    public boolean selezionaUtenzadaPrenotare(IControllerClienteSpiaggia controller_spiaggia, Utenza utenza) {
+
+        return true;
+    }
+
+    @Override
+    public int selezionaTariffa(ControllerSpiaggia controller_spiaggia, Tariffa tariffa) {
+    controller_spiaggia.ge
+    }
+
+    @Override
+    public List<PrenotazioneUtenza> getPrenotazioniUtenze() {
+        return this.utenzePrenotate;
+    }
+
+    @Override
+    public PrenotazioneUtenza selezionaUtenzaPrenotata(PrenotazioneUtenza prenotazione) {
+        PrenotazioneUtenza utenzaSelezionata;
+        utenzaSelezionata = this.utenzePrenotate.stream().filter(x->x.equals(prenotazione)).findFirst().get();
+        return utenzaSelezionata;
+    }
+
+    @Override
+    public void eliminaUtenzaPrenotata(IControllerClienteSpiaggia controller_spiaggia, Utenza utenza) {
+        controller_spiaggia.
+
+
+    }
+
+
 
 }

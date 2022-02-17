@@ -7,43 +7,38 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class ControllerSpiaggia  implements IControllerClienteSpiaggia {
+public class ControllerSpiaggia  implements IControllerGestoreSpiaggia,IControllerClienteSpiaggia {
 
     //lista utenze
     List<Utenza>utenze;
     List<Tariffa> tariffe;
 
     public ControllerSpiaggia(List<Utenza> utenze) {
-        this.utenze = utenze;
-        this.periodi = new ArrayList<>();
+        this.utenze = new ArrayList<>();
+        this.tariffe = new ArrayList<>();
     }
 
-
-    public List<GregorianCalendar> getPeriodi() {
-        return periodi;
+    @Override
+    public List<Utenza> getUtenze() {
+        return this.utenze;
     }
 
-  public String getNomeUtente(Cliente cliente){
-      return cliente.getNome();
-  }
-    public String getCognomeUtente(Cliente cliente){
-        return cliente.getCognome();
-    }
-    public int getEta(Cliente cliente){
-      return cliente.getEta();
-    }
-    public char getSesso(Cliente cliente){
-        return cliente.getSesso();
-    }
-    public Tariffa getTariffa(){
-      return null;
+    @Override
+    public boolean aggiungiUtenza(Utenza utenza) {
+        this.utenze.add(utenza);
+        return true;
     }
 
+    @Override
+    public boolean eliminaUtenza(Utenza utenza) {
 
+        this.utenze.remove(utenza);
+        return true;
+    }
 
     @Override
     public List<Utenza> getUtenze(Periodo periodi) {
-
+        return null;
     }
 
     @Override
@@ -53,18 +48,22 @@ public class ControllerSpiaggia  implements IControllerClienteSpiaggia {
 
     @Override
     public List<Tariffa> getTariffe() {
-        return null;
+        return this.tariffe;
     }
 
     @Override
-    public boolean inviaPrenotazioneCliente(IControllerPrenotazioniUtenzeClienti receptionist, int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza) {
+    public boolean creaPrenotazioneCliente(IHandlerPrenotazioniUtenzeClienti receptionist, int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza) {
+
         return false;
     }
 
     @Override
-    public boolean eliminaPrenotazione(IControllerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenza prenotazione) {
+    public boolean eliminaPrenotazione(IHandlerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenza prenotazione) {
         return false;
     }
+
+
+
 
    /* public Optional<Utenza> prenotaUtenza(int idUtenza, int idTariffa){
         return null;

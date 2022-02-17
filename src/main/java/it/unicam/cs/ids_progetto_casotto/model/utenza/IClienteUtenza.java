@@ -40,14 +40,14 @@ public interface IClienteUtenza {
      * metodo che restituisce le utenze prenotate dal cliente
      * @return le utenze prenotate dall'utente
      */
-    List<Utenza> getPrenotazioniUtenze();
+    List<PrenotazioneUtenza> getPrenotazioniUtenze();
 
     /**
      * restituisce un'utenza selezionata dal cliente
      * @param utenza
      * @return un'utenza selezionata da un'utente
      */
-    Utenza selezionaUtenzaPrenotata(Utenza utenza);
+    PrenotazioneUtenza selezionaUtenzaPrenotata(PrenotazioneUtenza prenotazione);
 
     /**
      * metodo che permette al cliente di cancellare una prenotazione effettuata
