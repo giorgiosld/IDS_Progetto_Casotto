@@ -1,9 +1,9 @@
-package it.unicam.cs.ids_progetto_casotto.controller;
+package it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
 import it.unicam.cs.ids_progetto_casotto.model.Barista;
 import it.unicam.cs.ids_progetto_casotto.model.Comanda;
 import it.unicam.cs.ids_progetto_casotto.model.Consumazione;
-import it.unicam.cs.ids_progetto_casotto.model.StaffRistorazione;
 
 import java.util.List;
 

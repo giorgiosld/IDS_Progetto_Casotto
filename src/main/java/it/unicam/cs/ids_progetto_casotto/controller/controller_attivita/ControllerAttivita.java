@@ -1,4 +1,4 @@
-package it.unicam.cs.ids_progetto_casotto.controller;
+package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.IHandlerPrenotazioniAttivitaClienti;
@@ -11,7 +11,7 @@ import java.util.List;
  * Classe che rappresenta un gestore delle
  * attivit&agrave;
  */
-public class ControllerAttivita implements IControllerClienteAttività{
+public class ControllerAttivita implements IControllerClienteAttività {
 
     private final List<Attivita> attivita;
 

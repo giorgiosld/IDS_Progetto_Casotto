@@ -1,4 +1,4 @@
-package it.unicam.cs.ids_progetto_casotto.controller;
+package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.IHandlerPrenotazioniAttivitaClienti;

@@ -1,5 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class Barista extends StaffRistorazione{
     }
 
     /**
-     * Metodo che permette l'aggiunta della comanda da preparare in seguito alla creazione della comanda su {@link it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione}
+     * Metodo che permette l'aggiunta della comanda da preparare in seguito alla creazione della comanda su {@link ControllerOrdinazione}
      *
      * @param comanda la comanda che è stata notificata
      */

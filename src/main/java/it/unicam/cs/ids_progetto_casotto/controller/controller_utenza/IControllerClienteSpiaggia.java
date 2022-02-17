@@ -1,4 +1,4 @@
-package it.unicam.cs.ids_progetto_casotto.controller;
+package it.unicam.cs.ids_progetto_casotto.controller.controller_utenza;
 
 import it.unicam.cs.ids_progetto_casotto.model.*;
 

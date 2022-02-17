@@ -1,13 +1,12 @@
-package it.unicam.cs.ids_progetto_casotto.controller;
+package it.unicam.cs.ids_progetto_casotto.controller.controller_utenza;
 
 import it.unicam.cs.ids_progetto_casotto.model.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Optional;
 
-public class ControllerSpiaggia  implements IControllerClienteSpiaggia{
+public class ControllerSpiaggia  implements IControllerClienteSpiaggia {
 
     //lista utenze
     List<Utenza>utenze;

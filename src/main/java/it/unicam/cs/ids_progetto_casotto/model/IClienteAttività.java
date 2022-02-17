@@ -1,6 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import it.unicam.cs.ids_progetto_casotto.controller.IControllerClienteAttività;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttività;
 
 import java.util.List;
 

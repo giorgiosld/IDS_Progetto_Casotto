@@ -1,13 +1,12 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import it.unicam.cs.ids_progetto_casotto.controller.IControllerNotificheClienti;
-
-import java.util.List;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_notifiche.IControllerNotificheClienti;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_notifiche.ControllerNotifiche;
 
 /**
  * Interfaccia che definisce le azioni,
  * eseguibili dal {@link Receptionist} per
- * gestire il {@link it.unicam.cs.ids_progetto_casotto.controller.ControllerNotifiche}
+ * gestire il {@link ControllerNotifiche}
  */
 public interface IHandlerNewsletter {
 

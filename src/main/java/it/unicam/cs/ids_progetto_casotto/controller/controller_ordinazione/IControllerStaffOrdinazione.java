@@ -1,5 +1,6 @@
-package it.unicam.cs.ids_progetto_casotto.controller;
+package it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
 import it.unicam.cs.ids_progetto_casotto.model.Comanda;
 import it.unicam.cs.ids_progetto_casotto.model.StatoComanda;
 

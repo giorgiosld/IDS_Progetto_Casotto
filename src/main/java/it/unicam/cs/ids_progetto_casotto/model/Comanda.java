@@ -1,11 +1,13 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * Classe che rappresenta una generica comanda contenuta all'interno del {@link it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione}
+ * Classe che rappresenta una generica comanda contenuta all'interno del {@link ControllerOrdinazione}
  */
 public class Comanda {
 

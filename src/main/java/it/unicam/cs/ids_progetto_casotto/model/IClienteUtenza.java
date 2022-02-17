@@ -1,6 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import it.unicam.cs.ids_progetto_casotto.controller.IControllerClienteSpiaggia;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.IControllerClienteSpiaggia;
 
 import java.util.List;
 

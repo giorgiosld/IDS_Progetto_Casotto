@@ -1,11 +1,11 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import it.unicam.cs.ids_progetto_casotto.controller.IControllerClienteOrdinazione;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.IControllerClienteOrdinazione;
 
 import java.util.List;
 
 /**
- * Interfaccia che permette l'interazione tra {@link Cliente} e {@link it.unicam.cs.ids_progetto_casotto.controller.IControllerClienteOrdinazione}
+ * Interfaccia che permette l'interazione tra {@link Cliente} e {@link IControllerClienteOrdinazione}
  */
 public interface IClienteConsumazione {
 
