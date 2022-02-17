@@ -1,7 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
-import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttività;
-import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttivita;
 
 import java.util.List;
 
@@ -14,13 +13,13 @@ public interface IClienteAttività {
     /**
      * Metodo che permette al cliente di visualizzare
      * le attivit&agrave;, proposte dal casotto,
-     * tramite il {@link IControllerClienteAttività}
+     * tramite il {@link IControllerClienteAttivita}
      *
      * @param controllerAttivita controller che permette
      *                           di accedere alle attivit&agrave;
      * @return lista di attivit&agrave; visualizzate
      */
-    List<Attivita> visualizzaAttivita(IControllerClienteAttività controllerAttivita);
+    List<Attivita> visualizzaAttivita(IControllerClienteAttivita controllerAttivita);
 
     /**
      * Metodo che permette al cliente di selezionare
@@ -31,7 +30,7 @@ public interface IClienteAttività {
      *                           selezionata
      * @param attivita attivit&agrave; da selezionare
      */
-    Attivita selezionaAttivita(IControllerClienteAttività controllerAttivita, Attivita attivita);
+    Attivita selezionaAttivita(IControllerClienteAttivita controllerAttivita, Attivita attivita);
 
     /**
      * Metodo che permette al cliente di prenotare
@@ -44,7 +43,7 @@ public interface IClienteAttività {
      * @return true se l'attivit&agrave; risulta prenotata,
      * false altrimenti
      */
-    boolean prenotaAttivita(IControllerClienteAttività controllerAttivita, Attivita attivita);
+    boolean prenotaAttivita(IControllerClienteAttivita controllerAttivita, Attivita attivita);
 
     /**
      * Metodo che ritorna tutte le attivit&agrave;
@@ -73,5 +72,5 @@ public interface IClienteAttività {
      *                           selezionata
      * @param attivita attivit&agrave; prenotata da eliminare
      */
-    void eliminaAttivitaPrenotata(IControllerClienteAttività controllerAttivita, Attivita attivita);
+    void eliminaAttivitaPrenotata(IControllerClienteAttivita controllerAttivita, Attivita attivita);
 }

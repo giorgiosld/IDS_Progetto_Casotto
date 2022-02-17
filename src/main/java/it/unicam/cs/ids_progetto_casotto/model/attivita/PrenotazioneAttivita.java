@@ -1,10 +1,12 @@
 package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
-import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.ControllerAttivita;
 
 /**
- * Classe che rappresenta una
- * prenotazione effettuata dall'utente
+ * Classe che rappresenta una prenotazione
+ * del cliente che viene gestita da
+ * {@link ControllerAttivita} e {@link it.unicam.cs.ids_progetto_casotto.model.Receptionist}
  */
 public class PrenotazioneAttivita {
 

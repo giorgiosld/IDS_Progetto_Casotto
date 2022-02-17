@@ -45,7 +45,7 @@ public interface IControllerClienteSpiaggia {
      * @param permanenza   il periodo di permanenza del cliente
      * @return true o false se la creazione ha avuto successo o meno
      */
-    boolean creaPrenotazioneCliente(IControllerPrenotazioniUtenzeClienti receptionist, int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza);
+    boolean creaPrenotazioneCliente(IHandlerPrenotazioniUtenzeClienti receptionist, int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza);
 
     /**
      * metodo che permette di far eliminare la prenotazione dell'utenza effettuata dal cliente, al receptionist
@@ -54,5 +54,5 @@ public interface IControllerClienteSpiaggia {
      * @param prenotazione la prenotazione da cancellare
      * @return true o false se l'operazione ha avuto successo
      */
-    boolean eliminaPrenotazione(IControllerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenza prenotazione);
+    boolean eliminaPrenotazione(IHandlerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenza prenotazione);
 }

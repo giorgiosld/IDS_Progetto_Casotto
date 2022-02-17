@@ -9,6 +9,7 @@ import it.unicam.cs.ids_progetto_casotto.model.Receptionist;
  * eseguibili dal {@link Receptionist} per
  * gestire il {@link ControllerNotifiche}
  */
+//TODO da sistemare la gestione dei messaggi
 public interface IHandlerNewsletter {
 
     /**

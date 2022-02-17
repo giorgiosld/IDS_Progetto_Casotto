@@ -8,7 +8,7 @@ import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
  * per le attivit&agrave; utilizzabile dal gestore
  * del casotto per gestire le attivit&agrave;
  */
-public interface IControllerGestoreAttività {
+public interface IControllerGestoreAttivita {
 
     /**
      * Metodo che permette di aggiungere un'

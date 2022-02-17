@@ -1,37 +1,52 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import it.unicam.cs.ids_progetto_casotto.controller.ControllerUtenze;
-import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.PrenotazioneUtenzaCliente;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.PrenotazioneAttivitaCliente;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.IHandlerPrenotazioniUtenzeClienti;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Receptionist extends Staff{
-    private String cognome;
-    private int idReceptionist;
+/**
+ * Classe che rappresenta un receptionist
+ * che deve gestire {@link PrenotazioneUtenzaCliente},
+ * {@link PrenotazioneAttivitaCliente} e le
+ * notifiche tramite {@link it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter}
+ */
+public class Receptionist extends Persona implements IHandlerPrenotazioniAttivitaClienti, IHandlerPrenotazioniUtenzeClienti {
 
-    public Receptionist(String nome,String cognome,int idReceptionist){
-        super(nome);
-        this.cognome=cognome;
-        this.idReceptionist=idReceptionist;
+    private final List<PrenotazioneUtenzaCliente> prenotazioniUtenzaClienti;
+    private final List<PrenotazioneAttivitaCliente> prenotazioniAttivitaClienti;
+
+    public Receptionist(int id, String nome, String cognome, String annoNascita, char sesso, String email) {
+        super(id, nome, cognome, annoNascita, sesso, email);
+        this.prenotazioniUtenzaClienti = new ArrayList<>();
+        this.prenotazioniAttivitaClienti = new ArrayList<>();
     }
 
-    public String getNome() {
-        return nome;
+    @Override
+    public List<PrenotazioneAttivitaCliente> getPrenotazioniAttivitaClienti() {
+        return this.prenotazioniAttivitaClienti;
     }
 
-    public String getCognome() {
-        return cognome;
+    @Override
+    public List<PrenotazioneAttivitaCliente> getPrenotazioniAttivitaCliente(int idCliente) {
+        return this.getPrenotazioniAttivitaClienti().stream()
+                .filter(x -> x.getIdCliente() == idCliente).collect(Collectors.toList());
     }
 
-    public int getId() {
-        return idReceptionist;
+    @Override
+    public boolean aggiungiPrenotazioneAttivita(PrenotazioneAttivitaCliente prenotazione) {
+        if (this.getPrenotazioniAttivitaClienti().contains(prenotazione)) {
+            return false;
+        }
+        this.getPrenotazioniAttivitaClienti().add(prenotazione);
+        return true;
     }
 
-    public List<Utenza> visualizzaPrenotazioni(ControllerUtenze controller){ //lista fai tornare stringa
-      return controller.getUtenze()
-               .stream()
-               .filter(x -> x.getDisponibilita() == false)
-               .collect(Collectors.toList());
-    }
+    //TODO sistemare i metodi di IHandlerPrenotazioniUtenzeClienti
+
+    //TODO sistemare i metodi di IHandlerNewsletter
 }

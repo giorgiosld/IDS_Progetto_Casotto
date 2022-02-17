@@ -2,7 +2,7 @@ package it.unicam.cs.ids_progetto_casotto.model;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.ControllerAttivita;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
-import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttività;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.PrenotazioneAttivita;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Consumazione;
@@ -33,7 +33,7 @@ public class Cliente extends Persona{
      *
      * @return lista di attivit&agrave; visualizzate
      */
-    public List<Attivita> visualizzaAttivita(IControllerClienteAttività controller) {
+    public List<Attivita> visualizzaAttivita(IControllerClienteAttivita controller) {
         return controller.getAttivita();
     }
 
