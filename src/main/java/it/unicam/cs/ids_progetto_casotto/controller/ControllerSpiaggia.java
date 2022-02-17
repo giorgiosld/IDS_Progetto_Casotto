@@ -1,19 +1,17 @@
 package it.unicam.cs.ids_progetto_casotto.controller;
 
-import it.unicam.cs.ids_progetto_casotto.model.Cliente;
-import it.unicam.cs.ids_progetto_casotto.model.Tariffa;
-import it.unicam.cs.ids_progetto_casotto.model.Utenza;
+import it.unicam.cs.ids_progetto_casotto.model.*;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
-public class ControllerSpiaggia  implements HandlerDatiUtente{
+public class ControllerSpiaggia  implements IControllerClienteSpiaggia{
 
     //lista utenze
     List<Utenza>utenze;
-    List<GregorianCalendar> periodi;
+    List<Tariffa> tariffe;
 
     public ControllerSpiaggia(List<Utenza> utenze) {
         this.utenze = utenze;
@@ -41,13 +39,34 @@ public class ControllerSpiaggia  implements HandlerDatiUtente{
       return null;
     }
 
-    public List<Utenza> getUtenze(){
 
-      return utenze;
+
+    @Override
+    public List<Utenza> getUtenze(Periodo periodi) {
 
     }
 
-    public Optional<Utenza> prenotaUtenza(int idUtenza, int idTariffa){
+    @Override
+    public List<Utenza> getUtenze(Periodo periodi, FasciaOraria fasciaOraria) {
+        return null;
+    }
+
+    @Override
+    public List<Tariffa> getTariffe() {
+        return null;
+    }
+
+    @Override
+    public boolean inviaPrenotazioneCliente(IControllerPrenotazioniUtenzeClienti receptionist, int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza) {
+        return false;
+    }
+
+    @Override
+    public boolean eliminaPrenotazione(IControllerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenza prenotazione) {
+        return false;
+    }
+
+   /* public Optional<Utenza> prenotaUtenza(int idUtenza, int idTariffa){
         return null;
     }
 
@@ -56,15 +75,13 @@ public class ControllerSpiaggia  implements HandlerDatiUtente{
         utenza.setDisponibilita(disponibilita);
 
     }
+*/
+   /*public List<Utenza> getUtenze(){
 
-    public void notificaReceptionist(){
+       return utenze;
 
-    }//produttore consumatore o flags?
-    //quando prenota manda notifica
+   }
 
-    //getçPeriodi
+    */
 
-    //prenotaUtenza
-
-    //
 }
