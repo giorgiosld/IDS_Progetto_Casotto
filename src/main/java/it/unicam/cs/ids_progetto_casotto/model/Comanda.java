@@ -4,15 +4,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Classe che rappresenta una generica comanda contenuta all'interno del {@link it.unicam.cs.ids_progetto_casotto.controller.ControllerOrdinazione}
+ */
 public class Comanda {
 
     private static int id;
-    private int idComanda;
+    private final int idComanda;
     public List<Consumazione> consumazioni;
     public double prezzoTotale;
-    public StatoComanda state;
+    public StatoComanda statoComanda;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    private String orarioCreazione;
+    private final String orarioCreazione;
 
     /**
      * Crea la comanda
@@ -27,7 +30,7 @@ public class Comanda {
         Comanda.id++;
         this.consumazioni = consumazioni;
         this.prezzoTotale = prezzoTotale;
-        this.state = state;
+        this.statoComanda = state;
         this.orarioCreazione =  dtf.format(LocalDateTime.now());
     }
 
@@ -41,17 +44,26 @@ public class Comanda {
         this.idComanda = Comanda.id;
         Comanda.id++;
         this.consumazioni = consumazioni;
-        this.state = state;
+        this.statoComanda = state;
         this.orarioCreazione =  dtf.format(LocalDateTime.now());
     }
 
     /**
      * Ritorna l'id della comanda
      *
-     * @return
+     * @return id della comanda
      */
-    public int getIdComanda() {
+    public int getId() {
         return this.idComanda;
+    }
+
+    /**
+     * Ritorna la lista delle consumazioni presenti nella comanda
+     *
+     * @return lista consumazioni scelte dal cliente
+     */
+    public List<Consumazione> getConsumazioni() {
+        return consumazioni;
     }
 
     /**
@@ -80,8 +92,8 @@ public class Comanda {
      *
      * @return stato comanda
      */
-    public StatoComanda getState() {
-        return state;
+    public StatoComanda getStatoComanda() {
+        return statoComanda;
     }
 
     /**
@@ -89,18 +101,10 @@ public class Comanda {
      *
      * @param state stato da impostare
      */
-    public void setState(StatoComanda state){
-        this.state = state;
+    public void setStatoComanda(StatoComanda state){
+        this.statoComanda = state;
     }
 
-    /**
-     * Ritorna la lista delle consumazioni presenti nella comanda
-     *
-     * @return lista consumazioni scelte dal cliente
-     */
-    public List<Consumazione> getConsumazioni() {
-        return consumazioni;
-    }
 
     /**
      * Ritorna l'orario in stringa di quando si è creata la comanda
@@ -117,7 +121,7 @@ public class Comanda {
                 "idComanda=" + id +
                 ", consumazioni=" + consumazioni +
                 ", prezzoTotale=" + prezzoTotale +
-                ", state=" + state +
+                ", state=" + statoComanda +
                 ", data creazione=" + orarioCreazione +
                 '}';
     }

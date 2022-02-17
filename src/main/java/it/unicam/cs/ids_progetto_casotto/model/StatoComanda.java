@@ -4,5 +4,6 @@ public enum StatoComanda {
     CREATA,
     IN_PREPARAZIONE,
     PRONTA,
+    IN_CONSEGNA,
     CONSEGNATA
 }

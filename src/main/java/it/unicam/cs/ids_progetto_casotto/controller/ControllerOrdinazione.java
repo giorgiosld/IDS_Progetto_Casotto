@@ -1,88 +1,73 @@
 package it.unicam.cs.ids_progetto_casotto.controller;
 
-import it.unicam.cs.ids_progetto_casotto.model.Comanda;
-import it.unicam.cs.ids_progetto_casotto.model.Consumazione;
-import it.unicam.cs.ids_progetto_casotto.model.StatoComanda;
+import it.unicam.cs.ids_progetto_casotto.model.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Classe che implementa un controller per le ordinazioni. Si possono effettuare varie operazioni tutte ineresnti alla
  * classe comanda e consumazione.
  */
-public class ControllerOrdinazione {
+public class ControllerOrdinazione implements IControllerStaffOrdinazione, IControllerClienteOrdinazione {
 
     private final List<Comanda> comande;
     private final List<Consumazione> consumazioni;
+    private  List<Barista> staffBar;
 
     public ControllerOrdinazione(){
         this.comande = new ArrayList<>();
         this.consumazioni = new ArrayList<>();
+        //da controllare
+        this.staffBar = new ArrayList<>();
     }
 
-    /**
-     * Creazione di una nuova comanda all'interno del controller
-     *
-     * @param consumazione le consumazioni scelte
-     * @return la comanda creata con reltiva notifica della sua creazione
-     */
-    public Comanda creaComanda(Consumazione ... consumazione){
-        if (consumazione == null) { throw new NullPointerException("Ci dispiace, c'è stato un errore nella selezione"); }
-        List<Consumazione> consumaziones = new ArrayList<>();
-        Collections.addAll(consumaziones, consumazione);
-        //possibile calcolo errato se non si tiene conto della quantità
-        double prezzoTot = consumaziones.stream()
+
+    @Override
+    public List<Consumazione> getConsumazioni() {
+        return this.consumazioni;
+    }
+
+    @Override
+    public boolean creaComanda(List<Consumazione> consumazioni) {
+        if (consumazioni == null) { throw new NullPointerException("Ci dispiace, c'è stato un errore nella selezione"); }
+        double prezzoTot = consumazioni.stream()
                 .mapToDouble(Consumazione::getPrezzo)
                 .sum();
-        Comanda nuovaComanda = new Comanda(consumaziones, prezzoTot, StatoComanda.CREATA);
-        notificaStaff(nuovaComanda);
-        return nuovaComanda;
+        Comanda nuovaComanda = new Comanda(consumazioni, prezzoTot, StatoComanda.CREATA);
+        this.comande.add(nuovaComanda);
+        Barista StaffToNotify = staffBar.stream().filter(x -> x.getStatoOccupazione().equals(StatoOccupazione.LIBERO)).findFirst().orElse(null);
+        notificaComanda(StaffToNotify, nuovaComanda);
+        return true;
     }
 
-    /**
-     * Ritorna la lista di comande all'interno del controller ordinazione
-     *
-     * @return le comande presenti nel controller
-     */
-    public List<Comanda> getComande(){
-        return comande;
+    @Override
+    public Comanda notificaComanda(Barista barista, Comanda comanda) {
+        barista.aggiungiComandaDaPreparare(comanda);
+        return comanda;
     }
 
-    /**
-     * Ritorna una lista di consumazioni. Utile per la visualizzazione del menù
-     *
-     * @return le consumazioni disponibili presenti nel menù
-     */
-    public List<Consumazione> getConsumazioni() { return consumazioni; }
-
-    /**
-     * Notifica ai vari componenti dello staff l'arrivo di una nuova comanda
-     *
-     * @param comanda la nuova comanda creata
-     * @return la comanda creata
-     */
-    public String notificaStaff(Comanda comanda){
-        return comanda.toString();
+    @Override
+    public Comanda getComanda(Comanda comanda) {
+        return this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null);
     }
 
-    /**
-     * Invia importo totale riguardante una comanda
-     *
-     * @param comanda
-     * @return il totale della comanda
-     */
-    public double inviaImportoComanda(Comanda comanda){
-        return comanda.getPrezzoTotale();
+    @Override
+    public List<Comanda> getComande() {
+        return this.comande;
     }
 
-    /**
-     * Ritorna l'ultima comanda inserita all'interno del controller
-     *
-     * @return ultima comanda
-     */
-    public Comanda getLastComanda(){
-        return comande.get(comande.size() - 1);
+    @Override
+    public StatoComanda getStatoComanda(Comanda comanda) {
+        return Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).getStatoComanda();
     }
+
+    @Override
+    public void setStatoComanda(Comanda comanda, StatoComanda nuovoStato) {
+        Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).setStatoComanda(nuovoStato);
+    }
+
+
 }

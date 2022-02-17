@@ -127,9 +127,9 @@ public class Cliente {
      *
      * @return lista di consumazioni ordinate
      */
-    public List<Consumazione> ordinazioneConsumazione(ControllerOrdinazione controllerOrdinazione, Consumazione ... consumazioni) {
-        Comanda c = controllerOrdinazione.creaComanda(consumazioni);
-        return c.getConsumazioni();
+    public List<Consumazione> ordinazioneConsumazione(ControllerOrdinazione controllerOrdinazione, List<Consumazione> consumazioni) {
+        boolean c = controllerOrdinazione.creaComanda(consumazioni);
+        return consumazioni;
     }
 
     /**
