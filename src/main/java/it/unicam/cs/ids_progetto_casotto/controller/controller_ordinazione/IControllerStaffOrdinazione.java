@@ -1,13 +1,13 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione;
 
-import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
-import it.unicam.cs.ids_progetto_casotto.model.Comanda;
-import it.unicam.cs.ids_progetto_casotto.model.StatoComanda;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Comanda;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.StatoComanda;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.StaffRistorazione;
 
 import java.util.List;
 
 /**
- * Interfaccia rappresentante le azioni che pu&ograve; eseguire {@link it.unicam.cs.ids_progetto_casotto.model.StaffRistorazione} per la comunicazione con
+ * Interfaccia rappresentante le azioni che pu&ograve; eseguire {@link StaffRistorazione} per la comunicazione con
  * il {@link ControllerOrdinazione}
  */
 public interface IControllerStaffOrdinazione {

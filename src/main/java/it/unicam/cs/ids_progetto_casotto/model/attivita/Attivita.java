@@ -1,4 +1,4 @@
-package it.unicam.cs.ids_progetto_casotto.model;
+package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;

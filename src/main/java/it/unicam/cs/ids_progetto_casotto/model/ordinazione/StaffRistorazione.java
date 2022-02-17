@@ -1,6 +1,7 @@
-package it.unicam.cs.ids_progetto_casotto.model;
+package it.unicam.cs.ids_progetto_casotto.model.ordinazione;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.IControllerStaffOrdinazione;
+import it.unicam.cs.ids_progetto_casotto.model.Persona;
 
 import java.util.List;
 

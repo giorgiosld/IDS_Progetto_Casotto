@@ -1,9 +1,8 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione;
 
-import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
-import it.unicam.cs.ids_progetto_casotto.model.Barista;
-import it.unicam.cs.ids_progetto_casotto.model.Comanda;
-import it.unicam.cs.ids_progetto_casotto.model.Consumazione;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Barista;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Comanda;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Consumazione;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public interface IControllerClienteOrdinazione {
     List<Consumazione> getConsumazioni();
 
     /**
-     * Metodo che permette la creazione di una {@link it.unicam.cs.ids_progetto_casotto.model.Comanda} all'interno del {@link ControllerOrdinazione}
+     * Metodo che permette la creazione di una {@link Comanda} all'interno del {@link ControllerOrdinazione}
      *
      * @param consumazioni la lista delle consumazioni selezionate
      * @return true se avviene la creazione e aggiunta della comanda

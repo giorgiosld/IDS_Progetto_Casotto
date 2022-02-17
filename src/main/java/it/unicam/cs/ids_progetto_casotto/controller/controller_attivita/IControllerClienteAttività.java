@@ -1,8 +1,8 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
-import it.unicam.cs.ids_progetto_casotto.model.Attivita;
-import it.unicam.cs.ids_progetto_casotto.model.IHandlerPrenotazioniAttivitaClienti;
-import it.unicam.cs.ids_progetto_casotto.model.PrenotazioneAttivitaCliente;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.PrenotazioneAttivitaCliente;
 
 import java.util.List;
 

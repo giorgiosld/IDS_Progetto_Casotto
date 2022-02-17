@@ -1,6 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione;
 
-import it.unicam.cs.ids_progetto_casotto.model.*;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.*;
 
 import java.util.ArrayList;
 import java.util.List;

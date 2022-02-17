@@ -1,7 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
-import it.unicam.cs.ids_progetto_casotto.model.Attivita;
-import it.unicam.cs.ids_progetto_casotto.model.IHandlerNewsletter;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
 
 /**
  * Interfaccia che definisce un generico controller

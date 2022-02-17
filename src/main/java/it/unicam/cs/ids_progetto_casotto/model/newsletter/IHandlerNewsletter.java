@@ -1,7 +1,8 @@
-package it.unicam.cs.ids_progetto_casotto.model;
+package it.unicam.cs.ids_progetto_casotto.model.newsletter;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_notifiche.IControllerNotificheClienti;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_notifiche.ControllerNotifiche;
+import it.unicam.cs.ids_progetto_casotto.model.Receptionist;
 
 /**
  * Interfaccia che definisce le azioni,

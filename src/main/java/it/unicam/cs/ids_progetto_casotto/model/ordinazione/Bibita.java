@@ -1,4 +1,4 @@
-package it.unicam.cs.ids_progetto_casotto.model;
+package it.unicam.cs.ids_progetto_casotto.model.ordinazione;
 
 /**
  * Classe che rappresenta un generica bibita che si trova nel men&ugrave;

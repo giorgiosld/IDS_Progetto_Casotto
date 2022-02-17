@@ -1,4 +1,6 @@
-package it.unicam.cs.ids_progetto_casotto.model;
+package it.unicam.cs.ids_progetto_casotto.model.attivita;
+
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 
 /**
  * Classe che rappresenta una

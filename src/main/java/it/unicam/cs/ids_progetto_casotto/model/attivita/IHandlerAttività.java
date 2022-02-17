@@ -1,6 +1,7 @@
-package it.unicam.cs.ids_progetto_casotto.model;
+package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerGestoreAttività;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 
 /**
  * Interfaccia che definisce le azioni,
