@@ -34,7 +34,7 @@ public class Cliente extends Persona implements IClienteUtenza {
      *
      * @return lista di attivit&agrave; visualizzate
      */
-    public List<Attivita> visualizzaAttivita(IControllerClienteAttività controller) {
+    public List<Attivita> visualizzaAttivita(IControllerClienteAttivita controller) {
         return controller.getAttivita();
     }
 

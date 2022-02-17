@@ -4,87 +4,116 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+/**
+ * Classe che rappresenta le
+ * attivit&agrave; presenti
+ * nel sistema
+ */
 public class Attivita {
 
-    private int idAttivita;
     private final String nome;
-    private final int idTariffa;
+    private final String descrizione;
     private int postiDisponibili;
-    private String descrizione;
-    private GregorianCalendar dataSvolgimento;
-    private final List<String> clientiPrenotati;
+    private final int numeroMassimoPosti;
+    private String dataSvolgimento;
+    private final double prezzo;
 
-    private static final int postiIllimatati = Integer.MAX_VALUE;
-
-    public Attivita(int idAttivita, String nome, int idTariffa, int postiDisponibili, String descrizione, int year, int month, int day) {
-        this.idAttivita = idAttivita;
+    public Attivita(String nome, String descrizione, int numeroMassimoPosti, String dataSvolgimento, double prezzo) {
         this.nome = nome;
-        this.idTariffa = idTariffa;
-        this.postiDisponibili = postiDisponibili;
         this.descrizione = descrizione;
-        this.dataSvolgimento = new GregorianCalendar(year, month, day);
-        this.clientiPrenotati = new ArrayList<>();
+        this.postiDisponibili = numeroMassimoPosti;
+        this.numeroMassimoPosti = numeroMassimoPosti;
+        this.dataSvolgimento = dataSvolgimento;
+        this.prezzo = prezzo;
     }
 
-    public Attivita(int idAttivita, String nome, int idTariffa, String descrizione, int year, int month, int day) {
-        this.idAttivita = idAttivita;
-        this.nome = nome;
-        this.idTariffa = idTariffa;
-        this.postiDisponibili = postiIllimatati;
-        this.descrizione = descrizione;
-        this.dataSvolgimento = new GregorianCalendar(year, month, day);
-        this.clientiPrenotati = new ArrayList<>();
-    }
-
-    public int getIdAttivita() { return this.idAttivita; }
-
-    public void setIdAttivita(int id) { this.idAttivita = id; }
-
+    /**
+     * Metodo che ritorna
+     * il nome dell'attivit&agrave;
+     *
+     * @return nome attivit&agrave;
+     */
     public String getNome() {
-        return this.nome;
+        return nome;
     }
 
-    public int getIdTariffa() {
-        return this.idTariffa;
-    }
-
-    public int getPostiDisponibili() {
-        return this.postiDisponibili;
-    }
-
-    public void setPostiDisponibili(int postiDisponibili) {
-        this.postiDisponibili = postiDisponibili;
-    }
-
+    /**
+     * Metodo che ritorna
+     * la descrizione dell'attivit&agrave;
+     *
+     * @return descrizione dell'attivit&grave;
+     */
     public String getDescrizione() {
-        return this.descrizione;
+        return descrizione;
     }
 
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
+    /**
+     * Metodo che ritorna
+     * il numero di posti disponibili
+     *
+     * @return numero posti disponibili
+     */
+    public int getPostiDisponibili() {
+        return postiDisponibili;
     }
 
-    public GregorianCalendar getDataSvolgimento() {
-        return this.dataSvolgimento;
+    /**
+     * Metodo che riduce di uno
+     * i posti disponibili
+     */
+    public void riduciPostiDisponibili() {
+        this.postiDisponibili--;
     }
 
-    public void setDataSvolgimento(int year, int month, int day) {
-        this.dataSvolgimento = new GregorianCalendar(year, month, day);
+    /**
+     * Metodo che ritorna il numero
+     * di posti massimo nell'attivit&agrave;
+     *
+     * @return numero di posti massimo
+     */
+    public int getNumeroMassimoPosti() {
+        return numeroMassimoPosti;
     }
 
-    public List<String> getClientiPrenotati() {
-        return this.clientiPrenotati;
+    /**
+     * Metodo che ritorna la data
+     * di svolgimento dell'attivit&agrave;
+     *
+     * @return data di svolgimento
+     */
+    public String getDataSvolgimento() {
+        return dataSvolgimento;
+    }
+
+    /**
+     * Metodo che modifica la data
+     * di svolgimento dell'attivit&agrave;
+     *
+     * @param newData nuova data di svolgimento
+     */
+    public void setDataSvolgimento(String newData) {
+        this.dataSvolgimento = newData;
+    }
+
+    /**
+     * Metodo che ritorna il prezzo
+     * dell'attivit&agrave;
+     *
+     * @return prezzo attivit&agrave;
+     */
+    public double getPrezzo() {
+        return prezzo;
     }
 
     @Override
     public String toString() {
         return "Attivita{" +
-                "idAttivita=" + idAttivita +
-                ", nome='" + nome + '\'' +
-                ", idTariffa=" + idTariffa +
-                ", postiDisponibili=" + postiDisponibili +
+                "nome='" + nome + '\'' +
                 ", descrizione='" + descrizione + '\'' +
-                ", dataSvolgimento=" + dataSvolgimento +
+                ", postiDisponibili=" + postiDisponibili +
+                ", numeroMassimoPosti=" + numeroMassimoPosti +
+                ", dataSvolgimento='" + dataSvolgimento + '\'' +
+                ", prezzo=" + prezzo +
                 '}';
     }
 }

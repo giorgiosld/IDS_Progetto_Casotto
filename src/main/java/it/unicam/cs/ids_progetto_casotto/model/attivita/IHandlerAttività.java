@@ -1,7 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
-import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerGestoreAttività;
-import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerGestoreAttivita;
 
 /**
  * Interfaccia che definisce le azioni,
@@ -28,7 +27,7 @@ public interface IHandlerAttività {
      * @return true se l'attivit&agrave; risulta aggiunta correttamente,
      * false altrimenti
      */
-    boolean aggiungiAttivita(IControllerGestoreAttività controllerGestoreAttività, String nome, String descrizione, int numeroMassimoPosti, String dataSvolgimento, double prezzo);
+    boolean aggiungiAttivita(IControllerGestoreAttivita controllerGestoreAttività, String nome, String descrizione, int numeroMassimoPosti, String dataSvolgimento, double prezzo);
 
     /**
      * Metodo che permette al gestore
@@ -42,7 +41,7 @@ public interface IHandlerAttività {
      * @return true se l'attivit&agrave; risulta eliminate correttamente,
      * false altrimenti
      */
-    boolean eliminaAttivita(IControllerGestoreAttività controllerGestoreAttività, Attivita attivita);
+    boolean eliminaAttivita(IControllerGestoreAttivita controllerGestoreAttività, Attivita attivita);
 
     /**
      * Metodo che permette al gestore
@@ -57,5 +56,5 @@ public interface IHandlerAttività {
      * @return true se l'attivit&agrave; risulta rimandata correttamente,
      * false altrimenti
      */
-    boolean rimandaAttivita(IControllerGestoreAttività controllerGestoreAttività, Attivita attivita, String nuovaData);
+    boolean rimandaAttivita(IControllerGestoreAttivita controllerGestoreAttività, Attivita attivita, String nuovaData);
 }

@@ -2,7 +2,6 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
-import it.unicam.cs.ids_progetto_casotto.model.attivita.PrenotazioneAttivitaCliente;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ import java.util.List;
  * controller per gestire le attivit&agrave;
  * che il cliente vuole prenotare
  */
-public interface IControllerClienteAttività {
+public interface IControllerClienteAttivita {
 
     /**
      * Metodo che ritorna le attivit&agrave;
@@ -46,7 +45,7 @@ public interface IControllerClienteAttività {
      * @param attivita attivit&agrave; che il cliente ha prenotato
      * @return true se la prenotazione avviene con successo, false altrimenti
      */
-    boolean inviaPrenotazioneCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Attivita attivita);
+    boolean creaPrenotazioneCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Attivita attivita);
 
     /**
      * Metodo che permette al cliente
