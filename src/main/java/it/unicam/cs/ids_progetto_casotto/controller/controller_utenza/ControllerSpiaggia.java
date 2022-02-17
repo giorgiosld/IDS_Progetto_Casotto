@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class ControllerSpiaggia  implements IControllerClienteSpiaggia {
+public class ControllerSpiaggia  implements IControllerGestoreSpiaggia {
 
     //lista utenze
     List<Utenza>utenze;
@@ -15,56 +15,29 @@ public class ControllerSpiaggia  implements IControllerClienteSpiaggia {
 
     public ControllerSpiaggia(List<Utenza> utenze) {
         this.utenze = utenze;
-        this.periodi = new ArrayList<>();
-    }
-
-
-    public List<GregorianCalendar> getPeriodi() {
-        return periodi;
-    }
-
-  public String getNomeUtente(Cliente cliente){
-      return cliente.getNome();
-  }
-    public String getCognomeUtente(Cliente cliente){
-        return cliente.getCognome();
-    }
-    public int getEta(Cliente cliente){
-      return cliente.getEta();
-    }
-    public char getSesso(Cliente cliente){
-        return cliente.getSesso();
-    }
-    public Tariffa getTariffa(){
-      return null;
-    }
-
-
-
-    @Override
-    public List<Utenza> getUtenze(Periodo periodi) {
-
+        this.tariffe = tariffe;
     }
 
     @Override
-    public List<Utenza> getUtenze(Periodo periodi, FasciaOraria fasciaOraria) {
-        return null;
+    public List<Utenza> getUtenze() {
+        return this.utenze;
     }
 
     @Override
-    public List<Tariffa> getTariffe() {
-        return null;
+    public boolean aggiungiUtenza(Utenza utenza) {
+        this.utenze.add(utenza);
+        return true;
     }
 
     @Override
-    public boolean inviaPrenotazioneCliente(IControllerPrenotazioniUtenzeClienti receptionist, int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza) {
-        return false;
+    public boolean eliminaUtenza(Utenza utenza) {
+
+        this.utenze.remove(utenza);
+        return true;
     }
 
-    @Override
-    public boolean eliminaPrenotazione(IControllerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenza prenotazione) {
-        return false;
-    }
+
+
 
    /* public Optional<Utenza> prenotaUtenza(int idUtenza, int idTariffa){
         return null;
