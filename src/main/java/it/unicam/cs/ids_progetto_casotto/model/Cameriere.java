@@ -54,7 +54,7 @@ public class Cameriere extends StaffRistorazione{
      *
      * @param comanda la comanda che sta per essere consegnata
      */
-    public void consegnaComande(Comanda comanda){
+    public void consegnaComanda(Comanda comanda){
         comanda.setStatoComanda(StatoComanda.IN_CONSEGNA);
         this.setStatoOccupazione(StatoOccupazione.OCCUPATO);
     }
