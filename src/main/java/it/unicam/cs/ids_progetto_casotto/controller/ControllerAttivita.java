@@ -1,55 +1,47 @@
 package it.unicam.cs.ids_progetto_casotto.controller;
 
 import it.unicam.cs.ids_progetto_casotto.model.Attivita;
+import it.unicam.cs.ids_progetto_casotto.model.IHandlerPrenotazioniAttivitaClienti;
+import it.unicam.cs.ids_progetto_casotto.model.PrenotazioneAttivita;
+import it.unicam.cs.ids_progetto_casotto.model.PrenotazioneAttivitaCliente;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Classe che rappresenta un gestore delle
  * attivit&agrave;
  */
-public class ControllerAttivita {
+public class ControllerAttivita implements IControllerClienteAttività{
 
     private final List<Attivita> attivita;
 
-    public ControllerAttivita() {
-        this.attivita = new ArrayList<>();
+    public ControllerAttivita(List<Attivita> attivita) {
+        this.attivita = attivita;
     }
 
-    /**
-     * Metodo che ritorna tutte le attivit&agrave;
-     * organizzate
-     *
-     * @return lista di attivit&agrave;
-     */
+    @Override
     public List<Attivita> getAttivita() {
         return this.attivita;
     }
 
-    /**
-     * Metodo che implementa la possibitlità
-     * ad un cliente di prenotare un'attivit&agrave;
-     *
-     * @param codiceFiscale del cliente che ha effettuato la prenotazione
-     * @param nomeAttivita dell'attivit&agrave; selezionata
-     *
-     * @return l'attivit&agrave; selezionata in caso di prenotazione
-     * avvenuta con successo. Nulla altrimenti
-     */
-    public Optional<Attivita> prenotazioneAttivita(String codiceFiscale, String nomeAttivita) {
-        Optional<Attivita> attivita = this.attivita.stream()
-                .filter(x -> x.getNome().equals(nomeAttivita))
-                .findFirst();
-        if (attivita.isPresent()) {
-            Attivita temp = attivita.get();
-            if (temp.getPostiDisponibili() > 0) {
-                temp.setPostiDisponibili(temp.getPostiDisponibili() - 1);
-                temp.getClientiPrenotati().add(codiceFiscale);
-                return attivita;
-            }
-        }
-        return Optional.empty();
+    @Override
+    public int getPostiDisponibili(Attivita attivita) {
+        return attivita.getPostiDisponibili();
+    }
+
+    @Override
+    public boolean inviaPrenotazioneCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Attivita attivita) {
+        //TODO implementare
+        return false;
+    }
+
+    @Override
+    public boolean eliminaPrenotazioneCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione) {
+        //TODO implementare
+        return false;
+    }
+
+    private boolean checkRimborso(PrenotazioneAttivita prenotazioneAttivita) {
+        return false;
     }
 }
