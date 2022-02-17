@@ -4,8 +4,8 @@ public class Ombrellone extends Utenza {
 
 
 
-    public Ombrellone(int id, boolean disponibilita, double tariffa, long postiDisponibili){
+    public Ombrellone(int id, int numeroPostiOccupabili){
 
-        super(id,disponibilita,tariffa,postiDisponibili);
+        super(id,numeroPostiOccupabili);
     }
 }
