@@ -1,5 +1,8 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
+/**
+ * Classe che descrive una Tariffa
+ */
 public class Tariffa {
 
     FasciaOraria fasciaOraria;
@@ -16,9 +19,11 @@ public class Tariffa {
     public int getAttivitaComprese() {
         return this.attivitaComprese;
     }
+
     public FasciaOraria getFasciaOraria(){
-        return this.getFasciaOraria();
+        return this.fasciaOraria;
     }
+
     public double getPrezzo(){
         return this.prezzo;
     }

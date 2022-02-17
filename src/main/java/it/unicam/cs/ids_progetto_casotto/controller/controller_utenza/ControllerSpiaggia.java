@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class ControllerSpiaggia  implements IControllerGestoreSpiaggia {
+public class ControllerSpiaggia  implements IControllerGestoreSpiaggia,IControllerClienteSpiaggia {
 
     //lista utenze
     List<Utenza>utenze;
     List<Tariffa> tariffe;
 
     public ControllerSpiaggia(List<Utenza> utenze) {
-        this.utenze = utenze;
-        this.tariffe = tariffe;
+        this.utenze = new ArrayList<>();
+        this.tariffe = new ArrayList<>();
     }
 
     @Override
@@ -34,6 +34,32 @@ public class ControllerSpiaggia  implements IControllerGestoreSpiaggia {
 
         this.utenze.remove(utenza);
         return true;
+    }
+
+    @Override
+    public List<Utenza> getUtenze(Periodo periodi) {
+        return null;
+    }
+
+    @Override
+    public List<Utenza> getUtenze(Periodo periodi, FasciaOraria fasciaOraria) {
+        return null;
+    }
+
+    @Override
+    public List<Tariffa> getTariffe() {
+        return this.tariffe;
+    }
+
+    @Override
+    public boolean creaPrenotazioneCliente(IHandlerPrenotazioniUtenzeClienti receptionist, int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza) {
+
+        return false;
+    }
+
+    @Override
+    public boolean eliminaPrenotazione(IHandlerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenza prenotazione) {
+        return false;
     }
 
 
