@@ -61,7 +61,7 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
         LocalDate dataSvolgimento = prenotazioneAttivita.getAttivitaPrenotata().getDataSvolgimento();
         LocalDate now = LocalDate.now();
         Period difference = Period.between(now,dataSvolgimento);
-        if (difference.getYears() == 0 || difference.getMonths() == 0 || difference.getDays() >= 2) {
+        if (difference.getYears() >= 0 || difference.getMonths() >= 0 || difference.getDays() >= 2) {
             return true;
         }
         return false;
@@ -70,8 +70,10 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
     @Override
     public boolean aggiungiAttivita(Attivita attivita) {
         if (this.getAttivita().contains(attivita)) {
+            System.out.println("L'attività che si vuole aggiungere è già presente");
             return false;
         }
+        System.out.println("Attività aggiunta correttamente");
         this.getAttivita().add(attivita);
         return true;
     }
@@ -79,8 +81,10 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
     @Override
     public boolean eliminaAttivita(Attivita attivita) {
         if (!this.getAttivita().contains(attivita)) {
+            System.out.println("L'attività che si vuole aggiungere non è presente");
             return false;
         }
+        System.out.println("Attività rimossa correttamente");
         this.getAttivita().remove(attivita);
         return true;
     }
@@ -88,6 +92,7 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
     @Override
     public boolean rimandaAttivita(IHandlerNewsletter receptionist, Attivita attivita, String nuovaData) {
         if (!this.getAttivita().contains(attivita)) {
+            System.out.println("L'attività che si vuole rimandare non esiste");
             return false;
         }
         Optional<Attivita> check = this.getAttivita().stream().filter(x -> x==attivita).findFirst();

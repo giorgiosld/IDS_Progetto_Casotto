@@ -18,26 +18,37 @@ public interface IClienteUtenza {
     List<Utenza>visualizzaUtenze(IControllerClienteSpiaggia controllerSpiaggia, Periodo periodi);
 
     /**
+     * Metodo che permette di visualizzare le
+     * utenze in base al periodo e alla fascia oraria
      *
-     * @param controller_spiaggia
-     * @param periodi
-     * @param fascia_oraria
-     * @return
+     * @param controllerSpiaggia controller che permette di accedere
+     *                           alle utenze
+     * @param periodo selezionato
+     * @param fasciaOraria orari di interesse
+     * @return lsita di utenze corrispondenti al periodo e alla
+     * fascia oraria selezionati
      */
-    List<Utenza> visualizzaUtenze(IControllerClienteSpiaggia controller_spiaggia, Periodo periodi, FasciaOraria fascia_oraria);
+    List<Utenza> visualizzaUtenze(IControllerClienteSpiaggia controllerSpiaggia, Periodo periodo, FasciaOraria fasciaOraria);
 
     /**
      * metodo che permette di far selezionare un'utenza da prenotare al cliente
      *
-     * @param controller_spiaggia restituisce tutte le utenze del casotto
+     * @param controllerSpiaggia restituisce tutte le utenze del casotto
      * @param utenza l'utenza da selezionare
      * @return true o false se l'utenza è stata scelta o meno
      */
-    boolean selezionaUtenzadaPrenotare(IControllerClienteSpiaggia controller_spiaggia, Utenza utenza);
+    boolean selezionaUtenzadaPrenotare(IControllerClienteSpiaggia controllerSpiaggia, Utenza utenza);
 
-    Tariffa selezionaTariffa(IControllerClienteSpiaggia controller_spiaggia, Tariffa tariffa);
-
-    Tariffa selezionaTariffa(ControllerSpiaggia controller_spiaggia, Tariffa tariffa);
+    /**
+     * Metodo che permette di selezionare
+     * la tariffa
+     *
+     * @param controllerSpiaggia controller che permette di accedere
+     *                           alla tariffa
+     * @param tariffa tariffa da selezionare
+     * @return tariffa selezionata
+     */
+    Tariffa selezionaTariffa(ControllerSpiaggia controllerSpiaggia, Tariffa tariffa);
 
     /**
      * metodo che restituisce le utenze prenotate dal cliente
@@ -54,10 +65,10 @@ public interface IClienteUtenza {
 
     /**
      * metodo che permette al cliente di cancellare una prenotazione effettuata
-     * @param controller_spiaggia restituisce  le utenze prenotate del cliente
+     * @param controllerSpiaggia restituisce  le utenze prenotate del cliente
      * @param utenza l'utenza selezionata da cancellare
      */
-    void eliminaPrenotazioneUtenza(IControllerClienteSpiaggia controller_spiaggia, PrenotazioneUtenza utenza);
+    void eliminaPrenotazioneUtenza(IControllerClienteSpiaggia controllerSpiaggia, PrenotazioneUtenza utenza);
 
 
 }
