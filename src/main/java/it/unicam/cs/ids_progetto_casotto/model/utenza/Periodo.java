@@ -32,15 +32,12 @@ public class Periodo {
         return LocalDate.parse(this.checkIn);
     }
 
-    public String getCheckOut(){
-        return  this.checkOut;
-    }
-
-    public void setCheckIn(String newCheckIn){
-        this.checkIn=newCheckIn;
-    }
-
-    public void setCheckOut(String newCheckOut){
-        this.checkOut=newCheckOut;
+    /**
+     * Metodo che ritorna la data del check-out
+     *
+     * @return check-out
+     */
+    public LocalDate getCheckOut(){
+        return LocalDate.parse(this.checkOut);
     }
 }
