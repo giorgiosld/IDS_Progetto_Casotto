@@ -1,5 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.ControllerSpiaggia;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.IControllerClienteSpiaggia;
 
 import java.util.List;
@@ -10,11 +11,11 @@ import java.util.List;
 public interface IClienteUtenza {
     /**
      * metodo che permette di visualizzare le utenze disponibili del Casotto in un determinato periodo
-     * @param controller_spiaggia restituisce tutte le utenze del casotto
+     * @param controllerSpiaggia restituisce tutte le utenze del casotto
      * @param periodi il periodo selezionato dall'utente
      * @return la lista delle utenze disponibili
      */
-    List<Utenza>visualizzaUtenze(IControllerClienteSpiaggia controller_spiaggia, Periodo periodi);
+    List<Utenza>visualizzaUtenze(IControllerClienteSpiaggia controllerSpiaggia, Periodo periodi);
 
     /**
      *
@@ -34,7 +35,9 @@ public interface IClienteUtenza {
      */
     boolean selezionaUtenzadaPrenotare(IControllerClienteSpiaggia controller_spiaggia, Utenza utenza);
 
-    int selezionaTariffa(IControllerClienteSpiaggia controller_spiaggia, Tariffa tariffa);
+    Tariffa selezionaTariffa(IControllerClienteSpiaggia controller_spiaggia, Tariffa tariffa);
+
+    Tariffa selezionaTariffa(ControllerSpiaggia controller_spiaggia, Tariffa tariffa);
 
     /**
      * metodo che restituisce le utenze prenotate dal cliente
@@ -47,13 +50,15 @@ public interface IClienteUtenza {
      * @param utenza
      * @return un'utenza selezionata da un'utente
      */
-    PrenotazioneUtenza selezionaUtenzaPrenotata(PrenotazioneUtenza prenotazione);
+    PrenotazioneUtenza selezionaPrenotazioneUtenza(PrenotazioneUtenza prenotazione);
 
     /**
      * metodo che permette al cliente di cancellare una prenotazione effettuata
      * @param controller_spiaggia restituisce  le utenze prenotate del cliente
      * @param utenza l'utenza selezionata da cancellare
      */
-    void eliminaUtenzaPrenotata(IControllerClienteSpiaggia controller_spiaggia, Utenza utenza);
+    void eliminaPrenotazioneUtenza(IControllerClienteSpiaggia controller_spiaggia, PrenotazioneUtenza utenza);
+
+
 }
 
