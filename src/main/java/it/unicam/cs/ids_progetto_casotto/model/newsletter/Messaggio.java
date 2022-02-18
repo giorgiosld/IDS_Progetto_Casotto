@@ -8,12 +8,13 @@ import java.util.List;
  * Classe che definisce un messaggio della NewsLetter
  */
 public class Messaggio {
-    IHandlerNewsletter mittente;
-     List<Cliente> destinatario;
-     String oggetto;
-     String body;
 
-    public Messaggio(IHandlerNewsletter mittente, List<Cliente> destinatario, String oggetto, String body) {
+     private final IHandlerNewsletter mittente;
+     private final List<Cliente> destinatario;
+     private final Oggetto oggetto;
+     private final String body;
+
+    public Messaggio(IHandlerNewsletter mittente, List<Cliente> destinatario, Oggetto oggetto, String body) {
         this.mittente = mittente;
         this.destinatario = destinatario;
         this.oggetto = oggetto;
@@ -28,7 +29,7 @@ public class Messaggio {
         return destinatario;
     }
 
-    public String getOggetto() {
+    public Oggetto getOggetto() {
         return oggetto;
     }
 

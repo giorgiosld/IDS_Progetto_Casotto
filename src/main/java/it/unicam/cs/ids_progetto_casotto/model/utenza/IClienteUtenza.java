@@ -1,6 +1,5 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
-import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.ControllerSpiaggia;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.IControllerClienteSpiaggia;
 
 import java.util.List;
@@ -48,7 +47,7 @@ public interface IClienteUtenza {
      * @param tariffa tariffa da selezionare
      * @return tariffa selezionata
      */
-    Tariffa selezionaTariffa(ControllerSpiaggia controllerSpiaggia, Tariffa tariffa);
+    Tariffa selezionaTariffa(IControllerClienteSpiaggia controllerSpiaggia, Tariffa tariffa);
 
     /**
      * metodo che restituisce le utenze prenotate dal cliente
