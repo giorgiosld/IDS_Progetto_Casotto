@@ -1,5 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -81,8 +82,9 @@ public class Attivita {
      *
      * @return data di svolgimento
      */
-    public String getDataSvolgimento() {
-        return dataSvolgimento;
+    public LocalDate getDataSvolgimento() {
+        LocalDate data = LocalDate.parse(this.dataSvolgimento);
+        return data;
     }
 
     /**

@@ -6,16 +6,14 @@ import java.time.LocalDate;
 
 public class PrenotazioneAttivitaCliente {
 
-    private static final int DATA_SCADENZA_CANCELLAZIONE = 2;
-
     private final int idCliente;
     private final Attivita attivitaPrenotata;
-    private final LocalDate orarioPrenotazione;
+    private final String orarioPrenotazione;
 
     public PrenotazioneAttivitaCliente(int idCliente, Attivita attivitaPrenotata, String orarioPrenotazione) {
         this.idCliente = idCliente;
         this.attivitaPrenotata = attivitaPrenotata;
-        this.orarioPrenotazione = LocalDate.parse(orarioPrenotazione);
+        this.orarioPrenotazione = orarioPrenotazione;
     }
 
     /**
@@ -47,6 +45,15 @@ public class PrenotazioneAttivitaCliente {
      * @return orario prenotazione
      */
     public LocalDate getOrarioPrenotazione() {
-        return orarioPrenotazione;
+        return LocalDate.parse(this.orarioPrenotazione);
+    }
+
+    @Override
+    public String toString() {
+        return "PrenotazioneAttivitaCliente{" +
+                "idCliente=" + idCliente +
+                ", attivitaPrenotata=" + attivitaPrenotata +
+                ", orarioPrenotazione=" + orarioPrenotazione +
+                '}';
     }
 }

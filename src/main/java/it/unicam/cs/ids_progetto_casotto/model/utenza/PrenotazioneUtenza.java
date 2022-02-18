@@ -1,5 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
+import java.time.LocalDate;
+
 /**
  * Classe che rappresenta una prenotazione
  * effettuata dall'utente
@@ -55,7 +57,7 @@ public class PrenotazioneUtenza {
      *
      * @return orario della prenotazione
      */
-    public String getOrarioPrenotazione() {
-        return this.orarioPrenotazione;
+    public LocalDate getOrarioPrenotazione() {
+        return LocalDate.parse(this.orarioPrenotazione);
     }
 }
