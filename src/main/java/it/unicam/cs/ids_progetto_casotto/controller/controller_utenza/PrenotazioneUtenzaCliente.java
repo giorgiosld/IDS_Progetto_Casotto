@@ -4,6 +4,8 @@ import it.unicam.cs.ids_progetto_casotto.model.utenza.Periodo;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.Tariffa;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
 
+import java.time.LocalDate;
+
 /**
  * Classe che rappresenta una prenotazione
  * del cliente che viene gestita da
@@ -73,7 +75,7 @@ public class PrenotazioneUtenzaCliente {
      *
      * @return orario prenotazione
      */
-    public String getOrarioPrenotazione() {
-        return orarioPrenotazione;
+    public LocalDate getOrarioPrenotazione() {
+        return LocalDate.parse(this.orarioPrenotazione);
     }
 }

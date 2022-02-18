@@ -1,5 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
+import java.time.LocalDate;
+
 /**
  * Classe che descrive un periodo di prenotazione
  */
@@ -18,21 +20,26 @@ public class Periodo {
      * @return true se i checkIn e checkOut sono uguali altrimenti false
      */
     public boolean checkGiorni(){
+        return this.checkOut.equals(this.checkOut);
+    }
 
-        if(this.checkOut.equals(this.checkOut)){
-            return true;
-        }
-        return false;
+    /**
+     * Metodo che ritorna la data del check-in
+     *
+     * @return check-in
+     */
+    public LocalDate getCheckIn(){
+        return LocalDate.parse(this.checkIn);
     }
-    public String getCheckIn(){
-        return this.checkIn;
-    }
+
     public String getCheckOut(){
         return  this.checkOut;
     }
+
     public void setCheckIn(String newCheckIn){
         this.checkIn=newCheckIn;
     }
+
     public void setCheckOut(String newCheckOut){
         this.checkOut=newCheckOut;
     }
