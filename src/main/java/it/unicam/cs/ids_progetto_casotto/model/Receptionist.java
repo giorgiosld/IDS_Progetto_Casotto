@@ -1,8 +1,11 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_notifiche.IControllerNotificheClienti;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.PrenotazioneUtenzaCliente;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.PrenotazioneAttivitaCliente;
+import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.IHandlerPrenotazioniUtenzeClienti;
 
 import java.util.ArrayList;
@@ -15,7 +18,7 @@ import java.util.stream.Collectors;
  * {@link PrenotazioneAttivitaCliente} e le
  * notifiche tramite {@link it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter}
  */
-public class Receptionist extends Persona implements IHandlerPrenotazioniAttivitaClienti, IHandlerPrenotazioniUtenzeClienti {
+public class Receptionist extends Persona implements IHandlerPrenotazioniAttivitaClienti, IHandlerPrenotazioniUtenzeClienti, IHandlerNewsletter {
 
     private final List<PrenotazioneUtenzaCliente> prenotazioniUtenzaClienti;
     private final List<PrenotazioneAttivitaCliente> prenotazioniAttivitaClienti;
@@ -81,6 +84,17 @@ public class Receptionist extends Persona implements IHandlerPrenotazioniAttivit
             return false;
         }
         this.getPrenotazioniUtenzeClienti().remove(prenotazione);
+        return false;
+    }
+
+    @Override
+    public boolean notificaCliente(IControllerNotificheClienti newsletter, String oggetto, String body) {
+
+        return false;
+    }
+
+    @Override
+    public boolean notificaAttivita(IControllerNotificheClienti newsletter, Attivita attivita) {
         return false;
     }
 
