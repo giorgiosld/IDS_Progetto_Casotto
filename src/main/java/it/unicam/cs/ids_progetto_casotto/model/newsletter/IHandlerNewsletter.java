@@ -2,7 +2,11 @@ package it.unicam.cs.ids_progetto_casotto.model.newsletter;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_notifiche.IControllerNotificheClienti;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_notifiche.ControllerNotifiche;
+import it.unicam.cs.ids_progetto_casotto.model.Cliente;
 import it.unicam.cs.ids_progetto_casotto.model.Receptionist;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+
+import java.util.List;
 
 /**
  * Interfaccia che definisce le azioni,
@@ -27,6 +31,17 @@ public interface IHandlerNewsletter {
      */
     boolean notificaCliente(IControllerNotificheClienti newsletter, String oggetto, String body);
 
-
-    boolean notificaAttivita(IControllerNotificheClienti newsletter);
+    /**
+     * Metodo che permette al
+     * {@link Receptionist} di inviare un remindare
+     * dell'attivit&agrave; giornaliera
+     *
+     * @param newsletter controller che permette di
+     *                   inviare il reminder
+     * @param attivita di cui si vuole inviare il
+     *                 reminder
+     * @return true se il messaggio viene inviato
+     * correttamente, false altrimenti
+     */
+    boolean notificaAttivita(IControllerNotificheClienti newsletter, Attivita attivita);
 }

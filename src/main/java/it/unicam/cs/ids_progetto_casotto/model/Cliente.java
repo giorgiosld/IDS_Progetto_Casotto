@@ -1,8 +1,11 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.ControllerSpiaggia;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttivita;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.IControllerClienteSpiaggia;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.IClienteAttività;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.PrenotazioneAttivita;
+import it.unicam.cs.ids_progetto_casotto.model.newsletter.Messaggio;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.*;
 
 import java.util.*;
@@ -12,15 +15,28 @@ import java.util.*;
  * generico cliente che utilizzer&agrave;
  * il sistema
  */
-public class Cliente extends Persona implements IClienteUtenza {
+public class Cliente extends Persona implements IClienteUtenza, IClienteAttività {
 
     private final List<PrenotazioneUtenza> utenzePrenotate;
-    private final List<PrenotazioneAttivita> attivitaPrenotata;
+    private final List<PrenotazioneAttivita> attivitaPrenotate;
+    private final List<Messaggio> listaMessaggi;
 
     public Cliente(int id, String nome, String cognome, String annoNascita, char sesso, String email) {
         super(id, nome, cognome, annoNascita, sesso, email);
         this.utenzePrenotate = new ArrayList<>();
-        this.attivitaPrenotata = new ArrayList<>();
+        this.attivitaPrenotate = new ArrayList<>();
+        this.listaMessaggi = new ArrayList<>();
+    }
+
+    /**
+     * Metodo che ritorna la lista
+     * dei messaggi che il cliente
+     * riceve dal sistema
+     *
+     * @return lista messaggi ricevuti
+     */
+    public List<Messaggio> getListaMessaggi() {
+        return this.listaMessaggi;
     }
 
     @Override
@@ -35,12 +51,11 @@ public class Cliente extends Persona implements IClienteUtenza {
 
     @Override
     public boolean selezionaUtenzadaPrenotare(IControllerClienteSpiaggia controllerSpiaggia, Utenza utenza) {
-
         return false;
     }
 
     @Override
-    public Tariffa selezionaTariffa(ControllerSpiaggia controllerSpiaggia, Tariffa tariffa) {
+    public Tariffa selezionaTariffa(IControllerClienteSpiaggia controllerSpiaggia, Tariffa tariffa) {
         return null;
     }
 
@@ -56,6 +71,36 @@ public class Cliente extends Persona implements IClienteUtenza {
 
     @Override
     public void eliminaPrenotazioneUtenza(IControllerClienteSpiaggia controllerSpiaggia, PrenotazioneUtenza utenza) {
+
+    }
+
+    @Override
+    public List<Attivita> visualizzaAttivita(IControllerClienteAttivita controllerAttivita) {
+        return null;
+    }
+
+    @Override
+    public Attivita selezionaAttivita(IControllerClienteAttivita controllerAttivita, Attivita attivita) {
+        return null;
+    }
+
+    @Override
+    public boolean prenotaAttivita(IControllerClienteAttivita controllerAttivita, Attivita attivita) {
+        return false;
+    }
+
+    @Override
+    public List<Attivita> getAttivitaPrenotate() {
+        return null;
+    }
+
+    @Override
+    public Attivita selezionaAttivitaPrenotata(Attivita attivita) {
+        return null;
+    }
+
+    @Override
+    public void eliminaAttivitaPrenotata(IControllerClienteAttivita controllerAttivita, Attivita attivita) {
 
     }
 }
