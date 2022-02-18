@@ -4,6 +4,9 @@ import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.Prenotazio
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.PrenotazioneAttivitaCliente;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.IHandlerPrenotazioniUtenzeClienti;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.Periodo;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.Tariffa;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +46,26 @@ public class Receptionist extends Persona implements IHandlerPrenotazioniAttivit
         }
         this.getPrenotazioniAttivitaClienti().add(prenotazione);
         return true;
+    }
+
+    @Override
+    public List<PrenotazioneUtenzaCliente> getPrenotazioniUtenzeCliente() {
+        return null;
+    }
+
+    @Override
+    public List<PrenotazioneUtenzaCliente> getPrenotazioneCliente(int idCliente) {
+        return null;
+    }
+
+    @Override
+    public PrenotazioneUtenzaCliente aggiungiPrenotazioneUtenza(int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza) {
+        return null;
+    }
+
+    @Override
+    public boolean eliminaPrenotazioneUtenza(PrenotazioneUtenzaCliente prenotazione) {
+        return false;
     }
 
     //TODO sistemare i metodi di IHandlerPrenotazioniUtenzeClienti

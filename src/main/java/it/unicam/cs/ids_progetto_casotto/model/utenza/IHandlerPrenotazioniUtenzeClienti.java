@@ -1,5 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.PrenotazioneUtenzaCliente;
+
 import java.util.List;
 
 /**
