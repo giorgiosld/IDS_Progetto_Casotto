@@ -1,16 +1,38 @@
 package it.unicam.cs.ids_progetto_casotto.model.ordinazione;
 
+import org.springframework.jdbc.object.UpdatableSqlQuery;
+import org.springframework.lang.NonNull;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+import java.util.UUID;
+
 /**
  * Classe astratta rappresentante una generica consumazione
  */
+@MappedSuperclass
+@Table(name = "ArticoloBar")
 public abstract class Consumazione {
 
+    @Id
+    @Column(updatable = false)
+    private UUID id;
+
+    @NonNull
+    @Column(unique = true)
     protected String nome;
+
+    @Column(length = 500)
     protected double prezzo;
 
-    public Consumazione(String nome, double prezzo){
+    /*public Consumazione(String nome, double prezzo){
         this.nome = nome;
         this.prezzo = prezzo;
+    }*/
+    public Consumazione(){
+
     }
 
     /**
