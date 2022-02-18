@@ -2,7 +2,7 @@ package it.unicam.cs.ids_progetto_casotto.model;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.ControllerAttivita;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
-import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttività;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttivita;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.ControllerSpiaggia;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.IControllerClienteSpiaggia;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
@@ -107,7 +107,7 @@ public class Cliente extends Persona implements IClienteUtenza {
     }
     //TODO
     @Override
-    public List<Utenza> visualizzaUtenze(IControllerClienteSpiaggia controller_spiaggia, Periodo periodi) {
+    public List<Utenza> visualizzaUtenze(IControllerClienteSpiaggia controllerSpiaggia, Periodo periodi) {
         return null;
     }
     //TODO
@@ -116,15 +116,21 @@ public class Cliente extends Persona implements IClienteUtenza {
         return null;
     }
 
+    //TODO vedere come passare parametri
     @Override
     public boolean selezionaUtenzadaPrenotare(IControllerClienteSpiaggia controller_spiaggia, Utenza utenza) {
-
-        return true;
+        controller_spiaggia.creaPrenotazioneCliente()
     }
 
     @Override
-    public int selezionaTariffa(ControllerSpiaggia controller_spiaggia, Tariffa tariffa) {
-    controller_spiaggia.ge
+    public Tariffa selezionaTariffa(ControllerSpiaggia controller_spiaggia, Tariffa tariffa) {
+        Tariffa myTariffa;
+        myTariffa = controller_spiaggia.getTariffe()
+                .stream()
+                .filter(x->x.equals(tariffa))
+                .findFirst()
+                .get();
+        return myTariffa;
     }
 
     @Override
@@ -133,15 +139,19 @@ public class Cliente extends Persona implements IClienteUtenza {
     }
 
     @Override
-    public PrenotazioneUtenza selezionaUtenzaPrenotata(PrenotazioneUtenza prenotazione) {
-        PrenotazioneUtenza utenzaSelezionata;
-        utenzaSelezionata = this.utenzePrenotate.stream().filter(x->x.equals(prenotazione)).findFirst().get();
-        return utenzaSelezionata;
+    public PrenotazioneUtenza selezionaPrenotazioneUtenza(PrenotazioneUtenza prenotazione) {
+        PrenotazioneUtenza myPrenotazione;
+       myPrenotazione = this.utenzePrenotate
+               .stream()
+               .filter(x->x.equals(prenotazione))
+               .findFirst()
+               .get();
+        return myPrenotazione;
     }
-
+       //TODO
     @Override
-    public void eliminaUtenzaPrenotata(IControllerClienteSpiaggia controller_spiaggia, Utenza utenza) {
-        controller_spiaggia.
+    public void eliminaPrenotazioneUtenza(IControllerClienteSpiaggia controller_spiaggia, PrenotazioneUtenza utenza) {
+
 
 
     }
