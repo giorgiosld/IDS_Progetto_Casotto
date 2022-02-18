@@ -4,8 +4,6 @@ import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.Prenotazio
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.PrenotazioneAttivitaCliente;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.IHandlerPrenotazioniUtenzeClienti;
-import it.unicam.cs.ids_progetto_casotto.model.utenza.Periodo;
-import it.unicam.cs.ids_progetto_casotto.model.utenza.Tariffa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,26 +47,42 @@ public class Receptionist extends Persona implements IHandlerPrenotazioniAttivit
     }
 
     @Override
-    public List<PrenotazioneUtenzaCliente> getPrenotazioniUtenzeCliente() {
-        return null;
+    public boolean eliminaPrenotazioneAttivita(PrenotazioneAttivitaCliente prenotazione) {
+        if (!this.getPrenotazioniAttivitaClienti().contains(prenotazione)) {
+            return false;
+        }
+        this.getPrenotazioniAttivitaClienti().remove(prenotazione);
+        return true;
+    }
+
+    @Override
+    public List<PrenotazioneUtenzaCliente> getPrenotazioniUtenzeClienti() {
+        return this.prenotazioniUtenzaClienti;
     }
 
     @Override
     public List<PrenotazioneUtenzaCliente> getPrenotazioneCliente(int idCliente) {
-        return null;
+        return this.getPrenotazioniUtenzeClienti().stream()
+                .filter(x -> x.getIdCliente() == idCliente).collect(Collectors.toList());
     }
 
     @Override
-    public PrenotazioneUtenzaCliente aggiungiPrenotazioneUtenza(int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza) {
-        return null;
+    public boolean aggiungiPrenotazioneUtenza(PrenotazioneUtenzaCliente prenotazione) {
+        if (this.getPrenotazioniUtenzeClienti().contains(prenotazione)) {
+            return false;
+        }
+        this.getPrenotazioniUtenzeClienti().add(prenotazione);
+        return true;
     }
 
     @Override
     public boolean eliminaPrenotazioneUtenza(PrenotazioneUtenzaCliente prenotazione) {
+        if (!this.getPrenotazioniUtenzeClienti().contains(prenotazione)) {
+            return false;
+        }
+        this.getPrenotazioniUtenzeClienti().remove(prenotazione);
         return false;
     }
-
-    //TODO sistemare i metodi di IHandlerPrenotazioniUtenzeClienti
 
     //TODO sistemare i metodi di IHandlerNewsletter
 }
