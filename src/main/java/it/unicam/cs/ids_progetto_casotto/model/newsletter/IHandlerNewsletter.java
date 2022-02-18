@@ -27,5 +27,6 @@ public interface IHandlerNewsletter {
      */
     boolean notificaCliente(IControllerNotificheClienti newsletter, String oggetto, String body);
 
+
     boolean notificaAttivita(IControllerNotificheClienti newsletter);
 }
