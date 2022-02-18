@@ -1,5 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.PrenotazioneUtenzaCliente;
+
 import java.util.List;
 
 /**
@@ -12,31 +14,28 @@ public interface IHandlerPrenotazioniUtenzeClienti {
      *
      * @return una lista delle prenotazioni effettuate dai clienti
      */
-    List<PrenotazioneUtenzaCliente> getPrenotazioniUtenzeCliente();
+    List<PrenotazioneUtenzaCliente> getPrenotazioniUtenzeClienti();
 
     /**
      * metodo che restituisce una prenotazione effettuata da un cliente
      *
-     * @param idCliente
-     * @return
+     * @param idCliente id del cliente
+     * @return lista delle prenotazioni effettuate dal cliente selezionato
      */
     List<PrenotazioneUtenzaCliente> getPrenotazioneCliente(int idCliente);
 
     /**
      * metodo che aggiunge una prenotazione effettuata dal cliente
      *
-     * @param idUtenza l'identificativo dell'utenza
-     * @param idCliente l'identificativo del cliente
-     * @param tariffa la tariffa selezionata
-     * @param permanenza il periodo di utilizzo dell'utenza da parte del cliente
+     * @param prenotazione da aggiungere
      * @return la prenotazione aggiunta
      */
-    PrenotazioneUtenzaCliente aggiungiPrenotazioneUtenza(int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza);
+    boolean aggiungiPrenotazioneUtenza(PrenotazioneUtenzaCliente prenotazione);
 
     /**
-     * metodo che elimina un'utenza
+     * metodo che elimina una prenotazione
      *
-     * @param prenotazione
+     * @param prenotazione da eliminare
      * @return true o false se l'operazione ha avuto successo
      */
     boolean eliminaPrenotazioneUtenza(PrenotazioneUtenzaCliente prenotazione);

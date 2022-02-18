@@ -3,6 +3,8 @@ package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.ControllerAttivita;
 
+import java.time.LocalDate;
+
 /**
  * Classe che rappresenta una prenotazione
  * del cliente che viene gestita da
@@ -35,7 +37,15 @@ public class PrenotazioneAttivita {
      *
      * @return orario prenotazione
      */
-    public String getOrarioPrenotazione() {
-        return orarioPrenotazione;
+    public LocalDate getOrarioPrenotazione() {
+        return LocalDate.parse(this.orarioPrenotazione);
+    }
+
+    @Override
+    public String toString() {
+        return "PrenotazioneAttivita{" +
+                "attivita=" + attivita +
+                ", orarioPrenotazione='" + orarioPrenotazione + '\'' +
+                '}';
     }
 }

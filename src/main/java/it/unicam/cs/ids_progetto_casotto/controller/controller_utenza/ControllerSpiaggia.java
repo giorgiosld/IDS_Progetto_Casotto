@@ -1,19 +1,22 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_utenza;
 
-import it.unicam.cs.ids_progetto_casotto.model.*;
+import it.unicam.cs.ids_progetto_casotto.model.Receptionist;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
+/**
+ * Classe che permette di gestire
+ * le utenze
+ */
 public class ControllerSpiaggia  implements IControllerGestoreSpiaggia,IControllerClienteSpiaggia {
 
-    //lista utenze
-    List<Utenza>utenze;
-    List<Tariffa> tariffe;
+    private final List<Utenza>utenze;
+    private final List<Tariffa> tariffe;
 
-    public ControllerSpiaggia(List<Utenza> utenze) {
+    public ControllerSpiaggia() {
         this.utenze = new ArrayList<>();
         this.tariffe = new ArrayList<>();
     }
@@ -31,7 +34,6 @@ public class ControllerSpiaggia  implements IControllerGestoreSpiaggia,IControll
 
     @Override
     public boolean eliminaUtenza(Utenza utenza) {
-
         this.utenze.remove(utenza);
         return true;
     }
@@ -52,18 +54,29 @@ public class ControllerSpiaggia  implements IControllerGestoreSpiaggia,IControll
     }
 
     @Override
-    public boolean creaPrenotazioneCliente(IHandlerPrenotazioniUtenzeClienti receptionist, int idUtenza, int idCliente, Tariffa tariffa, Periodo permanenza) {
-
+    public boolean creaPrenotazioneCliente(IHandlerPrenotazioniUtenzeClienti receptionist, int idCliente, Periodo permanenzaUtenza, Utenza utenza, Tariffa tariffa) {
+        LocalDate t1 = LocalDate.now();
+        String str = t1.toString();
+        PrenotazioneUtenzaCliente prenotazioneUtenzaCliente = new PrenotazioneUtenzaCliente(idCliente, permanenzaUtenza, utenza, tariffa, str);
+        if (!receptionist.aggiungiPrenotazioneUtenza(prenotazioneUtenzaCliente)) {
+            System.out.println("Prenotazione di: " + prenotazioneUtenzaCliente + " non effettuata!");
+            return false;
+        }
+        receptionist.aggiungiPrenotazioneUtenza(prenotazioneUtenzaCliente);
+        System.out.println("Prenotazione di: " + prenotazioneUtenzaCliente + " effettuata");
         return false;
     }
 
     @Override
-    public boolean eliminaPrenotazione(IHandlerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenza prenotazione) {
+    public boolean eliminaPrenotazione(IHandlerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenzaCliente prenotazione) {
+        receptionist.eliminaPrenotazioneUtenza(prenotazione);
         return false;
     }
 
+    private boolean checkRimborso(PrenotazioneUtenzaCliente prenotazioneUtenzaCliente) {
 
-
+        return false;
+    }
 
    /* public Optional<Utenza> prenotaUtenza(int idUtenza, int idTariffa){
         return null;

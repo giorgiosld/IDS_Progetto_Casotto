@@ -35,8 +35,8 @@ public interface IHandlerPrenotazioniAttivitaClienti {
 
     /**
      * Metodo che permette di aggiungere una
-     * prenotazione, di un'attivit&agrave;, effettuata
-     * al cliente nella lista delle prenotazioni gestite
+     * prenotazione di un'attivit&agrave;, effettuata
+     * dal cliente, nella lista delle prenotazioni gestite
      * dal {@link Receptionist}
      *
      * @param prenotazione da aggiungere nella lista
@@ -44,4 +44,16 @@ public interface IHandlerPrenotazioniAttivitaClienti {
      * false altrimenti
      */
     boolean aggiungiPrenotazioneAttivita(PrenotazioneAttivitaCliente prenotazione);
+
+    /**
+     * Metodo che permette di eliminare una
+     * prenotazione di un'attivit&agrave;, effettuata
+     * dal cliente, dalla lista delle prenotazioni gestite
+     * dal {@link Receptionist}
+     *
+     * @param prenotazione da eliminare
+     * @return true se la rimozione prevede il rimborso,
+     * false altrimenti
+     */
+    boolean eliminaPrenotazioneAttivita(PrenotazioneAttivitaCliente prenotazione);
 }

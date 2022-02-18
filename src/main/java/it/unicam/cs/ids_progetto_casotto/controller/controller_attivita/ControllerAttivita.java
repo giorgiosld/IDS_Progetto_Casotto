@@ -2,18 +2,17 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
-import it.unicam.cs.ids_progetto_casotto.model.attivita.PrenotazioneAttivita;
 import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
 
-import java.sql.Timestamp;
-import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Classe che rappresenta un gestore delle
- * attivit&agrave;
+ * Classe che permette di gestire
+ * le attivit&agrave;
  */
 public class ControllerAttivita implements IControllerClienteAttivita,IControllerGestoreAttivita {
 
@@ -34,25 +33,37 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
     }
 
     @Override
-    public boolean creaPrenotazioneCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Attivita attivita) {
-        Timestamp t1 = Timestamp.from(Instant.now());
+    public boolean creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Attivita attivita) {
+        LocalDate t1 = LocalDate.now();
         String str = t1.toString();
         PrenotazioneAttivitaCliente prenotazioneAttivitaCliente = new PrenotazioneAttivitaCliente(idCliente, attivita, str);
         if (!receptionist.aggiungiPrenotazioneAttivita(prenotazioneAttivitaCliente)) {
-            System.out.println("Prenotazione non effettuata!");
+            System.out.println("Prenotazione di: " + prenotazioneAttivitaCliente + " non effettuata");
             return false;
         }
-        System.out.println("Prenotazione effettuata!");
+        receptionist.aggiungiPrenotazioneAttivita(prenotazioneAttivitaCliente);
+        System.out.println("Prenotazione di: " + prenotazioneAttivitaCliente +" effettuata");
         return true;
     }
 
     @Override
-    public boolean eliminaPrenotazioneCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione) {
-        //TODO implementare
+    public boolean eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione) {
+        receptionist.eliminaPrenotazioneAttivita(prenotazione);
+        if (checkRimborso(prenotazione)) {
+            System.out.println("Rimborso consentito!");
+            return true;
+        }
+        System.out.println("Rimborso negato!");
         return false;
     }
 
-    private boolean checkRimborso(PrenotazioneAttivita prenotazioneAttivita) {
+    private boolean checkRimborso(PrenotazioneAttivitaCliente prenotazioneAttivita) {
+        LocalDate dataSvolgimento = prenotazioneAttivita.getAttivitaPrenotata().getDataSvolgimento();
+        LocalDate now = LocalDate.now();
+        Period difference = Period.between(now,dataSvolgimento);
+        if (difference.getYears() == 0 || difference.getMonths() == 0 || difference.getDays() >= 2) {
+            return true;
+        }
         return false;
     }
 
