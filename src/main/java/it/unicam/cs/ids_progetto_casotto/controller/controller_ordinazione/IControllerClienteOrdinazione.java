@@ -23,9 +23,10 @@ public interface IControllerClienteOrdinazione {
      * Metodo che permette la creazione di una {@link Comanda} all'interno del {@link ControllerOrdinazione}
      *
      * @param consumazioni la lista delle consumazioni selezionate
+     * @oaram idUtenze l'identificativo dell'utenza alla quale portare la comanda
      * @return true se avviene la creazione e aggiunta della comanda
      */
-    boolean creaComanda(List<Consumazione> consumazioni);
+    Comanda creaComanda(List<Consumazione> consumazioni, int idUtenza);
 
     /**
      * Metodo che notifica al barista che una nuova comanda &egrave; stata creata e inserita all'interno del {@link ControllerOrdinazione}
