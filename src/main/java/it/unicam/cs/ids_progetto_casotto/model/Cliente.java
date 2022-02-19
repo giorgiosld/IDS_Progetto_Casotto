@@ -8,6 +8,7 @@ import it.unicam.cs.ids_progetto_casotto.model.attivita.PrenotazioneAttivita;
 import it.unicam.cs.ids_progetto_casotto.model.newsletter.Messaggio;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.*;
 
+import javax.persistence.Entity;
 import java.util.*;
 
 /**

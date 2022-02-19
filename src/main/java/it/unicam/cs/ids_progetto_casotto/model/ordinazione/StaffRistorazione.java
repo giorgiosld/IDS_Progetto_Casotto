@@ -26,9 +26,9 @@ public abstract class StaffRistorazione extends Persona {
      * @param bar controller contenente le varie ordinazioni
      * @return l'ordinazione cercata
      */
-    public Comanda getComanda(IControllerStaffOrdinazione bar, Comanda comanda){
-        return bar.getComanda(comanda);
-    }
+//    public Comanda getComanda(IControllerStaffOrdinazione bar, Comanda comanda){
+//        return bar.getComanda(comanda);
+//    }
 
     /**
      * Ritorna tutte le ordinazioni presenti nel controller
@@ -36,10 +36,10 @@ public abstract class StaffRistorazione extends Persona {
      * @param bar controller contenente le ordinazioni
      * @return una lista contenente le ordinazioni effettuatate
      */
-    public List<Comanda> getComande(IControllerStaffOrdinazione bar){
-        List<Comanda> comande = bar.getComande();
-        return comande;
-    }
+//    public List<Comanda> getComande(IControllerStaffOrdinazione bar){
+//        List<Comanda> comande = bar.getComande();
+//        return comande;
+//    }
 
     /**
      * Metodo che ritorna lo stato di preparazione di una comanda
@@ -48,9 +48,9 @@ public abstract class StaffRistorazione extends Persona {
      * @param comanda la comanda alla quale voglio vedere lo stato di preparazione
      * @return stato di preparazione della comanda
      */
-    public StatoComanda getStatoComanda(IControllerStaffOrdinazione bar, Comanda comanda){
-        return bar.getComanda(comanda).getStatoComanda();
-    }
+//    public StatoComanda getStatoComanda(IControllerStaffOrdinazione bar, Comanda comanda){
+//        return bar.getComanda(comanda).getStatoComanda();
+//    }
 
     /**
      * Metodo che imposta lo stato di una comanda
@@ -60,7 +60,7 @@ public abstract class StaffRistorazione extends Persona {
      * @param stato lo stato nel quale si vuole mettere la comanda
      */
     public void setStatoComanda(IControllerStaffOrdinazione bar, Comanda comanda, StatoComanda stato){
-         bar.getComanda(comanda).setStatoComanda(stato);
+         //bar.getComanda(comanda).setStatoComanda(stato);
     }
 
     public StatoOccupazione getStatoOccupazione() {
