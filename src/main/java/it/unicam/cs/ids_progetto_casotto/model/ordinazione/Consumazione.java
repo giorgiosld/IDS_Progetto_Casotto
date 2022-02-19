@@ -3,18 +3,15 @@ package it.unicam.cs.ids_progetto_casotto.model.ordinazione;
 import org.springframework.jdbc.object.UpdatableSqlQuery;
 import org.springframework.lang.NonNull;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 /**
  * Classe astratta rappresentante una generica consumazione
  */
-@MappedSuperclass
+@Entity
 @Table(name = "ArticoloBar")
-public abstract class Consumazione {
+public class Consumazione {
 
     @Id
     @Column(updatable = false)
@@ -32,7 +29,7 @@ public abstract class Consumazione {
         this.prezzo = prezzo;
     }*/
     public Consumazione(){
-
+        this.id = UUID.randomUUID();
     }
 
     /**

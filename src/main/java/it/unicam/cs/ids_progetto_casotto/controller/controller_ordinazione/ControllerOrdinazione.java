@@ -1,18 +1,25 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione;
 
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.*;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Comanda;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Classe che implementa un controller per le ordinazioni. Si possono effettuare varie operazioni tutte ineresnti alla
  * classe comanda e consumazione.
  */
+@RestController
+@RequestMapping("/bar")
 public class ControllerOrdinazione implements IControllerStaffOrdinazione, IControllerClienteOrdinazione {
 
-    private final List<Comanda> comande;
+    /*private final List<Comanda> comande;
     private final List<Consumazione> consumazioni;
     private  List<Barista> staffBar;
 
@@ -21,17 +28,31 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
         this.consumazioni = new ArrayList<>();
         //da controllare
         this.staffBar = new ArrayList<>();
-    }
+    }*/
+    @Autowired
+    private ServiceConsumazioni serviceConsumazioni;
+
+    @Autowired
+    private ServiceOrdinazioni serviceOrdinazioni;
 
 
     @Override
+    @GetMapping("/menu")
     public List<Consumazione> getConsumazioni() {
-        return this.consumazioni;
+        //return this.consumazioni;
+        return this.serviceConsumazioni.getAll();
+    }
+
+    @PostMapping("/addmenu")
+    public Consumazione addConsumazione(@RequestBody Consumazione consumazione){
+        Optional<Consumazione> added = this.serviceConsumazioni.addConsumazione(consumazione);
+        return this.getConsumazioneOrThrownException(added, HttpStatus.BAD_REQUEST);
     }
 
     @Override
-    public boolean creaComanda(List<Consumazione> consumazioni) {
-        if (consumazioni == null) { throw new NullPointerException("Ci dispiace, c'è stato un errore nella selezione"); }
+    @PostMapping("/ordina")
+    public Comanda creaComanda(@RequestBody List<Consumazione> consumazioni, int idUtenza) {
+        /*if (consumazioni == null) { throw new NullPointerException("Ci dispiace, c'è stato un errore nella selezione"); }
         double prezzoTot = consumazioni.stream()
                 .mapToDouble(Consumazione::getPrezzo)
                 .sum();
@@ -39,7 +60,8 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
         this.comande.add(nuovaComanda);
         Barista StaffToNotify = staffBar.stream().filter(x -> x.getStatoOccupazione().equals(StatoOccupazione.LIBERO)).findFirst().orElse(null);
         notificaComanda(StaffToNotify, nuovaComanda);
-        return true;
+        return true;*/
+        return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni, idUtenza).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_GATEWAY));
     }
 
     @Override
@@ -49,24 +71,35 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
     }
 
     @Override
-    public Comanda getComanda(Comanda comanda) {
-        return this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null);
+    @GetMapping("ordinazione{id}")
+    public Comanda getComanda(@PathVariable UUID id) {
+        return this.serviceOrdinazioni.getComanda(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @Override
+    @GetMapping("/ordinazioni")
     public List<Comanda> getComande() {
-        return this.comande;
+        return this.serviceOrdinazioni.getAll();
     }
 
     @Override
-    public StatoComanda getStatoComanda(Comanda comanda) {
-        return Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).getStatoComanda();
+    @GetMapping("ordinazione{id}/stato")
+    public StatoComanda getStatoComanda(@PathVariable UUID id) {
+        //return Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).getStatoComanda();
+        return this.serviceOrdinazioni.getStatus(id);
     }
 
     @Override
-    public void setStatoComanda(Comanda comanda, StatoComanda nuovoStato) {
-        Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).setStatoComanda(nuovoStato);
+    @PostMapping("ordinazione{id}/stato")
+    public void setStatoComanda(@PathVariable UUID id, StatoComanda nuovoStato) {
+        //Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).setStatoComanda(nuovoStato);
+        this.serviceOrdinazioni.setStatus(id, nuovoStato);
     }
 
+    private Consumazione getConsumazioneOrThrownException(Optional<Consumazione> consumazione, HttpStatus status) {
+        if (consumazione.isEmpty())
+            throw new ResponseStatusException(status);
+        return consumazione.get();
+    }
 
 }
