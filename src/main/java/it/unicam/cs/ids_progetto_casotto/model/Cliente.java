@@ -21,16 +21,6 @@ import java.util.*;
 @Table(name = "Utente")
 public class Cliente extends Persona {
 
-//    private final List<PrenotazioneUtenza> utenzePrenotate;
-//    private final List<PrenotazioneAttivita> attivitaPrenotate;
-//    private final List<Messaggio> listaMessaggi;
-
-//    public Cliente(int id, String nome, String cognome, String annoNascita, char sesso, String email) {
-//        super(id, nome, cognome, annoNascita, sesso, email);
-//        this.utenzePrenotate = new ArrayList<>();
-//        this.attivitaPrenotate = new ArrayList<>();
-//        this.listaMessaggi = new ArrayList<>();
-//    }
     public Cliente(){
         super();
     }
