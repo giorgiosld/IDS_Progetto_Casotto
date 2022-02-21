@@ -22,10 +22,8 @@ public class ServiceConsumazioni {
         }
 
         public Optional<Consumazione> addConsumazione(Consumazione consumazione){
-            /*if(consumazione.getNome().isEmpty())
+            if((consumazione.getNome().isEmpty()) || (consumazione.getPrezzo() == 0))
                 return Optional.empty();
-            else if(consumazione.getPrezzo() == 0)
-                return Optional.empty();*/
             return Optional.of(repositoryConsumazioni.save(consumazione));
         }
 }

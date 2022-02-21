@@ -1,31 +1,53 @@
 package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
+import com.fasterxml.jackson.databind.JsonSerializer;
+import lombok.NonNull;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Classe che rappresenta le
  * attivit&agrave; presenti
  * nel sistema
  */
+
+@Entity
+@Table(name="Attivita")
 public class Attivita {
 
-    private final String nome;
-    private final String descrizione;
-    private int postiDisponibili;
-    private final int numeroMassimoPosti;
-    private String dataSvolgimento;
-    private final double prezzo;
+    @Id
+    @Column
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private static Integer id;
 
-    public Attivita(String nome, String descrizione, int numeroMassimoPosti, String dataSvolgimento, double prezzo) {
-        this.nome = nome;
+    @NonNull
+    @Column(unique=true)
+    private String nome;
+
+   // private final String descrizione;
+    @Column
+    private int postiDisponibili;
+    @Column
+    private Optional<Integer> numeroMassimoPosti;
+    @Column
+    private String dataSvolgimento;
+    @Column(length = 500)
+    private  double prezzo;
+
+    public Attivita() {
+      /*  this.nome = nome;
         this.descrizione = descrizione;
         this.postiDisponibili = numeroMassimoPosti;
         this.numeroMassimoPosti = numeroMassimoPosti;
         this.dataSvolgimento = dataSvolgimento;
         this.prezzo = prezzo;
+        */
+        this.id=id;
     }
 
     /**
@@ -44,9 +66,11 @@ public class Attivita {
      *
      * @return descrizione dell'attivit&grave;
      */
-    public String getDescrizione() {
+  /*  public String getDescrizione() {
         return descrizione;
     }
+
+   */
 
     /**
      * Metodo che ritorna
@@ -72,8 +96,12 @@ public class Attivita {
      *
      * @return numero di posti massimo
      */
-    public int getNumeroMassimoPosti() {
+    public Optional<Integer> getNumeroMassimoPosti() {
+        if(numeroMassimoPosti.isEmpty()){
+            return Optional.empty();
+        }
         return numeroMassimoPosti;
+
     }
 
     /**
@@ -111,7 +139,7 @@ public class Attivita {
     public String toString() {
         return "Attivita{" +
                 "nome='" + nome + '\'' +
-                ", descrizione='" + descrizione + '\'' +
+              //  ", descrizione='" + descrizione + '\'' +
                 ", postiDisponibili=" + postiDisponibili +
                 ", numeroMassimoPosti=" + numeroMassimoPosti +
                 ", dataSvolgimento='" + dataSvolgimento + '\'' +

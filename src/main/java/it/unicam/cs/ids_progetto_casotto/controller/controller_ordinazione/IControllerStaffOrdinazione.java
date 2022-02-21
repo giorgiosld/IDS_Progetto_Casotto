@@ -20,7 +20,7 @@ public interface IControllerStaffOrdinazione {
      * @param id la comanda la quale si vuole visualizzare
      * @return la comanda cercata se presente all'interno del sistema
      */
-    Comanda getComanda(UUID id);
+    Comanda getComanda(Integer id);
 
     /**
      * Metodo che permette la visualizzazione di tutte le comande presenti all'interno del {@link ControllerOrdinazione}
@@ -35,7 +35,7 @@ public interface IControllerStaffOrdinazione {
      * @param id la comanda la quale si vuole visualizzare lo stato
      * @return lo {@link StatoComanda} della comanda selezionata
      */
-    StatoComanda getStatoComanda(UUID id);
+    StatoComanda getStatoComanda(Integer id);
 
     /**
      * Metodo che permette la modifica dello {@link StatoComanda} di una determinata comanda presente all'interno del {@link ControllerOrdinazione}
@@ -43,5 +43,5 @@ public interface IControllerStaffOrdinazione {
      * @param id la comanda alla quale si vuole cambiare lo stato
      * @param nuovoStato lo stato da settare alla nuova comanda
      */
-    void setStatoComanda( UUID id, StatoComanda nuovoStato);
+    void setStatoComanda(Integer id, StatoComanda nuovoStato);
 }
