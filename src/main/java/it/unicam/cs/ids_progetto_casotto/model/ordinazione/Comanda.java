@@ -1,24 +1,17 @@
 package it.unicam.cs.ids_progetto_casotto.model.ordinazione;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
-import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Classe che rappresenta una generica comanda contenuta all'interno del {@link ControllerOrdinazione}
  */
 @Entity
-@Getter
-@Setter
 public class Comanda {
 
     @Id
@@ -33,7 +26,7 @@ public class Comanda {
     @JoinColumn
     private List<Consumazione> consumazioni;
     @Column
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private StatoComanda statoComanda;
     @Column
     private LocalDateTime orarioCreazione;
@@ -51,7 +44,7 @@ public class Comanda {
      *
      * @return id della comanda
      */
-    public int getId() {
+    public Integer getId() {
         return this.idComanda;
     }
 

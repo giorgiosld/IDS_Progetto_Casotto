@@ -4,13 +4,8 @@ import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Comanda;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Consumazione;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.StatoComanda;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ServiceOrdinazioni {
@@ -22,7 +17,8 @@ public class ServiceOrdinazioni {
     }
 
     //Optional<Comanda> ordinaConsumazioni(List<Consumazione> consumazioni, int idUtenza){
-    Optional<Comanda> ordinaConsumazioni(List<Consumazione> consumazioni){
+    public Optional<Comanda> ordinaConsumazioni(List<Consumazione> consumazioni){
+        //TODO finire una volta creato serviceUtenza
         if (consumazioni == null) { Optional.empty(); }
         //add controllo utenza
         double prezzoTot = consumazioni.stream()
@@ -35,20 +31,29 @@ public class ServiceOrdinazioni {
 
     }
 
-    Optional<Comanda> getComanda(Integer id){
-        return null;
+    public Optional<Comanda> getComanda(Integer id){
+        Optional<Comanda> toGet = this.repositoryOrdinazioni.findById(id);
+        if(toGet.isEmpty())
+            return Optional.empty();
+        return toGet;
     }
 
-    List<Comanda> getAll(){
+    public List<Comanda> getAll(){
         return this.repositoryOrdinazioni.findAll();
     }
 
-    StatoComanda getStatus(Integer id){
-        return null;
+    public StatoComanda getStatus(Integer id){
+        Comanda comanda = this.repositoryOrdinazioni.getById(id);
+        return comanda.getStatoComanda();
     }
 
-    void setStatus(Integer id, StatoComanda nuovoStato){
-
+    public StatoComanda setStatus(Integer id, StatoComanda nuovoStato){
+        Comanda comanda = this.repositoryOrdinazioni.getById(id);
+        comanda.setStatoComanda(nuovoStato);
+        System.out.println(comanda.getStatoComanda());
+        this.repositoryOrdinazioni.save(comanda);
+        Comanda toGet = this.repositoryOrdinazioni.getById(id);
+        return toGet.getStatoComanda();
     }
 
 }
