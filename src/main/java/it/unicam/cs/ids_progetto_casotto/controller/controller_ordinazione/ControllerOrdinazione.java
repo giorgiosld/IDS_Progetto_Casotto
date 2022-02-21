@@ -73,7 +73,7 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
     }
 
     @Override
-    @GetMapping("ordinazione{id}")
+    @GetMapping("/ordinazione{id}")
     public Comanda getComanda(@PathVariable("id") Integer id) {
         Optional<Comanda> got = this.serviceOrdinazioni.getComanda(id);
         return this.getComandaOrThrownException(got, HttpStatus.NOT_FOUND);
@@ -86,7 +86,7 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
     }
 
     @Override
-    @GetMapping("ordinazione{id}/stato")
+    @GetMapping("/ordinazione{id}/stato")
     public StatoComanda getStatoComanda(@PathVariable Integer id) {
         Optional<Comanda> got = this.serviceOrdinazioni.getComanda(id);
         if(got.isEmpty())
@@ -96,13 +96,13 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
 
     //TODO sistemare problema del non modifica stato
     @Override
-    @PutMapping("ordinazione{id}/stato")
+    @PutMapping("/ordinazione{id}/setstato")
     public StatoComanda setStatoComanda(@PathVariable Integer id,@RequestBody StatoComanda nuovoStato) {
         Optional<Comanda> got = this.serviceOrdinazioni.getComanda(id);
         if(got.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        StatoComanda updated = this.serviceOrdinazioni.setStatus(id, nuovoStato);
-        return this.getStatoConsumazioneOrThrownExcpetion(updated, HttpStatus.BAD_REQUEST);
+        return this.serviceOrdinazioni.setStatus(id, nuovoStato);
+        //return this.getStatoConsumazioneOrThrownExcpetion(updated, HttpStatus.BAD_REQUEST);
     }
 
     private Consumazione getConsumazioneOrThrownException(Optional<Consumazione> consumazione, HttpStatus status) {
