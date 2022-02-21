@@ -27,11 +27,11 @@ public interface IControllerGestoreAttivita {
      * Metodo che permette di eliminare un'
      * attivit&agrave; nel sistema
      *
-     * @param attivita da eliminare
+     * @param id da eliminare
      * @return true se l'attivit&agrave; risulta
      * eliminata correttamente, false altrimenti
      */
-    Optional<Attivita> eliminaAttivita(Attivita attivita);
+    Optional<Attivita> eliminaAttivita(Integer id);
 
     /**
      * Metodo che permette di rimandare le attivit&agrave;
@@ -40,7 +40,7 @@ public interface IControllerGestoreAttivita {
      * @param receptionist colui che dovr&agrave; avvisare
      *                     eventuali iscritti all'attivit&agrave;
      *                     della modifica della data di svolgimento
-     * @param attivita attivit&agrave; da rimandare
+     * @param id attivit&agrave; da rimandare
      * @param nuovaData nuova data di svolgimento
      * @return true se l'attivit&agrave; risulta spostata correttamente,
      * false altrimenti

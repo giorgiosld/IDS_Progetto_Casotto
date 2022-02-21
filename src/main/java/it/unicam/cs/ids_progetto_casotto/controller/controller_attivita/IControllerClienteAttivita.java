@@ -24,6 +24,14 @@ public interface IControllerClienteAttivita {
     List<Attivita> getAttivita();
 
     /**
+     * Metodo che ritorna una singola attività
+     *
+     * @param id l'id dell'attività
+     * @return l'attività
+     */
+    Attivita getSingolaAttivita(Integer id);
+
+    /**
      * Metodo che ritorna il numero di
      * posti disponibili per un'attivit&agrave;
      * in particolare
@@ -45,10 +53,10 @@ public interface IControllerClienteAttivita {
      * @param receptionist a cui inviare la prenotazione
      *                     effettuata dal cliente
      * @param idCliente id del cliente che si &egrave; prenotato
-     * @param attivita attivit&agrave; che il cliente ha prenotato
+     * @param id attivit&agrave; che il cliente ha prenotato
      * @return true se la prenotazione avviene con successo, false altrimenti
      */
-    boolean creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Attivita attivita);
+    Attivita creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Integer id);
 
     /**
      * Metodo che permette al cliente
@@ -62,9 +70,6 @@ public interface IControllerClienteAttivita {
      * @param prenotazione da rimuovere
      * @return true se la rimozione prevede il rimborso, false altrimenti
      */
-    boolean eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione);
+    Attivita eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione);
 
-    //FATTO
-    @DeleteMapping("attivita{id}/cancellazione")
-    Optional<Attivita> eliminaAttivita(@PathVariable Integer id);
 }

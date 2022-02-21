@@ -13,45 +13,45 @@ import java.util.List;
  * le notifiche da inviare ai clienti
  */
 public interface IControllerNotificheClienti {
-
-    /**
-     * Metodo che ritorna i clienti
-     * iscritti alla newsletter
-     *
-     * @return clienti iscritti alla newsletter
-     */
-    List<Cliente> getClientiIscrittiNewsletter();
-
-    /**
-     * Metodo che ritorna i clienti
-     * iscritti al sistema
-     *
-     * @return clienti iscritti al sistema
-     */
-    List<Cliente> getClientiIscrittiSistema();
-
-    /**
-     * Metodo che permette di inviare
-     * una notifica ai clienti
-     *
-     * @param receptionist &egrave; il mittente
-     *                     del messaggio
-     * @param oggetto del messaggio
-     * @param body testo del messaggio
-     * @return true se il messaggio risulta inviato
-     * correttamente, false altrimenti
-     */
-    boolean notificaClienti(IHandlerNewsletter receptionist, Oggetto oggetto, String body);
-
-    /**
-     * Metodo che permette di inviare
-     * un reminder di un'attivit&agrave;
-     * giornaliera ai clienti iscritti a tale attivit&agrave;
-     *
-     * @param receptionist mittente del messaggio
-     * @param attivita di cui fare il reminder
-     * @return true se il messaggio risulta inviato
-     * correttamente, false altrimenti
-     */
-    boolean notificaAttivita(IHandlerNewsletter receptionist, Attivita attivita);
+//
+//    /**
+//     * Metodo che ritorna i clienti
+//     * iscritti alla newsletter
+//     *
+//     * @return clienti iscritti alla newsletter
+//     */
+//    List<Cliente> getClientiIscrittiNewsletter();
+//
+//    /**
+//     * Metodo che ritorna i clienti
+//     * iscritti al sistema
+//     *
+//     * @return clienti iscritti al sistema
+//     */
+//    List<Cliente> getClientiIscrittiSistema();
+//
+//    /**
+//     * Metodo che permette di inviare
+//     * una notifica ai clienti
+//     *
+//     * @param receptionist &egrave; il mittente
+//     *                     del messaggio
+//     * @param oggetto del messaggio
+//     * @param body testo del messaggio
+//     * @return true se il messaggio risulta inviato
+//     * correttamente, false altrimenti
+//     */
+//    boolean notificaClienti(IHandlerNewsletter receptionist, Oggetto oggetto, String body);
+//
+//    /**
+//     * Metodo che permette di inviare
+//     * un reminder di un'attivit&agrave;
+//     * giornaliera ai clienti iscritti a tale attivit&agrave;
+//     *
+//     * @param receptionist mittente del messaggio
+//     * @param attivita di cui fare il reminder
+//     * @return true se il messaggio risulta inviato
+//     * correttamente, false altrimenti
+//     */
+//    boolean notificaAttivita(IHandlerNewsletter receptionist, Attivita attivita);
 }

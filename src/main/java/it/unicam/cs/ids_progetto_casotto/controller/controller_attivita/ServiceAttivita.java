@@ -74,10 +74,10 @@ public class ServiceAttivita {
         LocalDate t1 = LocalDate.now();
         String str = t1.toString();
         Optional<Attivita> attivitaSelezionata = this.repositoryAttivita.findById(id);
-        PrenotazioneAttivitaCliente nuovaPrenotazione = new PrenotazioneAttivitaCliente(idCliente,attivitaSelezionata,str);
+        //PrenotazioneAttivitaCliente nuovaPrenotazione = new PrenotazioneAttivitaCliente(idCliente,attivitaSelezionata,str);
 
-        return Optional.of(nuovaPrenotazione);
-
+        //return Optional.of(nuovaPrenotazione);
+        return Optional.empty();
 
 
     }

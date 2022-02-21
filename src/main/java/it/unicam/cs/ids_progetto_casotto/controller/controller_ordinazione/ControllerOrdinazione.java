@@ -66,11 +66,6 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
         return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
-    @Override
-    public Comanda notificaComanda(Barista barista, Comanda comanda) {
-        barista.aggiungiComandaDaPreparare(comanda);
-        return comanda;
-    }
 
     @Override
     @GetMapping("/ordinazione{id}")

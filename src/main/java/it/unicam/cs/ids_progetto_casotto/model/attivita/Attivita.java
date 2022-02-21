@@ -30,7 +30,7 @@ public class Attivita {
     @Column
     private int postiDisponibili;
     @Column
-    private Optional<Integer> numeroMassimoPosti;
+    private Integer numeroMassimoPosti;
     @Column
     private String dataSvolgimento;
     @Column(length = 500)
@@ -95,10 +95,10 @@ public Integer getId(){
      *
      * @return numero di posti massimo
      */
-    public Optional<Integer> getNumeroMassimoPosti() {
-        if(numeroMassimoPosti.isEmpty()){
-            return Optional.empty();
-        }
+    public Integer getNumeroMassimoPosti() {
+//        if(numeroMassimoPosti.isEmpty()){
+//            return Optional.empty();
+//        }
         return numeroMassimoPosti;
 
     }
