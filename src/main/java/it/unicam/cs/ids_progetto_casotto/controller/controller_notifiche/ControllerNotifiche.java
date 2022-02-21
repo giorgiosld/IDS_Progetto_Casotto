@@ -17,41 +17,41 @@ import java.util.stream.Collectors;
  */
 public class ControllerNotifiche implements IControllerNotificheClienti{
 
-    private final List<Cliente> clientiIscrittiNewsletter;
-    private final List<Cliente> clientiIscrittiSistema;
-
-    public ControllerNotifiche() {
-        this.clientiIscrittiNewsletter = new ArrayList<>();
-        this.clientiIscrittiSistema = new ArrayList<>();
-    }
-
-    @Override
-    public List<Cliente> getClientiIscrittiNewsletter() {
-        return this.clientiIscrittiNewsletter;
-    }
-
-    @Override
-    public List<Cliente> getClientiIscrittiSistema() {
-        return this.clientiIscrittiSistema;
-    }
-
-    @Override
-    public boolean notificaClienti(IHandlerNewsletter receptionist, Oggetto oggetto, String body) {
-        if (oggetto == Oggetto.PROMO) {
-            this.getClientiIscrittiNewsletter().forEach(x -> x.getListaMessaggi().add(new Messaggio(receptionist,this.getClientiIscrittiNewsletter(),oggetto,body)));
-        }
-        this.getClientiIscrittiSistema().forEach(x -> x.getListaMessaggi().add(new Messaggio(receptionist,this.getClientiIscrittiSistema(),oggetto,body)));
-        return true;
-    }
-
-    @Override
-    public boolean notificaAttivita(IHandlerNewsletter receptionist, Attivita attivita) {
-        String body = "Ti ricordiamo che oggi si volgerà " + attivita.toString();
-        List<Cliente> clientiDaNotificare = this.getClientiIscrittiSistema()
-                .stream()
-                .filter(x -> x.getAttivitaPrenotate().contains(attivita))
-                .collect(Collectors.toList());
-        clientiDaNotificare.forEach(x -> x.getListaMessaggi().add(new Messaggio(receptionist,clientiDaNotificare,Oggetto.ATTIVITA,body)));
-        return true;
-    }
+//    private final List<Cliente> clientiIscrittiNewsletter;
+//    private final List<Cliente> clientiIscrittiSistema;
+//
+//    public ControllerNotifiche() {
+//        this.clientiIscrittiNewsletter = new ArrayList<>();
+//        this.clientiIscrittiSistema = new ArrayList<>();
+//    }
+//
+//    @Override
+//    public List<Cliente> getClientiIscrittiNewsletter() {
+//        return this.clientiIscrittiNewsletter;
+//    }
+//
+//    @Override
+//    public List<Cliente> getClientiIscrittiSistema() {
+//        return this.clientiIscrittiSistema;
+//    }
+//
+//    @Override
+//    public boolean notificaClienti(IHandlerNewsletter receptionist, Oggetto oggetto, String body) {
+//        if (oggetto == Oggetto.PROMO) {
+//            this.getClientiIscrittiNewsletter().forEach(x -> x.getListaMessaggi().add(new Messaggio(receptionist,this.getClientiIscrittiNewsletter(),oggetto,body)));
+//        }
+//        this.getClientiIscrittiSistema().forEach(x -> x.getListaMessaggi().add(new Messaggio(receptionist,this.getClientiIscrittiSistema(),oggetto,body)));
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean notificaAttivita(IHandlerNewsletter receptionist, Attivita attivita) {
+//        String body = "Ti ricordiamo che oggi si volgerà " + attivita.toString();
+//        List<Cliente> clientiDaNotificare = this.getClientiIscrittiSistema()
+//                .stream()
+//                .filter(x -> x.getAttivitaPrenotate().contains(attivita))
+//                .collect(Collectors.toList());
+//        clientiDaNotificare.forEach(x -> x.getListaMessaggi().add(new Messaggio(receptionist,clientiDaNotificare,Oggetto.ATTIVITA,body)));
+//        return true;
+//    }
 }

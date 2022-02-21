@@ -7,12 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
-@Entity
 
 public class PrenotazioneAttivitaCliente {
-
-    @Id
-    @Column
 
 
     private final int idCliente;

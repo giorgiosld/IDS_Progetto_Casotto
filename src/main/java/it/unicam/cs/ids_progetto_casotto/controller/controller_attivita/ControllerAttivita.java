@@ -38,6 +38,7 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
         return this.serviceAttivita.getAll();
     }
 
+    @Override
     @GetMapping("/attivita{id}")
     public Attivita getSingolaAttivita(@PathVariable ("id")Integer id){
         Optional<Attivita> attivita = this.serviceAttivita.getAttivita(id);
@@ -59,29 +60,30 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
     @Override
     @PostMapping("/prenota")
     public Attivita creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, @PathVariable("id")Integer id) {
-         LocalDate t1 = LocalDate.now();
-        String str = t1.toString();
-        PrenotazioneAttivitaCliente prenotazioneAttivitaCliente = new PrenotazioneAttivitaCliente(idCliente, attivita, str);
-        if (!receptionist.aggiungiPrenotazioneAttivita(prenotazioneAttivitaCliente)) {
-            System.out.println("Prenotazione di: " + prenotazioneAttivitaCliente + " non effettuata");
-            return false;
-
-
-        }
-        receptionist.aggiungiPrenotazioneAttivita(prenotazioneAttivitaCliente);
-        System.out.println("Prenotazione di: " + prenotazioneAttivitaCliente +" effettuata");
-        return true;
+//         LocalDate t1 = LocalDate.now();
+//        String str = t1.toString();
+//        PrenotazioneAttivitaCliente prenotazioneAttivitaCliente = new PrenotazioneAttivitaCliente(idCliente, );
+//        if (!receptionist.aggiungiPrenotazioneAttivita(prenotazioneAttivitaCliente)) {
+//            System.out.println("Prenotazione di: " + prenotazioneAttivitaCliente + " non effettuata");
+//            return null;
+//
+//
+//        }
+//        receptionist.aggiungiPrenotazioneAttivita(prenotazioneAttivitaCliente);
+//        System.out.println("Prenotazione di: " + prenotazioneAttivitaCliente +" effettuata");
+//        return null;
+        return null;
     }
 
     @Override
-    public boolean eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione) {
+    public Attivita eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione) {
         receptionist.eliminaPrenotazioneAttivita(prenotazione);
         if (checkRimborso(prenotazione)) {
             System.out.println("Rimborso consentito!");
-            return true;
+            return null;
         }
         System.out.println("Rimborso negato!");
-        return false;
+        return null;
     }
 
     private boolean checkRimborso(PrenotazioneAttivitaCliente prenotazioneAttivita) {
@@ -135,7 +137,7 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
         if(check.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        Optional<Attivita>toUpdate = this.serviceAttivita.rimandaAttivita();
+        //Optional<Attivita>toUpdate = this.serviceAttivita.rimandaAttivita();
 
         //TODO sistemare notifica clienti con receptionist
 
