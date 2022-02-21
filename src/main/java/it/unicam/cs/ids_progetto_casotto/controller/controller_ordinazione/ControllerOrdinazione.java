@@ -39,7 +39,6 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
     @Override
     @GetMapping("/menu")
     public List<Consumazione> getConsumazioni() {
-        //return this.consumazioni;
         return this.serviceConsumazioni.getAll();
     }
 
@@ -51,17 +50,10 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
 
     @Override
     @PostMapping("/ordina")
-    public Comanda creaComanda(@RequestBody List<Consumazione> consumazioni, int idUtenza) {
-        /*if (consumazioni == null) { throw new NullPointerException("Ci dispiace, c'è stato un errore nella selezione"); }
-        double prezzoTot = consumazioni.stream()
-                .mapToDouble(Consumazione::getPrezzo)
-                .sum();
-        Comanda nuovaComanda = new Comanda(consumazioni, prezzoTot, StatoComanda.CREATA);
-        this.comande.add(nuovaComanda);
-        Barista StaffToNotify = staffBar.stream().filter(x -> x.getStatoOccupazione().equals(StatoOccupazione.LIBERO)).findFirst().orElse(null);
-        notificaComanda(StaffToNotify, nuovaComanda);
-        return true;*/
-        return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni, idUtenza).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_GATEWAY));
+    //public Comanda creaComanda(@RequestBody List<Consumazione> consumazioni, int idUtenza) {
+    public Comanda creaComanda(@RequestBody List<Consumazione> consumazioni){
+        //return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni, idUtenza).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST))
+        return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
     @Override
@@ -72,7 +64,7 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
 
     @Override
     @GetMapping("ordinazione{id}")
-    public Comanda getComanda(@PathVariable UUID id) {
+    public Comanda getComanda(@PathVariable Integer id) {
         return this.serviceOrdinazioni.getComanda(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
@@ -84,14 +76,14 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
 
     @Override
     @GetMapping("ordinazione{id}/stato")
-    public StatoComanda getStatoComanda(@PathVariable UUID id) {
+    public StatoComanda getStatoComanda(@PathVariable Integer id) {
         //return Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).getStatoComanda();
         return this.serviceOrdinazioni.getStatus(id);
     }
 
     @Override
     @PostMapping("ordinazione{id}/stato")
-    public void setStatoComanda(@PathVariable UUID id, StatoComanda nuovoStato) {
+    public void setStatoComanda(@PathVariable Integer id, StatoComanda nuovoStato) {
         //Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).setStatoComanda(nuovoStato);
         this.serviceOrdinazioni.setStatus(id, nuovoStato);
     }

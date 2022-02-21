@@ -25,7 +25,8 @@ public class Cameriere extends StaffRistorazione{
      */
     public void creaComanda(ControllerOrdinazione controller, List<Consumazione> consumazioni, Barista barista){
         //modifica creaComanda in seguito allla modifica sul controller
-        controller.creaComanda(consumazioni, 1);
+        //controller.creaComanda(consumazioni, 1);
+        controller.creaComanda(consumazioni);
     }
 
     /**

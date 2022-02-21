@@ -3,12 +3,13 @@ package it.unicam.cs.ids_progetto_casotto.model.ordinazione;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,83 +21,68 @@ import java.util.UUID;
 @Setter
 public class Comanda {
 
-    //private static int id;
     @Id
     @Column
-    private  UUID idComanda;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer idComanda;
     @Column
-    public double prezzoTotale;
+    private double prezzoTotale;
     @Column
-    public StatoComanda statoComanda;
-    //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    @NonNull
+    @OneToMany
+    @JoinColumn
+    private List<Consumazione> consumazioni;
     @Column
-    private  String orarioCreazione;
+    @Enumerated(EnumType.ORDINAL)
+    private StatoComanda statoComanda;
+    @Column
+    private LocalDateTime orarioCreazione;
 
 
-//    public Comanda(List<Consumazione> consumazioni, double prezzoTotale, StatoComanda state){
-//        this.idComanda = Comanda.id;
-//        Comanda.id++;
-//        this.consumazioni = consumazioni;
-//        this.prezzoTotale = prezzoTotale;
-//        this.statoComanda = state;
-//        this.orarioCreazione =  dtf.format(LocalDateTime.now());
-//    }
     public Comanda(){
-        this.idComanda = UUID.randomUUID();
+        this.orarioCreazione = LocalDateTime.now();
+        this.statoComanda = StatoComanda.CREATA;
+        this.consumazioni = new ArrayList<>();
     }
 
-    /**
-     * Crea la comanda senza saperne il prezzo totale
-     *
-     * @param consumazioni la lista delle consumaizoni scelte
-     * @param state stato in cui si trova la comanda
-     */
-//    public Comanda(List<Consumazione> consumazioni, StatoComanda state){
-//        this.idComanda = Comanda.id;
-//        Comanda.id++;
-//        this.consumazioni = consumazioni;
-//        this.statoComanda = state;
-//        this.orarioCreazione =  dtf.format(LocalDateTime.now());
-//    }
 
     /**
      * Ritorna l'id della comanda
      *
      * @return id della comanda
      */
-//    public int getId() {
-//        return this.idComanda;
-//    }
+    public int getId() {
+        return this.idComanda;
+    }
+
+    public void setConsumazioni(List<Consumazione> consumazioniToAdd){
+        this.consumazioni.addAll(consumazioniToAdd);
+    }
 
     /**
      * Ritorna la lista delle consumazioni presenti nella comanda
      *
      * @return lista consumazioni scelte dal cliente
      */
-//    public List<Consumazione> getConsumazioni() {
-//        return consumazioni;
-//    }
+    public List<Consumazione> getConsumazioni() {
+        return consumazioni;
+    }
 
     /**
      * Se non presente chiama metodo per il calcolo del prezzo totale della comanda
      *
      * @return il prezzo totale della comanda
      */
-//    public double getPrezzoTotale() {
-//        if(Double.isNaN(this.prezzoTotale)){
-//            this.calcolaPrezzoTotale();
-//        }
-//        return this.prezzoTotale;
-//    }
+    public double getPrezzoTotale() {
+        return this.prezzoTotale;
+    }
 
     /**
      * Calcolo del prezzo totale della comanda
      */
-//    public void calcolaPrezzoTotale(){
-//        this.prezzoTotale = this.consumazioni.stream()
-//                .mapToDouble(Consumazione::getPrezzo)
-//                .sum();
-//    }
+    public void setPrezzoTotale(double prezzo){
+        this.prezzoTotale = prezzo;
+    }
 
     /**
      * Ritorna lo stato della comanda
@@ -116,15 +102,6 @@ public class Comanda {
         this.statoComanda = state;
     }
 
-
-    /**
-     * Ritorna l'orario in stringa di quando si è creata la comanda
-     *
-     * @return orario creazione comanda
-     */
-//    //public String getOrarioCreazione() {
-//        return orarioCreazione;
-//    }
 
     @Override
     public String toString() {
