@@ -9,29 +9,37 @@ public abstract class Persona implements IUtente{
 
     @Column
     @Id
-    private int id;
+    private Integer id;
+
     @Column
-    private final String nome;
+    private  String nome;
+
     @Column
-    private final String cognome;
+    private  String cognome;
+
     @Column
-    private final String annoNascita;
+    private  String annoNascita;
+
     @Column
-    private final char sesso;
+    private  char sesso;
+
     @Column
     private String email;
 
-    public Persona(int id, String nome, String cognome, String annoNascita, char sesso, String email) {
+    /*public Persona(int id, String nome, String cognome, String annoNascita, char sesso, String email) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.annoNascita = annoNascita;
         this.sesso = sesso;
         this.email = email;
+    }*/
+    public Persona(){
+
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 

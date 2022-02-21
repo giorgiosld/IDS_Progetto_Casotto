@@ -12,7 +12,7 @@ public interface IUtente {
      *
      * @return identificativo
      */
-    int getId();
+    Integer getId();
 
     /**
      * Metodo che ritorna il nome
