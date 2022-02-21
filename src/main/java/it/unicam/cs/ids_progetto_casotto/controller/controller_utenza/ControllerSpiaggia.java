@@ -1,53 +1,51 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_utenza;
 
 import it.unicam.cs.ids_progetto_casotto.model.utenza.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Classe che permette di gestire
  * le utenze
  */
+@RestController
+@RequestMapping("/spiaggia")
 public class ControllerSpiaggia  implements IControllerGestoreSpiaggia,IControllerClienteSpiaggia {
 
-    private final List<Utenza>utenze;
-    private final List<Tariffa> tariffe;
-    private final HashMap<Periodo,List<Utenza>> listaUtenzeByPeriodo;
-
-    public ControllerSpiaggia() {
-        this.utenze = new ArrayList<>();
-        this.tariffe = new ArrayList<>();
-        this.listaUtenzeByPeriodo = new HashMap<>();
-    }
+    @Autowired
+    private ServiceGestoreUtenze serviceGestoreUtenze;
 
     @Override
     public List<Utenza> getUtenze() {
-        return this.utenze;
+        return this.serviceGestoreUtenze.getAll();
+    }
+
+    @PostMapping("/addutenza")
+    @Override
+    public Utenza addUtenza(@RequestBody Tipo utenza) {
+        Optional<Utenza> added = this.serviceGestoreUtenze.addUtenza(utenza);
+        return this.getUtenzaOrTrhownExecption(added, HttpStatus.BAD_REQUEST);
     }
 
     @Override
-    public boolean aggiungiUtenza(Utenza utenza) {
-        if (this.getUtenze().contains(utenza)) {
-            System.out.println("L'utenza che si vuole aggiungere è già presente");
-            return false;
-        }
-        System.out.println("Utenza aggiunta correttamente");
-        this.utenze.add(utenza);
-        return true;
+    @DeleteMapping("/removeutenza{id}")
+    public Utenza removeUtenza(@PathVariable("id") Integer id) {
+        Optional<Utenza> removed = this.serviceGestoreUtenze.removeUtenza(id);
+        return this.getUtenzaOrTrhownExecption(removed,HttpStatus.NOT_FOUND);
     }
 
-    @Override
-    public boolean eliminaUtenza(Utenza utenza) {
-        if (!this.getUtenze().contains(utenza)) {
-            System.out.println("L'utenza che si vuole rimuovere non è presente");
+    private Utenza getUtenzaOrTrhownExecption(Optional<Utenza> utenza, HttpStatus status) {
+        if (utenza.isEmpty()) {
+            throw new ResponseStatusException(status);
         }
-        System.out.println("Utenza rimossa correttamente");
-        this.utenze.remove(utenza);
-        return true;
+        return  utenza.get();
     }
 
     @Override
