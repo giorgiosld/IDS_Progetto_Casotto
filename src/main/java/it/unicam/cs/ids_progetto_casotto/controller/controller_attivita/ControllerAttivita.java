@@ -3,6 +3,7 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
 import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -14,22 +15,32 @@ import java.util.Optional;
  * Classe che permette di gestire
  * le attivit&agrave;
  */
+@RestController
+@RequestMapping("/bacheca")
 public class ControllerAttivita implements IControllerClienteAttivita,IControllerGestoreAttivita {
 
-    private final List<Attivita> attivita;
+   // private final List<Attivita> attivita;
 
-    public ControllerAttivita() {
+   /* public ControllerAttivita() {
         this.attivita = new ArrayList<>();
     }
 
+    */
+    private ServiceAttivita serviceAttivita;
+
     @Override
+    @GetMapping("/Offerte")
     public List<Attivita> getAttivita() {
-        return this.attivita;
+       // return this.attivita;
+        return this.serviceAttivita.getAll();
     }
 
     @Override
-    public int getPostiDisponibili(Attivita attivita) {
-        return attivita.getPostiDisponibili();
+    @PostMapping
+    public int getPostiDisponibili(@RequestBody Attivita attivita) {
+       // return attivita.getPostiDisponibili();
+        int postiDisponibili;
+     postiDisponibili=this.serviceAttivita.getAll()
     }
 
     @Override
