@@ -41,15 +41,15 @@ public class ControllerUtente implements IControllerUtente {
     }
 
     @Override
-    @DeleteMapping("/delete")
-    public Cliente removeCliente(@RequestBody Integer id) {
+    @DeleteMapping("/delete/{id}")
+    public Cliente removeCliente(@PathVariable("id") Integer id) {
         Optional<Cliente>removed = this.serviceUtente.removeCliente(id);
         return this.getClienteOrThrownException(removed,HttpStatus.BAD_REQUEST);
     }
 
     @Override
     @PutMapping("/update/{id}")
-    public Cliente updateCliente(Integer id, Cliente cliente ) {
+    public Cliente updateCliente(@PathVariable("id") Integer id, @RequestBody Cliente cliente ) {
         Optional<Cliente> got = this.serviceUtente.getOne(id);
         if(got.isEmpty()){
             throw  new ResponseStatusException(HttpStatus.NOT_FOUND);

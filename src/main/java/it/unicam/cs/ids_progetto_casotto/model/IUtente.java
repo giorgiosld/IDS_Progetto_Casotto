@@ -31,14 +31,6 @@ public interface IUtente {
     String getCognomeUtente();
 
     /**
-     * Metodo che ritorna l'anno
-     * di nascita dell'utente
-     *
-     * @return anno di nascita
-     */
-    String getAnnoNascita();
-
-    /**
      * Metodo che ritorna il sesso
      * dell'utente
      *

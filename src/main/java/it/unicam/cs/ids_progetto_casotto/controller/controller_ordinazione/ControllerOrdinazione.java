@@ -31,7 +31,7 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
         return this.serviceConsumazioni.getAll();
     }
 
-    @GetMapping("/consumazione{id}")
+    @GetMapping("/consumazione/{id}")
     public Consumazione getConsumazione(@PathVariable("id") Integer id){
         Optional<Consumazione> got = this.serviceConsumazioni.getOne(id);
         return this.getConsumazioneOrThrownException(got, HttpStatus.NOT_FOUND);
@@ -43,13 +43,13 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
         return this.getConsumazioneOrThrownException(added, HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping("/removemenu{id}")
+    @DeleteMapping("/removemenu/{id}")
     public Consumazione removeConsumazione(@PathVariable("id")Integer id){
         Optional<Consumazione>removed = this.serviceConsumazioni.removeConsumazione(id);
         return this.getConsumazioneOrThrownException(removed, HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/updatemenu{id}")
+    @PutMapping("/updatemenu/{id}")
     public Consumazione updateConsumazione(@PathVariable("id")Integer id, @RequestBody Consumazione consumazione){
         Optional<Consumazione> got = this.serviceConsumazioni.getOne(id);
         if (got.isEmpty())
@@ -68,7 +68,7 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
 
 
     @Override
-    @GetMapping("/ordinazione{id}")
+    @GetMapping("/ordinazione/{id}")
     public Comanda getComanda(@PathVariable("id") Integer id) {
         Optional<Comanda> got = this.serviceOrdinazioni.getComanda(id);
         return this.getComandaOrThrownException(got, HttpStatus.NOT_FOUND);

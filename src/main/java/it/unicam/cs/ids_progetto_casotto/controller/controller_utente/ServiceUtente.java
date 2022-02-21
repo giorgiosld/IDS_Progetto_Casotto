@@ -11,6 +11,10 @@ public class ServiceUtente {
 
     private RepositoryUtente repositoryUtente;
 
+    public ServiceUtente(RepositoryUtente repositoryUtente){
+        this.repositoryUtente = repositoryUtente;
+    }
+
     public List<Cliente> getAll(){
         return this.repositoryUtente.findAll();
     }
@@ -30,21 +34,21 @@ public class ServiceUtente {
     }
 
     public Optional<Cliente> removeCliente(Integer id){
-        Optional<Cliente>toRemove = this.repositoryUtente.findById(id);
+        Optional<Cliente> toRemove = this.repositoryUtente.findById(id);
         if(toRemove.isEmpty()){
             return Optional.empty();
         }
-        return  toRemove;
+        this.repositoryUtente.deleteById(id);
+        return toRemove;
     }
     public Optional<Cliente> updateCliente(Integer id, Cliente cliente){
-        if((cliente.getNomeUtente().isEmpty())||(cliente.getCognomeUtente().isEmpty())||(cliente.getEmail().isEmpty())){
+        if((cliente.getNomeUtente().isEmpty()) || (cliente.getCognomeUtente().isEmpty()) || (cliente.getEmail().isEmpty())){
             return Optional.empty();
         }
         Cliente toUpdate = this.repositoryUtente.getById(id);
         toUpdate.setNome(cliente.getNomeUtente());
         toUpdate.setCognome(cliente.getCognomeUtente());
         toUpdate.setEmail(cliente.getEmail());
-
         return Optional.of(this.repositoryUtente.save(toUpdate));
     }
 }

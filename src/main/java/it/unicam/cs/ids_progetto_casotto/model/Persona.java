@@ -1,14 +1,13 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class Persona implements IUtente{
 
     @Column
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
     @Column
@@ -18,22 +17,11 @@ public abstract class Persona implements IUtente{
     private  String cognome;
 
     @Column
-    private  String annoNascita;
-
-    @Column
     private  char sesso;
 
     @Column
     private String email;
 
-    /*public Persona(int id, String nome, String cognome, String annoNascita, char sesso, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.annoNascita = annoNascita;
-        this.sesso = sesso;
-        this.email = email;
-    }*/
     public Persona(){
 
     }
@@ -63,11 +51,6 @@ public abstract class Persona implements IUtente{
     @Override
     public String getCognomeUtente() {
         return this.cognome;
-    }
-
-    @Override
-    public String getAnnoNascita() {
-        return this.annoNascita;
     }
 
     @Override
