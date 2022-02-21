@@ -1,18 +1,28 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
+import javax.persistence.*;
+import java.beans.ConstructorProperties;
+
 /**
  * Classe che definisce una generica
  * classe Utenza
  */
-public abstract class Utenza {
+@Entity
+@Table(name = "utenza")
+public class Utenza {
 
-    private int id;
-    private final int numeroPostiOccupabili;
+    @Id
+    @Column(updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    public Utenza(int id, int numeroPostiOccupabili){
-        this.id=id;
-        this.numeroPostiOccupabili = numeroPostiOccupabili;
-    }
+    @Column(updatable = false)
+    private Tipo tipo;
+
+    @Column(updatable = false)
+    private int numeroPostiOccupabili;
+
+    public Utenza(){}
 
     /**
      * Metodo che ritorna l'id
@@ -20,9 +30,13 @@ public abstract class Utenza {
      *
      * @return id dell'utenza
      */
-    public int getId(){
+    public Integer getId(){
         return this.id;
     }
+
+    public Tipo getTipo() { return this.tipo; }
+
+    public void setTipo(Tipo tipo) { this.tipo = tipo; }
 
     /**
      * Metodo che ritorna il
@@ -32,4 +46,8 @@ public abstract class Utenza {
      * occupabili
      */
     public int getNumeroPostiOccupabili(){ return this.numeroPostiOccupabili; }
+
+    public void setNumeroPostiOccupabili(int numeroPostiOccupabili) {
+        this.numeroPostiOccupabili = numeroPostiOccupabili;
+    }
 }
