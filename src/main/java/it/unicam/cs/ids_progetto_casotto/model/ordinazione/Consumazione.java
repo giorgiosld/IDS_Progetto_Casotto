@@ -44,12 +44,30 @@ public class Consumazione {
     }
 
     /**
+     * Metodo che modifica il nome della consumazione
+     *
+     * @param nome il nome con la quale si vuole modificare
+     */
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+
+    /**
      * Ritorna il costo del prodotto
      *
      * @return costo consumazione
      */
     public double getPrezzo() {
         return this.prezzo;
+    }
+
+    /**
+     * Metodo che modifica il prezzo della consumazione
+     *
+     * @param prezzo il prezzo con il quale si vuole modificare
+     */
+    public void setPrezzo(double prezzo){
+        this.prezzo = prezzo;
     }
 
 }

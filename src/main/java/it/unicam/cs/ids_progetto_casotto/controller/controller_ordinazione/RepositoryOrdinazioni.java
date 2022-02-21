@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public interface RepositoryOrdinazioni extends JpaRepository<Comanda, UUID> {
+public interface RepositoryOrdinazioni extends JpaRepository<Comanda, Integer> {
 }

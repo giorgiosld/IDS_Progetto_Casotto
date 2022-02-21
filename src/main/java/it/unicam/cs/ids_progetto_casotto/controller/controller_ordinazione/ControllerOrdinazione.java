@@ -9,7 +9,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Classe che implementa un controller per le ordinazioni. Si possono effettuare varie operazioni tutte ineresnti alla
@@ -19,16 +18,6 @@ import java.util.UUID;
 @RequestMapping("/bar")
 public class ControllerOrdinazione implements IControllerStaffOrdinazione, IControllerClienteOrdinazione {
 
-    /*private final List<Comanda> comande;
-    private final List<Consumazione> consumazioni;
-    private  List<Barista> staffBar;
-
-    public ControllerOrdinazione(){
-        this.comande = new ArrayList<>();
-        this.consumazioni = new ArrayList<>();
-        //da controllare
-        this.staffBar = new ArrayList<>();
-    }*/
     @Autowired
     private ServiceConsumazioni serviceConsumazioni;
 
@@ -42,10 +31,31 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
         return this.serviceConsumazioni.getAll();
     }
 
+    @GetMapping("/consumazione{id}")
+    public Consumazione getConsumazione(@PathVariable("id") Integer id){
+        Optional<Consumazione> got = this.serviceConsumazioni.getOne(id);
+        return this.getConsumazioneOrThrownException(got, HttpStatus.NOT_FOUND);
+    }
+
     @PostMapping("/addmenu")
     public Consumazione addConsumazione(@RequestBody Consumazione consumazione){
         Optional<Consumazione> added = this.serviceConsumazioni.addConsumazione(consumazione);
         return this.getConsumazioneOrThrownException(added, HttpStatus.BAD_REQUEST);
+    }
+
+    @DeleteMapping("/removemenu{id}")
+    public Consumazione removeConsumazione(@PathVariable("id")Integer id){
+        Optional<Consumazione>removed = this.serviceConsumazioni.removeConsumazione(id);
+        return this.getConsumazioneOrThrownException(removed, HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/updatemenu{id}")
+    public Consumazione updateConsumazione(@PathVariable("id")Integer id, @RequestBody Consumazione consumazione){
+        Optional<Consumazione> got = this.serviceConsumazioni.getOne(id);
+        if (got.isEmpty())
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        Optional<Consumazione> updated = this.serviceConsumazioni.updateConsumazione(id, consumazione);
+        return this.getConsumazioneOrThrownException(updated, HttpStatus.BAD_REQUEST);
     }
 
     @Override
@@ -64,8 +74,9 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
 
     @Override
     @GetMapping("ordinazione{id}")
-    public Comanda getComanda(@PathVariable Integer id) {
-        return this.serviceOrdinazioni.getComanda(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public Comanda getComanda(@PathVariable("id") Integer id) {
+        Optional<Comanda> got = this.serviceOrdinazioni.getComanda(id);
+        return this.getComandaOrThrownException(got, HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -77,15 +88,21 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
     @Override
     @GetMapping("ordinazione{id}/stato")
     public StatoComanda getStatoComanda(@PathVariable Integer id) {
-        //return Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).getStatoComanda();
+        Optional<Comanda> got = this.serviceOrdinazioni.getComanda(id);
+        if(got.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return this.serviceOrdinazioni.getStatus(id);
     }
 
+    //TODO sistemare problema del non modifica stato
     @Override
-    @PostMapping("ordinazione{id}/stato")
-    public void setStatoComanda(@PathVariable Integer id, StatoComanda nuovoStato) {
-        //Objects.requireNonNull(this.comande.stream().filter(x -> x.equals(comanda)).findFirst().orElse(null)).setStatoComanda(nuovoStato);
-        this.serviceOrdinazioni.setStatus(id, nuovoStato);
+    @PutMapping("ordinazione{id}/stato")
+    public StatoComanda setStatoComanda(@PathVariable Integer id,@RequestBody StatoComanda nuovoStato) {
+        Optional<Comanda> got = this.serviceOrdinazioni.getComanda(id);
+        if(got.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        StatoComanda updated = this.serviceOrdinazioni.setStatus(id, nuovoStato);
+        return this.getStatoConsumazioneOrThrownExcpetion(updated, HttpStatus.BAD_REQUEST);
     }
 
     private Consumazione getConsumazioneOrThrownException(Optional<Consumazione> consumazione, HttpStatus status) {
@@ -94,4 +111,15 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
         return consumazione.get();
     }
 
+    private Comanda getComandaOrThrownException(Optional<Comanda> comanda, HttpStatus status) {
+        if (comanda.isEmpty())
+            throw new ResponseStatusException(status);
+        return comanda.get();
+    }
+
+    private StatoComanda getStatoConsumazioneOrThrownExcpetion(StatoComanda statoComanda, HttpStatus status){
+        if (statoComanda == null)
+            throw new ResponseStatusException(status);
+        return statoComanda;
+    }
 }
