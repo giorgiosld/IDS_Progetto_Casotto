@@ -2,9 +2,18 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Entity
+
 public class PrenotazioneAttivitaCliente {
+
+    @Id
+    @Column
+
 
     private final int idCliente;
     private final Attivita attivitaPrenotata;

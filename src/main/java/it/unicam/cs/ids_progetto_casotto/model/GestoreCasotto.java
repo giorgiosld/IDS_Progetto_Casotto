@@ -33,8 +33,8 @@ public class GestoreCasotto extends Persona implements IHandlerAttivita, IHandle
     }
 
     @Override
-    public boolean rimandaAttivita(IControllerGestoreAttivita controllerGestoreAttivita, IHandlerNewsletter receptionist, Attivita attivita, String nuovaData) {
-        return controllerGestoreAttivita.rimandaAttivita(receptionist,attivita,nuovaData);
+    public Attivita rimandaAttivita(IControllerGestoreAttivita controllerGestoreAttivita, IHandlerNewsletter receptionist, Integer id, String nuovaData) {
+        return controllerGestoreAttivita.rimandaAttivita(receptionist,id,nuovaData);
     }
 
     @Override

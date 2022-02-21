@@ -2,8 +2,11 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interfaccia che definisce un generico
@@ -60,4 +63,8 @@ public interface IControllerClienteAttivita {
      * @return true se la rimozione prevede il rimborso, false altrimenti
      */
     boolean eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione);
+
+    //FATTO
+    @DeleteMapping("attivita{id}/cancellazione")
+    Optional<Attivita> eliminaAttivita(@PathVariable Integer id);
 }

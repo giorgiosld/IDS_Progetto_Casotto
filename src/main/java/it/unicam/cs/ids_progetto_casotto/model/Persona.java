@@ -52,6 +52,14 @@ public abstract class Persona implements IUtente{
         return this.nome;
     }
 
+    public void setNome(String nome){
+        this.nome=nome;
+    }
+
+    public void setCognome(String cognome){
+        this.cognome=cognome;
+    }
+
     @Override
     public String getCognomeUtente() {
         return this.cognome;
