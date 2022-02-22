@@ -39,7 +39,7 @@ public class ControllerPeriodo {
         return this.getPeriodoOrTrhownExecption(get, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{fasciaOraria")
+    @GetMapping("/{fasciaOraria}")
     public List<PeriodoUtenze> getPeriodiByFasciaOraria(@PathVariable(value = "fasciaOraria") FasciaOrariaUtenze fasciaOrariaUtenze) {
         Optional<List<PeriodoUtenze>> periodi = this.servicePeriodoUtenze.getPeriodiByFasciaOraria(fasciaOrariaUtenze);
         return this.getPeriodiOrThrownExecption(periodi, HttpStatus.NOT_FOUND);
@@ -76,11 +76,11 @@ public class ControllerPeriodo {
         return  periodo.get();
     }
 
-    @DeleteMapping("/{id}")
-    public Utenza removeUtenza(@PathVariable("id") Integer id) {
-        Optional<Utenza> removed = this.servicePeriodoUtenze.removeUtenza(id);
-        return this.getUtenzaOrTrhownExecption(removed,HttpStatus.NOT_FOUND);
-    }
+//    @DeleteMapping("/{id}")
+//    public Utenza removeUtenza(@PathVariable("id") Integer id) {
+//        Optional<Utenza> removed = this.servicePeriodoUtenze.removeUtenza(id);
+//        return this.getUtenzaOrTrhownExecption(removed,HttpStatus.NOT_FOUND);
+//    }
 
     private List<PeriodoUtenze> getPeriodiOrThrownExecption(Optional<List<PeriodoUtenze>> periodi, HttpStatus status) {
         if (periodi.isEmpty()) {
@@ -89,12 +89,12 @@ public class ControllerPeriodo {
         return periodi.get();
     }
 
-    private Utenza getUtenzaOrTrhownExecption(Optional<Utenza> utenza, HttpStatus status) {
-        if (utenza.isEmpty()) {
-            throw new ResponseStatusException(status);
-        }
-        return  utenza.get();
-    }
+//    private Utenza getUtenzaOrTrhownExecption(Optional<Utenza> utenza, HttpStatus status) {
+//        if (utenza.isEmpty()) {
+//            throw new ResponseStatusException(status);
+//        }
+//        return  utenza.get();
+//    }
 
 //    public List<Utenza> getUtenze(Periodo periodo) {
 //        if (periodo.checkGiorni()) {
@@ -110,38 +110,38 @@ public class ControllerPeriodo {
 //        return this.tariffe;
 //    }
 
-    public boolean creaPrenotazioneCliente(IHandlerPrenotazioniUtenzeClienti receptionist, int idCliente, Periodo permanenzaUtenza, Utenza utenza, Tariffa tariffa) {
-        LocalDate t1 = LocalDate.now();
-        String str = t1.toString();
-        PrenotazioneUtenzaCliente prenotazioneUtenzaCliente = new PrenotazioneUtenzaCliente(idCliente, permanenzaUtenza, utenza, tariffa, str);
-        if (!receptionist.aggiungiPrenotazioneUtenza(prenotazioneUtenzaCliente)) {
-            System.out.println("Prenotazione di: " + prenotazioneUtenzaCliente + " non effettuata!");
-            return false;
-        }
-        receptionist.aggiungiPrenotazioneUtenza(prenotazioneUtenzaCliente);
-        System.out.println("Prenotazione di: " + prenotazioneUtenzaCliente + " effettuata");
-        return false;
-    }
-
-    public boolean eliminaPrenotazione(IHandlerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenzaCliente prenotazione) {
-        receptionist.eliminaPrenotazioneUtenza(prenotazione);
-        if (checkRimborso(prenotazione)) {
-            System.out.println("Rimborso consentito!");
-            return true;
-        }
-        System.out.println("Rimborso negato!");
-        return false;
-    }
-
-    private boolean checkRimborso(PrenotazioneUtenzaCliente prenotazioneUtenzaCliente) {
-        LocalDate dataCheckIn = prenotazioneUtenzaCliente.getPeriodoPermanenza().getCheckIn();
-        LocalDate now = LocalDate.now();
-        Period difference = Period.between(now,dataCheckIn);
-        if (difference.getYears() == 0 || difference.getMonths() == 0 || difference.getDays() >= 2) {
-            return true;
-        }
-        return false;
-    }
+//    public boolean creaPrenotazioneCliente(IHandlerPrenotazioniUtenzeClienti receptionist, int idCliente, Periodo permanenzaUtenza, Utenza utenza, Tariffa tariffa) {
+//        LocalDate t1 = LocalDate.now();
+//        String str = t1.toString();
+//        PrenotazioneUtenzaCliente prenotazioneUtenzaCliente = new PrenotazioneUtenzaCliente(idCliente, permanenzaUtenza, utenza, tariffa, str);
+//        if (!receptionist.aggiungiPrenotazioneUtenza(prenotazioneUtenzaCliente)) {
+//            System.out.println("Prenotazione di: " + prenotazioneUtenzaCliente + " non effettuata!");
+//            return false;
+//        }
+//        receptionist.aggiungiPrenotazioneUtenza(prenotazioneUtenzaCliente);
+//        System.out.println("Prenotazione di: " + prenotazioneUtenzaCliente + " effettuata");
+//        return false;
+//    }
+//
+//    public boolean eliminaPrenotazione(IHandlerPrenotazioniUtenzeClienti receptionist, PrenotazioneUtenzaCliente prenotazione) {
+//        receptionist.eliminaPrenotazioneUtenza(prenotazione);
+//        if (checkRimborso(prenotazione)) {
+//            System.out.println("Rimborso consentito!");
+//            return true;
+//        }
+//        System.out.println("Rimborso negato!");
+//        return false;
+//    }
+//
+//    private boolean checkRimborso(PrenotazioneUtenzaCliente prenotazioneUtenzaCliente) {
+//        LocalDate dataCheckIn = prenotazioneUtenzaCliente.getPeriodoPermanenza().getCheckIn();
+//        LocalDate now = LocalDate.now();
+//        Period difference = Period.between(now,dataCheckIn);
+//        if (difference.getYears() == 0 || difference.getMonths() == 0 || difference.getDays() >= 2) {
+//            return true;
+//        }
+//        return false;
+//    }
 
    /* public Optional<Utenza> prenotaUtenza(int idUtenza, int idTariffa){
         return null;
