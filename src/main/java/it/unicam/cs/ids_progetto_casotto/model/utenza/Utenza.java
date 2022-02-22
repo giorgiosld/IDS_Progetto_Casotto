@@ -4,7 +4,9 @@ import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.PeriodoUte
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Classe che definisce una generica
@@ -15,18 +17,17 @@ import java.util.List;
 public class Utenza {
 
     @Id
-    @Column(updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(updatable = false)
+    @Column(name = "tipo")
     private Tipo tipo;
 
-    @Column(updatable = false)
+    @Column(name = "utenze")
     private int numeroPostiOccupabili;
 
-    @ManyToMany(mappedBy = "utenze")
-    private List<PeriodoUtenze> periodi = new ArrayList<>();
+    @ManyToMany(mappedBy = "utenze", fetch = FetchType.LAZY)
+    private Set<PeriodoUtenze> periodi = new HashSet<>();
 
     public Utenza(){}
 
@@ -43,6 +44,10 @@ public class Utenza {
     public Tipo getTipo() { return this.tipo; }
 
     public void setTipo(Tipo tipo) { this.tipo = tipo; }
+
+    public Set<PeriodoUtenze> getPeriodi() {
+        return this.periodi;
+    }
 
     /**
      * Metodo che ritorna il
