@@ -3,7 +3,6 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_utenza;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 

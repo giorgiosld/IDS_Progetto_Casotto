@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +19,11 @@ public class ServiceAttivita {
 
     private RepositoryAttivita repositoryAttivita;
 
-    private RepositoryPrenotazioneAttivita repositoryPrenotazioneAttivita;
-
     private RepositoryUtente repositoryUtente;
 
-    public ServiceAttivita(RepositoryAttivita repositoryAttivita, RepositoryPrenotazioneAttivita repositoryPrenotazioneAttivita,RepositoryUtente repositoryUtente) {
+    public ServiceAttivita(RepositoryAttivita repositoryAttivita, RepositoryUtente repositoryUtente) {
         this.repositoryAttivita = repositoryAttivita;
-        this.repositoryPrenotazioneAttivita = repositoryPrenotazioneAttivita;
+        //this.repositoryPrenotazioneAttivita = repositoryPrenotazioneAttivita;
         this.repositoryUtente=repositoryUtente;
     }
 
@@ -32,8 +31,8 @@ public class ServiceAttivita {
         return this.repositoryAttivita.findAll();
     }
 
-    public int getNPosti(Attivita attivita) {
-        return this.repositoryAttivita.getById(attivita.getId()).getPostiDisponibili();
+    public int getNPosti(Integer id) {
+        return this.repositoryAttivita.getById(id).getPostiDisponibili();
 
     }
 
@@ -46,7 +45,7 @@ public class ServiceAttivita {
     }
 
     public Optional<Attivita> addAttivita(Attivita attivita) {
-        if ((attivita.getNome().isEmpty()) || (attivita.getPrezzo() == 0)) {
+        if ((attivita.getNome().isEmpty()) || (attivita.getDataSvolgimento().toString().isEmpty())) {
             return Optional.empty();
         }
         return Optional.of(repositoryAttivita.save(attivita));
@@ -57,51 +56,15 @@ public class ServiceAttivita {
         if (toRemove.isEmpty()) {
             return Optional.empty();
         }
+        this.repositoryAttivita.deleteById(id);
         return toRemove;
 
     }
 
-    public Optional<Attivita> rimandaAttivita(Integer id, String nuovaData) {
-      /*  if(!repositoryAttivita.findAll().contains(attivita)){
-            throw new ResponseStatusException(HttpStatus.HTTP_VERSION_NOT_SUPPORTED);
-        }
-
-       */
+    public Optional<Attivita> rimandaAttivita(Integer id, Attivita nuovaData) {
         Attivita check = this.repositoryAttivita.getById(id);
-        check.setDataSvolgimento(nuovaData);
+        check.setDataSvolgimento(nuovaData.getDataSvolgimento());
         return Optional.of(this.repositoryAttivita.save(check));
-
-        /*if(!attivita.getDataSvolgimento().equals(nuovaData)){
-            throw new getAttivitaOrThrownException
-        }
-
-         */
     }
-
-    public Optional<PrenotazioneAttivitaCliente> creaPrenotazioneAttivita(int idCliente, Integer id) {
-
-        LocalDate t1 = LocalDate.now();
-        String str = t1.toString();
-        Optional<Attivita> attivitaSelezionata = this.repositoryAttivita.findById(id);
-        PrenotazioneAttivitaCliente nuovaPrenotazione = new PrenotazioneAttivitaCliente(idCliente, attivitaSelezionata.get(), str);
-
-        return Optional.of(this.repositoryPrenotazioneAttivita.save(nuovaPrenotazione));
-
-
-    }
-
-    public Optional<PrenotazioneAttivitaCliente> eliminaPrenotazioneAttivitaCliente(Integer idPrenotazione) {
-        Optional<PrenotazioneAttivitaCliente> toDelete = this.repositoryPrenotazioneAttivita.findById(idPrenotazione);
-        if(toDelete.isEmpty()){
-            return Optional.empty();
-        }
-       this.repositoryPrenotazioneAttivita.deleteById(idPrenotazione);
-        return toDelete;
-
-    }
-
-
-
-
 }
 
