@@ -17,7 +17,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/spiaggia")
-public class ControllerSpiaggia  implements IControllerGestoreSpiaggia,IControllerClienteSpiaggia {
+public class ControllerPeriodo implements IControllerGestoreSpiaggia,IControllerClienteSpiaggia {
 
     @Autowired
     private ServiceGestoreUtenze serviceGestoreUtenze;
