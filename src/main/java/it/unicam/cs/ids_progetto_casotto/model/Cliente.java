@@ -9,7 +9,6 @@ import it.unicam.cs.ids_progetto_casotto.model.utenza.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.*;
 
 /**
  * Classe che rappresenta un
