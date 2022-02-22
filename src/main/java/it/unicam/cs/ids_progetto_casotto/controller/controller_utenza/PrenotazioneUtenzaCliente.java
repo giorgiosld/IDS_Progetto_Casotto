@@ -9,7 +9,7 @@ import java.time.LocalDate;
 /**
  * Classe che rappresenta una prenotazione
  * del cliente che viene gestita da
- * {@link ControllerSpiaggia} e {@link it.unicam.cs.ids_progetto_casotto.model.Receptionist}
+ * {@link ControllerPeriodo} e {@link it.unicam.cs.ids_progetto_casotto.model.Receptionist}
  */
 public class PrenotazioneUtenzaCliente {
 

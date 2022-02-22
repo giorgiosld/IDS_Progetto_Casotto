@@ -1,7 +1,10 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.PeriodoUtenze;
+
 import javax.persistence.*;
-import java.beans.ConstructorProperties;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Classe che definisce una generica
@@ -21,6 +24,9 @@ public class Utenza {
 
     @Column(updatable = false)
     private int numeroPostiOccupabili;
+
+    @ManyToMany(mappedBy = "utenze_di")
+    private List<PeriodoUtenze> periodi = new ArrayList<>();
 
     public Utenza(){}
 
