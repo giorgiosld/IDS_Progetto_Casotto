@@ -54,6 +54,11 @@ public class ControllerUtenza {
         return this.getUtenzaOrTrhownExecption(added, HttpStatus.BAD_REQUEST);
     }
 
+    @DeleteMapping("/periodo/{idPeriodo}/utenza/{idUtenza}")
+    public Utenza deleteUtenzaFromPeriodo(@PathVariable(value = "idPeriodo")Integer idPeriodo, @RequestBody Integer idUtenza) {
+        return null;
+    }
+
     private Utenza getUtenzaOrTrhownExecption(Optional<Utenza> utenza, HttpStatus status) {
         if (utenza.isEmpty()) {
             throw new ResponseStatusException(status);

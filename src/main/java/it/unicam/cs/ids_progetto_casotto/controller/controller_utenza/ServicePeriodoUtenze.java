@@ -72,20 +72,6 @@ public class ServicePeriodoUtenze {
         return deleted;
     }
 
-    public List<Utenza> getAllUtenze() {
-        List<Utenza> utenze = new ArrayList<>();
-        this.repositoryPeriodoUtenze.findAll().forEach(x -> utenze.addAll(x.getUtenze()));
-        return utenze;
-    }
-
-    public List<Utenza> getUtenzeByPeriod(LocalDate day, FasciaOrariaUtenze fasciaOrariaUtenze) {
-        List<Utenza> utenze = new ArrayList<>();
-        this.repositoryPeriodoUtenze.findAll().stream()
-                .filter(x -> x.getDay().equals(day) && x.getFasciaOrariaUtenze().equals(fasciaOrariaUtenze))
-                .forEach(x -> utenze.addAll(x.getUtenze()));
-        return utenze;
-    }
-
     public Optional<Utenza> removeUtenza(Integer id) {
         Optional<Utenza> toRemove = this.repositoryUtenze.findById(id);
         if (toRemove.isEmpty()) {

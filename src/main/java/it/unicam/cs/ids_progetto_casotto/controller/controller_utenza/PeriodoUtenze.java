@@ -14,21 +14,23 @@ public class PeriodoUtenze {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false)
+    @Column
     private Integer id;
 
-    @Column
+    @Column(name = "giorno")
     private LocalDate day;
 
-    @Column
+    @Column(name = "fascia_oraria")
     private FasciaOrariaUtenze fasciaOrariaUtenze;
 
-    @ManyToMany
-    @JoinTable(
-            name = "booking",
-            joinColumns = @JoinColumn(name = "periodo_id"),
-            inverseJoinColumns = @JoinColumn(name = "utenza_id")
-    )
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "booking",
+            joinColumns = { @JoinColumn(name = "periodi_id") },
+            inverseJoinColumns = { @JoinColumn(name = "utenze_id") })
     private List<Utenza> utenze = new ArrayList<>();
 
     public PeriodoUtenze() {}
@@ -63,9 +65,12 @@ public class PeriodoUtenze {
 
     public void addUtenza(Utenza utenza) {
         this.utenze.add(utenza);
+        utenza.getPeriodi().add(this);
     }
 
-    public void removeUtenza(Utenza utenza) {
+    public Utenza removeUtenza(Integer utenza) {
+        Utenza removed = this.utenze.get(utenza);
         this.utenze.remove(utenza);
+        return removed;
     }
 }

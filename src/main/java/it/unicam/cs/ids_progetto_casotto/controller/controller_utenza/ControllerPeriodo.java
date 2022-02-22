@@ -76,7 +76,7 @@ public class ControllerPeriodo {
         return  periodo.get();
     }
 
-    @DeleteMapping("/removeutenza{id}")
+    @DeleteMapping("/{id}")
     public Utenza removeUtenza(@PathVariable("id") Integer id) {
         Optional<Utenza> removed = this.servicePeriodoUtenze.removeUtenza(id);
         return this.getUtenzaOrTrhownExecption(removed,HttpStatus.NOT_FOUND);

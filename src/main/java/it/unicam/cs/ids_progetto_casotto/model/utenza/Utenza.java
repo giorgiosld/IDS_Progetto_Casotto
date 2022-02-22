@@ -15,17 +15,21 @@ import java.util.List;
 public class Utenza {
 
     @Id
-    @Column(updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(updatable = false)
+    @Column(name = "tipo")
     private Tipo tipo;
 
-    @Column(updatable = false)
+    @Column(name = "posti_occupabili")
     private int numeroPostiOccupabili;
 
-    @ManyToMany(mappedBy = "utenze")
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "utenze")
     private List<PeriodoUtenze> periodi = new ArrayList<>();
 
     public Utenza(){}
@@ -43,6 +47,10 @@ public class Utenza {
     public Tipo getTipo() { return this.tipo; }
 
     public void setTipo(Tipo tipo) { this.tipo = tipo; }
+
+    public List<PeriodoUtenze> getPeriodi() {
+        return this.periodi;
+    }
 
     /**
      * Metodo che ritorna il
