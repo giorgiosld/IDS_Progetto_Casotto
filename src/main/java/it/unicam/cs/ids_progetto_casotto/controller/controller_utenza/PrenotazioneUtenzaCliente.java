@@ -11,6 +11,7 @@ import java.time.LocalDate;
  * del cliente che viene gestita da
  * {@link ControllerPeriodo} e {@link it.unicam.cs.ids_progetto_casotto.model.Receptionist}
  */
+
 public class PrenotazioneUtenzaCliente {
 
     private final int idCliente;
