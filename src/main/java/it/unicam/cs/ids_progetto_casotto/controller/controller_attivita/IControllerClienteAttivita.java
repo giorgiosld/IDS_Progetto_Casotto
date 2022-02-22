@@ -56,7 +56,7 @@ public interface IControllerClienteAttivita {
      * @param id attivit&agrave; che il cliente ha prenotato
      * @return true se la prenotazione avviene con successo, false altrimenti
      */
-    Attivita creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Integer id);
+    PrenotazioneAttivitaCliente creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Integer id);
 
     /**
      * Metodo che permette al cliente
@@ -70,6 +70,6 @@ public interface IControllerClienteAttivita {
      * @param prenotazione da rimuovere
      * @return true se la rimozione prevede il rimborso, false altrimenti
      */
-    Attivita eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione);
+    PrenotazioneAttivitaCliente eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, Integer id);
 
 }
