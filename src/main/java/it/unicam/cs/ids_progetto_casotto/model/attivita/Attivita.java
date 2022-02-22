@@ -1,10 +1,15 @@
 package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import lombok.NonNull;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -29,26 +34,26 @@ public class Attivita {
    // private final String descrizione;
     @Column
     private int postiDisponibili;
+
     @Column
     private Integer numeroMassimoPosti;
+
     @Column
-    private String dataSvolgimento;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dataSvolgimento;
+
     @Column(length = 500)
     private  double prezzo;
 
     public Attivita() {
-      /*  this.nome = nome;
-        this.descrizione = descrizione;
-        this.postiDisponibili = numeroMassimoPosti;
-        this.numeroMassimoPosti = numeroMassimoPosti;
-        this.dataSvolgimento = dataSvolgimento;
-        this.prezzo = prezzo;
-        */
-        this.id=id;
+
     }
-public Integer getId(){
+
+    public Integer getId(){
         return this.id;
 }
+
     /**
      * Metodo che ritorna
      * il nome dell'attivit&agrave;
@@ -109,9 +114,8 @@ public Integer getId(){
      *
      * @return data di svolgimento
      */
-    public LocalDate getDataSvolgimento() {
-        LocalDate data = LocalDate.parse(this.dataSvolgimento);
-        return data;
+    public LocalDateTime getDataSvolgimento() {
+        return this.dataSvolgimento;
     }
 
     /**
@@ -120,7 +124,7 @@ public Integer getId(){
      *
      * @param newData nuova data di svolgimento
      */
-    public void setDataSvolgimento(String newData) {
+    public void setDataSvolgimento(LocalDateTime newData) {
         this.dataSvolgimento = newData;
     }
 

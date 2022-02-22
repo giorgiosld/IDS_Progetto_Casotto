@@ -52,7 +52,8 @@ public class ControllerSpiaggia  implements IControllerGestoreSpiaggia,IControll
     public List<Utenza> getUtenze(Periodo periodo) {
         if (periodo.checkGiorni()) {
         }
-        return this.listaUtenzeByPeriodo.get(periodo);
+        return null;
+        //return this.listaUtenzeByPeriodo.get(periodo);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ControllerSpiaggia  implements IControllerGestoreSpiaggia,IControll
 
     @Override
     public List<Tariffa> getTariffe() {
-        return this.tariffe;
+        return null;
     }
 
     @Override

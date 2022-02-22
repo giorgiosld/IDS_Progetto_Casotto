@@ -42,7 +42,7 @@ public interface IControllerClienteAttivita {
      * @return numero di posti disponibili per
      * tale attivit&agrave;
      */
-    int getPostiDisponibili(Attivita attivita);
+    Integer getPostiDisponibili(Integer id);
 
     /**
      * Metodo che permette al cliente

@@ -3,6 +3,7 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -21,7 +22,7 @@ public interface IControllerGestoreAttivita {
      * @return true se l'attivti&agrave; risulta
      * aggiunta correttamente, false altrimenti
      */
-    Optional<Attivita> aggiungiAttivita(Attivita attivita);
+    Attivita aggiungiAttivita(Attivita attivita);
 
     /**
      * Metodo che permette di eliminare un'
@@ -31,7 +32,7 @@ public interface IControllerGestoreAttivita {
      * @return true se l'attivit&agrave; risulta
      * eliminata correttamente, false altrimenti
      */
-    Optional<Attivita> eliminaAttivita(Integer id);
+    Attivita eliminaAttivita(Integer id);
 
     /**
      * Metodo che permette di rimandare le attivit&agrave;
@@ -45,5 +46,5 @@ public interface IControllerGestoreAttivita {
      * @return true se l'attivit&agrave; risulta spostata correttamente,
      * false altrimenti
      */
-   Attivita rimandaAttivita(IHandlerNewsletter receptionist, Integer id, String nuovaData);
+   Attivita rimandaAttivita(IHandlerNewsletter receptionist, Integer id, Attivita nuovaData);
 }
