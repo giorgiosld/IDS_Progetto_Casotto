@@ -6,7 +6,9 @@ import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "periodo_utenze")
@@ -23,15 +25,15 @@ public class PeriodoUtenze {
     @Column(name = "fascia_oraria")
     private FasciaOrariaUtenze fasciaOrariaUtenze;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "booking",
-            joinColumns = { @JoinColumn(name = "periodi_id") },
-            inverseJoinColumns = { @JoinColumn(name = "utenze_id") })
-    private List<Utenza> utenze = new ArrayList<>();
+            joinColumns = {
+                    @JoinColumn(name = "periodo_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "utenze_id", referencedColumnName = "id",
+                            nullable = false, updatable = false)})
+    private Set<Utenza> utenze = new HashSet<>();
 
     public PeriodoUtenze() {}
 
@@ -55,11 +57,11 @@ public class PeriodoUtenze {
         this.fasciaOrariaUtenze = fasciaOrariaUtenze;
     }
 
-    public List<Utenza> getUtenze() {
+    public Set<Utenza> getUtenze() {
         return this.utenze;
     }
 
-    public void setUtenze(List<Utenza> utenze) {
+    public void setUtenze(Set<Utenza> utenze) {
         this.utenze = utenze;
     }
 
@@ -69,7 +71,8 @@ public class PeriodoUtenze {
     }
 
     public Utenza removeUtenza(Integer utenza) {
-        Utenza removed = this.utenze.get(utenza);
+        Utenza removed = this.utenze.stream()
+                .filter(t -> t.getId() == id).findFirst().orElse(null);
         this.utenze.remove(utenza);
         return removed;
     }
