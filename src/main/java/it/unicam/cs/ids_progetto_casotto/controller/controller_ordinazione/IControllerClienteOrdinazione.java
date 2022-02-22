@@ -1,6 +1,5 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione;
 
-import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Barista;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Comanda;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Consumazione;
 
