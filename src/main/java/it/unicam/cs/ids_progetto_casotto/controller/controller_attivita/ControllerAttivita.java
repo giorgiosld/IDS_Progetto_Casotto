@@ -58,8 +58,8 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
     }
 
     @Override
-    @PostMapping("/prenota")
-    public Attivita creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, @PathVariable("id")Integer id) {
+    @PostMapping("/prenota{id}")
+    public PrenotazioneAttivitaCliente creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, @PathVariable("id")Integer id) {
 //         LocalDate t1 = LocalDate.now();
 //        String str = t1.toString();
 //        PrenotazioneAttivitaCliente prenotazioneAttivitaCliente = new PrenotazioneAttivitaCliente(idCliente, );
@@ -72,28 +72,44 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
 //        receptionist.aggiungiPrenotazioneAttivita(prenotazioneAttivitaCliente);
 //        System.out.println("Prenotazione di: " + prenotazioneAttivitaCliente +" effettuata");
 //        return null;
-        return null;
+        PrenotazioneAttivitaCliente attivitaPrenotata = this.serviceAttivita.creaPrenotazioneAttivita(idCliente,id).get();
+
+
+        return attivitaPrenotata;
     }
 
     @Override
-    public Attivita eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione) {
-        receptionist.eliminaPrenotazioneAttivita(prenotazione);
+    @DeleteMapping("/elimina{id}")
+    public PrenotazioneAttivitaCliente eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, @PathVariable("id") Integer idPrenotazione) {
+
+       /* receptionist.eliminaPrenotazioneAttivita(prenotazione);
         if (checkRimborso(prenotazione)) {
             System.out.println("Rimborso consentito!");
             return null;
         }
         System.out.println("Rimborso negato!");
         return null;
+        */
+        PrenotazioneAttivitaCliente attivitaEliminata = this.serviceAttivita.eliminaPrenotazioneAttivitaCliente(idPrenotazione).get();
+        return attivitaEliminata;
     }
 
-    private boolean checkRimborso(PrenotazioneAttivitaCliente prenotazioneAttivita) {
-        LocalDate dataSvolgimento = prenotazioneAttivita.getAttivitaPrenotata().getDataSvolgimento();
+    private boolean checkRimborso(LocalDate primaData ) {
+        /*LocalDate dataSvolgimento = prenotazioneAttivita.getAttivitaPrenotata().getDataSvolgimento();
         LocalDate now = LocalDate.now();
         Period difference = Period.between(now,dataSvolgimento);
         if (difference.getYears() >= 0 || difference.getMonths() >= 0 || difference.getDays() >= 2) {
             return true;
         }
         return false;
+         */
+        LocalDate now = LocalDate.now();
+        Period difference = Period.between(now,primaData);
+        if (difference.getYears() >= 0 || difference.getMonths() >= 0 || difference.getDays() >= 2) {
+            return true;
+        }
+        return false;
+
     }
     //FATTO
     @Override//boolean
