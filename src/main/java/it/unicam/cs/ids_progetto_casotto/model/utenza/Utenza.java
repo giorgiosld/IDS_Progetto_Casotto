@@ -25,7 +25,7 @@ public class Utenza {
     @Column(updatable = false)
     private int numeroPostiOccupabili;
 
-    @ManyToMany(mappedBy = "utenze_di")
+    @ManyToMany(mappedBy = "utenze")
     private List<PeriodoUtenze> periodi = new ArrayList<>();
 
     public Utenza(){}

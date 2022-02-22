@@ -25,7 +25,7 @@ public class PeriodoUtenze {
 
     @ManyToMany
     @JoinTable(
-            name = "utenze_like",
+            name = "booking",
             joinColumns = @JoinColumn(name = "periodo_id"),
             inverseJoinColumns = @JoinColumn(name = "utenza_id")
     )
