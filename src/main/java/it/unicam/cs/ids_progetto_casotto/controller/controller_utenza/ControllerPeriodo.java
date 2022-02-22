@@ -76,17 +76,17 @@ public class ControllerPeriodo {
         return  periodo.get();
     }
 
+    @DeleteMapping("/removeutenza{id}")
+    public Utenza removeUtenza(@PathVariable("id") Integer id) {
+        Optional<Utenza> removed = this.servicePeriodoUtenze.removeUtenza(id);
+        return this.getUtenzaOrTrhownExecption(removed,HttpStatus.NOT_FOUND);
+    }
+
     private List<PeriodoUtenze> getPeriodiOrThrownExecption(Optional<List<PeriodoUtenze>> periodi, HttpStatus status) {
         if (periodi.isEmpty()) {
             throw new ResponseStatusException(status);
         }
         return periodi.get();
-    }
-
-    @DeleteMapping("/removeutenza{id}")
-    public Utenza removeUtenza(@PathVariable("id") Integer id) {
-        Optional<Utenza> removed = this.servicePeriodoUtenze.removeUtenza(id);
-        return this.getUtenzaOrTrhownExecption(removed,HttpStatus.NOT_FOUND);
     }
 
     private Utenza getUtenzaOrTrhownExecption(Optional<Utenza> utenza, HttpStatus status) {
