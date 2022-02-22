@@ -1,37 +1,33 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class Persona implements IUtente{
 
     @Column
     @Id
-    private int id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id;
+
     @Column
-    private final String nome;
+    private  String nome;
+
     @Column
-    private final String cognome;
+    private  String cognome;
+
     @Column
-    private final String annoNascita;
-    @Column
-    private final char sesso;
+    private  char sesso;
+
     @Column
     private String email;
 
-    public Persona(int id, String nome, String cognome, String annoNascita, char sesso, String email) {
-        this.id = id;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.annoNascita = annoNascita;
-        this.sesso = sesso;
-        this.email = email;
+    public Persona(){
+
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
@@ -44,14 +40,17 @@ public abstract class Persona implements IUtente{
         return this.nome;
     }
 
-    @Override
-    public String getCognomeUtente() {
-        return this.cognome;
+    public void setNome(String nome){
+        this.nome=nome;
+    }
+
+    public void setCognome(String cognome){
+        this.cognome=cognome;
     }
 
     @Override
-    public String getAnnoNascita() {
-        return this.annoNascita;
+    public String getCognomeUtente() {
+        return this.cognome;
     }
 
     @Override

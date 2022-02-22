@@ -29,13 +29,4 @@ public interface IControllerClienteOrdinazione {
     //Comanda creaComanda(List<Consumazione> consumazioni, int idUtenza);
     Comanda creaComanda(List<Consumazione> consumazioni);
 
-
-    /**
-     * Metodo che notifica al barista che una nuova comanda &egrave; stata creata e inserita all'interno del {@link ControllerOrdinazione}
-     *
-     * @param barista il responsabile alla quale verr&agrave; notificata la creazione della comanda
-     * @param comanda la comanda che &egrave; appena stata creata
-     * @return la comanda creata e che deve essere notificata
-     */
-    Comanda notificaComanda(Barista barista, Comanda comanda);
 }

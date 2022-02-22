@@ -12,7 +12,7 @@ public interface IUtente {
      *
      * @return identificativo
      */
-    int getId();
+    Integer getId();
 
     /**
      * Metodo che ritorna il nome
@@ -29,14 +29,6 @@ public interface IUtente {
      * @return cognome utente
      */
     String getCognomeUtente();
-
-    /**
-     * Metodo che ritorna l'anno
-     * di nascita dell'utente
-     *
-     * @return anno di nascita
-     */
-    String getAnnoNascita();
 
     /**
      * Metodo che ritorna il sesso

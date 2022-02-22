@@ -5,10 +5,7 @@ import lombok.NonNull;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Classe che rappresenta le
@@ -23,7 +20,7 @@ public class Attivita {
     @Id
     @Column
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private static Integer id;
+    private Integer id;
 
     @NonNull
     @Column(unique=true)
@@ -33,7 +30,7 @@ public class Attivita {
     @Column
     private int postiDisponibili;
     @Column
-    private Optional<Integer> numeroMassimoPosti;
+    private Integer numeroMassimoPosti;
     @Column
     private String dataSvolgimento;
     @Column(length = 500)
@@ -49,7 +46,9 @@ public class Attivita {
         */
         this.id=id;
     }
-
+public Integer getId(){
+        return this.id;
+}
     /**
      * Metodo che ritorna
      * il nome dell'attivit&agrave;
@@ -96,10 +95,10 @@ public class Attivita {
      *
      * @return numero di posti massimo
      */
-    public Optional<Integer> getNumeroMassimoPosti() {
-        if(numeroMassimoPosti.isEmpty()){
-            return Optional.empty();
-        }
+    public Integer getNumeroMassimoPosti() {
+//        if(numeroMassimoPosti.isEmpty()){
+//            return Optional.empty();
+//        }
         return numeroMassimoPosti;
 
     }

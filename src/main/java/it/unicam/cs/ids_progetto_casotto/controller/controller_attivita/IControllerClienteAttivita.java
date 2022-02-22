@@ -2,8 +2,11 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interfaccia che definisce un generico
@@ -19,6 +22,14 @@ public interface IControllerClienteAttivita {
      * @return lista di attivit&agrave;
      */
     List<Attivita> getAttivita();
+
+    /**
+     * Metodo che ritorna una singola attività
+     *
+     * @param id l'id dell'attività
+     * @return l'attività
+     */
+    Attivita getSingolaAttivita(Integer id);
 
     /**
      * Metodo che ritorna il numero di
@@ -42,10 +53,10 @@ public interface IControllerClienteAttivita {
      * @param receptionist a cui inviare la prenotazione
      *                     effettuata dal cliente
      * @param idCliente id del cliente che si &egrave; prenotato
-     * @param attivita attivit&agrave; che il cliente ha prenotato
+     * @param id attivit&agrave; che il cliente ha prenotato
      * @return true se la prenotazione avviene con successo, false altrimenti
      */
-    boolean creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Attivita attivita);
+    PrenotazioneAttivitaCliente creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Integer id);
 
     /**
      * Metodo che permette al cliente
@@ -59,5 +70,6 @@ public interface IControllerClienteAttivita {
      * @param prenotazione da rimuovere
      * @return true se la rimozione prevede il rimborso, false altrimenti
      */
-    boolean eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, PrenotazioneAttivitaCliente prenotazione);
+    PrenotazioneAttivitaCliente eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, Integer id);
+
 }
