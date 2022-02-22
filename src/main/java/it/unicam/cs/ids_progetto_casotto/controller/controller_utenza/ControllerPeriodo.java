@@ -24,7 +24,7 @@ public class ControllerPeriodo {
     private ServicePeriodoUtenze servicePeriodoUtenze;
 
     @GetMapping
-    public List<PeriodoUtenze> getPeriodI() {
+    public List<PeriodoUtenze> getAllPeriodi() {
         return this.servicePeriodoUtenze.getAllPeriodi();
     }
 
@@ -84,17 +84,6 @@ public class ControllerPeriodo {
         return periodi.get();
     }
 
-    @GetMapping("/periodo/{id}")
-    public ResponseEntity<PeriodoUtenze> getPeriodoUtenzeById(@PathVariable("id") Integer id) {
-
-    }
-
-    @PostMapping("/addutenza")
-    public Utenza addUtenza(@RequestBody Tipo utenza) {
-        Optional<Utenza> added = this.servicePeriodoUtenze.addUtenza(utenza);
-        return this.getUtenzaOrTrhownExecption(added, HttpStatus.BAD_REQUEST);
-    }
-
     @DeleteMapping("/removeutenza{id}")
     public Utenza removeUtenza(@PathVariable("id") Integer id) {
         Optional<Utenza> removed = this.servicePeriodoUtenze.removeUtenza(id);
@@ -108,19 +97,19 @@ public class ControllerPeriodo {
         return  utenza.get();
     }
 
-    public List<Utenza> getUtenze(Periodo periodo) {
-        if (periodo.checkGiorni()) {
-        }
-        return this.listaUtenzeByPeriodo.get(periodo);
-    }
-
-    public List<Utenza> getUtenze(Periodo periodi, FasciaOraria fasciaOraria) {
-        return null;
-    }
-
-    public List<Tariffa> getTariffe() {
-        return this.tariffe;
-    }
+//    public List<Utenza> getUtenze(Periodo periodo) {
+//        if (periodo.checkGiorni()) {
+//        }
+//        return this.listaUtenzeByPeriodo.get(periodo);
+//    }
+//
+//    public List<Utenza> getUtenze(Periodo periodi, FasciaOraria fasciaOraria) {
+//        return null;
+//    }
+//
+//    public List<Tariffa> getTariffe() {
+//        return this.tariffe;
+//    }
 
     public boolean creaPrenotazioneCliente(IHandlerPrenotazioniUtenzeClienti receptionist, int idCliente, Periodo permanenzaUtenza, Utenza utenza, Tariffa tariffa) {
         LocalDate t1 = LocalDate.now();

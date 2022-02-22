@@ -25,7 +25,7 @@ public class ServicePeriodoUtenze {
         this.repositoryUtenze = repositoryUtenze;
     }
 
-    public List<PeriodoUtenze> getAllPeriodi() { this.repositoryPeriodoUtenze.findAll(); }
+    public List<PeriodoUtenze> getAllPeriodi() { return this.repositoryPeriodoUtenze.findAll(); }
 
     public Optional<PeriodoUtenze> getPeriodoById(Integer id) {
         return this.repositoryPeriodoUtenze.findById(id);
@@ -86,24 +86,8 @@ public class ServicePeriodoUtenze {
         return utenze;
     }
 
-    public Optional<Utenza> add(PeriodoUtenze periodoUtenze, Tipo utenza) {
-        Utenza utenza1 = new Utenza();
-        utenza1.setTipo(utenza);
-        if (utenza == Tipo.LETTINO) {
-            utenza1.setNumeroPostiOccupabili(1);
-            this.repositoryPeriodoUtenze.save(utenza1);
-        } else if (utenza == Tipo.OMBRELLONE) {
-            utenza1.setNumeroPostiOccupabili(4);
-            this.repositoryPeriodoUtenze.save(utenza1);
-        } else if (utenza == Tipo.SDRAIO) {
-            utenza1.setNumeroPostiOccupabili(1);
-            this.repositoryPeriodoUtenze.save(utenza1);
-        }
-        return Optional.of(utenza1);
-    }
-
     public Optional<Utenza> removeUtenza(Integer id) {
-        Optional<Utenza> toRemove = this.repositoryPeriodoUtenze.findById(id);
+        Optional<Utenza> toRemove = this.repositoryUtenze.findById(id);
         if (toRemove.isEmpty()) {
             return Optional.empty();
         }

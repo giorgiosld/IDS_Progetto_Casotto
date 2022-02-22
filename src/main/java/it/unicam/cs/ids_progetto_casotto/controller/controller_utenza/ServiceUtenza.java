@@ -37,22 +37,39 @@ public class ServiceUtenza {
         return Optional.of(this.repositoryUtenze.findUtenzaByPeriodoId(idPeriodo));
     }
 
-    public Optional<Utenza> addUtenza(Integer idPeriodo, Utenza utenza) {
-       Utenza utenza1 = this.repositoryPeriodoUtenze.findById(idPeriodo).map(periodo -> {
-           Integer idUtenza = utenza.getId();
-           if (idUtenza != 0) {
-               Optional<Utenza> _utenza = this.repositoryUtenze.findById(idUtenza);
-               if (_utenza.isEmpty()) {
-                   return null;
-               }
-               periodo.addUtenza(_utenza.get());
-               this.repositoryPeriodoUtenze.save(periodo);
-               return _utenza.get();
-           }
-           periodo.addUtenza(utenza);
-           return this.repositoryUtenze.save(utenza);
-       }).orElse(null);
-        return Optional.empty();
+    public Optional<Utenza> createUtenza(Tipo utenza) {
+        Utenza utenza1 = new Utenza();
+        utenza1.setTipo(utenza);
+        if (utenza == Tipo.LETTINO) {
+            utenza1.setNumeroPostiOccupabili(1);
+            this.repositoryUtenze.save(utenza1);
+        } else if (utenza == Tipo.OMBRELLONE) {
+            utenza1.setNumeroPostiOccupabili(4);
+            this.repositoryUtenze.save(utenza1);
+        } else if (utenza == Tipo.SDRAIO) {
+            utenza1.setNumeroPostiOccupabili(1);
+            this.repositoryUtenze.save(utenza1);
+        }
+        return Optional.of(utenza1);
+    }
+
+    public Optional<Utenza> addUtenzaInPeriodo(Integer idPeriodo, Utenza utenza) {
+        Optional<PeriodoUtenze> periodo = this.repositoryPeriodoUtenze.findById(idPeriodo);
+        if (periodo.isEmpty()) {
+            return Optional.empty();
+        }
+        Integer idUtenza = utenza.getId();
+        if (idUtenza != 0) {
+            Optional<Utenza> _utenza = this.repositoryUtenze.findById(idUtenza);
+            if (_utenza.isEmpty()) {
+                return Optional.empty();
+            }
+            periodo.get().addUtenza(_utenza.get());
+            this.repositoryPeriodoUtenze.save(periodo.get());
+            return _utenza;
+        }
+        periodo.get().addUtenza(utenza);
+        return Optional.of(this.repositoryUtenze.save(utenza));
     }
 
 }

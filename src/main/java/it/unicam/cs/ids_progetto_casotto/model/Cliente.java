@@ -1,7 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.IControllerClienteAttivita;
-import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.IControllerClienteSpiaggia;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IClienteAttività;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.PrenotazioneAttivita;
