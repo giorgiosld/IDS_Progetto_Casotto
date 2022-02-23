@@ -1,15 +1,14 @@
 package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.NonNull;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -19,8 +18,9 @@ import java.util.*;
  */
 
 @Entity
-@Table(name="Attivita")
-public class Attivita {
+@Table(name="event")
+@JsonIgnoreProperties(value = {"prenotazione"}, allowSetters = true)
+public class Event {
 
     @Id
     @Column
@@ -46,7 +46,11 @@ public class Attivita {
     @Column(length = 500)
     private  double prezzo;
 
-    public Attivita() {
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(targetEntity = Prenotazione.class, mappedBy = "eventiPrenotatiList")
+    private Set<Prenotazione> prenotazione;
+
+    public Event() {
 
     }
 

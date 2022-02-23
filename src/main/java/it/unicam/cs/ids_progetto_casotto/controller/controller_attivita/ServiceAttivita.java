@@ -1,15 +1,9 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_utente.RepositoryUtente;
-import it.unicam.cs.ids_progetto_casotto.model.Cliente;
-import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
-import org.springframework.http.HttpStatus;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Event;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +21,7 @@ public class ServiceAttivita {
         this.repositoryUtente=repositoryUtente;
     }
 
-    public List<Attivita> getAll() {
+    public List<Event> getAll() {
         return this.repositoryAttivita.findAll();
     }
 
@@ -36,23 +30,23 @@ public class ServiceAttivita {
 
     }
 
-    public Optional<Attivita> getAttivita(Integer id) {
-        Optional<Attivita> attivita = this.repositoryAttivita.findById(id);
+    public Optional<Event> getAttivita(Integer id) {
+        Optional<Event> attivita = this.repositoryAttivita.findById(id);
         if (attivita.isEmpty()) {
             return Optional.empty();
         }
         return attivita;
     }
 
-    public Optional<Attivita> addAttivita(Attivita attivita) {
+    public Optional<Event> addAttivita(Event attivita) {
         if ((attivita.getNome().isEmpty()) || (attivita.getDataSvolgimento().toString().isEmpty())) {
             return Optional.empty();
         }
         return Optional.of(repositoryAttivita.save(attivita));
     }
 
-    public Optional<Attivita> eliminaAttivita(Integer id) {
-        Optional<Attivita> toRemove = this.repositoryAttivita.findById(id);
+    public Optional<Event> eliminaAttivita(Integer id) {
+        Optional<Event> toRemove = this.repositoryAttivita.findById(id);
         if (toRemove.isEmpty()) {
             return Optional.empty();
         }
@@ -61,8 +55,8 @@ public class ServiceAttivita {
 
     }
 
-    public Optional<Attivita> rimandaAttivita(Integer id, Attivita nuovaData) {
-        Attivita check = this.repositoryAttivita.getById(id);
+    public Optional<Event> rimandaAttivita(Integer id, Event nuovaData) {
+        Event check = this.repositoryAttivita.getById(id);
         check.setDataSvolgimento(nuovaData.getDataSvolgimento());
         return Optional.of(this.repositoryAttivita.save(check));
     }

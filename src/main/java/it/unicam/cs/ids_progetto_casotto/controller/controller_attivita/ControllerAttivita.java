@@ -1,6 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
-import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Event;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
 import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +29,21 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
 
     @Override
     @GetMapping("/offerte")
-    public List<Attivita> getAttivita() {
+    public List<Event> getAttivita() {
         return this.serviceAttivita.getAll();
     }
 
     @Override
     @PostMapping("/addAttivita")
-    public Attivita aggiungiAttivita(@RequestBody Attivita attivita) {
-        Optional <Attivita> added = this.serviceAttivita.addAttivita(attivita);
+    public Event aggiungiAttivita(@RequestBody Event attivita) {
+        Optional <Event> added = this.serviceAttivita.addAttivita(attivita);
         return this.getAttivitaOrThrownException(added, HttpStatus.BAD_REQUEST);
     }
 
     @Override
     @GetMapping("/attivita/{id}")
-    public Attivita getSingolaAttivita(@PathVariable ("id")Integer id){
-        Optional<Attivita> attivita = this.serviceAttivita.getAttivita(id);
+    public Event getSingolaAttivita(@PathVariable ("id")Integer id){
+        Optional<Event> attivita = this.serviceAttivita.getAttivita(id);
         return this.getAttivitaOrThrownException(attivita, HttpStatus.NOT_FOUND);
     }
 
@@ -57,19 +57,19 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
 
     @Override
     @DeleteMapping("attivita/{id}/cancellazione")
-    public Attivita eliminaAttivita(@PathVariable Integer id) {
-        Optional<Attivita> removed = this.serviceAttivita.eliminaAttivita(id);
+    public Event eliminaAttivita(@PathVariable Integer id) {
+        Optional<Event> removed = this.serviceAttivita.eliminaAttivita(id);
         return this.getAttivitaOrThrownException(removed, HttpStatus.NOT_FOUND);
     }
 
     @Override
     @PutMapping("/attivita/{id}/rimanda")//mapping //modififa interfaccia e controller
-    public Attivita rimandaAttivita(IHandlerNewsletter receptionist,@PathVariable("id")Integer id , @RequestBody  Attivita attivita) {
-        Optional<Attivita> check = this.serviceAttivita.getAttivita(id);
+    public Event rimandaAttivita(IHandlerNewsletter receptionist, @PathVariable("id")Integer id , @RequestBody Event attivita) {
+        Optional<Event> check = this.serviceAttivita.getAttivita(id);
         if(check.isEmpty()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        Optional<Attivita>toUpdate = this.serviceAttivita.rimandaAttivita(id, attivita);
+        Optional<Event>toUpdate = this.serviceAttivita.rimandaAttivita(id, attivita);
         //TODO sistemare notifica clienti con receptionist
         return this.getAttivitaOrThrownException(toUpdate,HttpStatus.BAD_REQUEST);
     }
@@ -129,7 +129,7 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
 
     }
 
-    private Attivita getAttivitaOrThrownException(Optional<Attivita> attivita, HttpStatus status) {
+    private Event getAttivitaOrThrownException(Optional<Event> attivita, HttpStatus status) {
         if (attivita.isEmpty())
             throw new ResponseStatusException(status);
         return attivita.get();

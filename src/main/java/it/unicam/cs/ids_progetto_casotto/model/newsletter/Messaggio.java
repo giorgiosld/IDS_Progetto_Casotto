@@ -1,6 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.model.newsletter;
 
-import it.unicam.cs.ids_progetto_casotto.model.Cliente;
+import it.unicam.cs.ids_progetto_casotto.model.User;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ import java.util.List;
 public class Messaggio {
 
      private final IHandlerNewsletter mittente;
-     private final List<Cliente> destinatario;
+     private final List<User> destinatario;
      private final Oggetto oggetto;
      private final String body;
 
-    public Messaggio(IHandlerNewsletter mittente, List<Cliente> destinatario, Oggetto oggetto, String body) {
+    public Messaggio(IHandlerNewsletter mittente, List<User> destinatario, Oggetto oggetto, String body) {
         this.mittente = mittente;
         this.destinatario = destinatario;
         this.oggetto = oggetto;
@@ -25,7 +25,7 @@ public class Messaggio {
         return mittente;
     }
 
-    public List<Cliente> getDestinatario() {
+    public List<User> getDestinatario() {
         return destinatario;
     }
 

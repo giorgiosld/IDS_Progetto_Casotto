@@ -1,6 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_utente;
 
-import it.unicam.cs.ids_progetto_casotto.model.Cliente;
+import it.unicam.cs.ids_progetto_casotto.model.User;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface IControllerUtente {
      *
      * @return lista dei clienti iscritti
      */
-    public List<Cliente> getClienti();
+    public List<User> getClienti();
 
     /**
      * Metodo che permette la visualizzazione di un cliente iscritto
@@ -19,7 +19,7 @@ public interface IControllerUtente {
      * @param id il cliente cercato
      * @return il cliente cercato
      */
-    public Cliente getCliente(Integer id);
+    public User getCliente(Integer id);
 
     /**
      * Metodo che permette l'aggiunta di un cliente nel sistema
@@ -27,7 +27,7 @@ public interface IControllerUtente {
      * @param cliente il cliente che vuole registraziorsi
      * @return il cliente registrato
      */
-    public Cliente addCliente(Cliente cliente);
+    public User addCliente(User cliente);
 
     /**
      * Metodo che permette di rimuovere un cliente dal sistema
@@ -35,7 +35,7 @@ public interface IControllerUtente {
      * @param id il cliente cercato
      * @return il cliente rimosso
      */
-    public Cliente removeCliente(Integer id);
+    public User removeCliente(Integer id);
 
     /**
      * Metodo che permette la modifica di un cliente dal sistema
@@ -43,5 +43,5 @@ public interface IControllerUtente {
      * @param id il cliente cercato
      * @return il cliente modificato
      */
-    public Cliente updateCliente(Integer id, Cliente cliente);
+    public User updateCliente(Integer id, User cliente);
 }

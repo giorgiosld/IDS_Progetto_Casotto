@@ -1,10 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
-import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Event;
 import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 /**
  * Interfaccia che definisce un generico controller
@@ -22,7 +19,7 @@ public interface IControllerGestoreAttivita {
      * @return true se l'attivti&agrave; risulta
      * aggiunta correttamente, false altrimenti
      */
-    Attivita aggiungiAttivita(Attivita attivita);
+    Event aggiungiAttivita(Event attivita);
 
     /**
      * Metodo che permette di eliminare un'
@@ -32,7 +29,7 @@ public interface IControllerGestoreAttivita {
      * @return true se l'attivit&agrave; risulta
      * eliminata correttamente, false altrimenti
      */
-    Attivita eliminaAttivita(Integer id);
+    Event eliminaAttivita(Integer id);
 
     /**
      * Metodo che permette di rimandare le attivit&agrave;
@@ -46,5 +43,5 @@ public interface IControllerGestoreAttivita {
      * @return true se l'attivit&agrave; risulta spostata correttamente,
      * false altrimenti
      */
-   Attivita rimandaAttivita(IHandlerNewsletter receptionist, Integer id, Attivita nuovaData);
+   Event rimandaAttivita(IHandlerNewsletter receptionist, Integer id, Event nuovaData);
 }

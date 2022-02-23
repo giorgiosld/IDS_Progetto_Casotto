@@ -1,12 +1,13 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione;
 
+import it.unicam.cs.ids_progetto_casotto.model.User;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Comanda;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Consumazione;
 
 import java.util.List;
 
 /**
- * Interfaccia rappresentante le azioni che pu&ograve; eseguire {@link it.unicam.cs.ids_progetto_casotto.model.Cliente} per la comunicazione con
+ * Interfaccia rappresentante le azioni che pu&ograve; eseguire {@link User} per la comunicazione con
  * il {@link ControllerOrdinazione}
  */
 public interface IControllerClienteOrdinazione {

@@ -1,13 +1,12 @@
 package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.PrenotazioneAttivitaCliente;
-import it.unicam.cs.ids_progetto_casotto.model.Receptionist;
 
 import java.util.List;
 
 /**
  * Interfaccia che definsice le azioni,
- * eseguibili dal {@link Receptionist}, per gestire
+ * eseguibili dal {@link }, per gestire
  * le attivit&agrave; prenotate dal cliente
  */
 public interface IHandlerPrenotazioniAttivitaClienti {
@@ -37,7 +36,7 @@ public interface IHandlerPrenotazioniAttivitaClienti {
      * Metodo che permette di aggiungere una
      * prenotazione di un'attivit&agrave;, effettuata
      * dal cliente, nella lista delle prenotazioni gestite
-     * dal {@link Receptionist}
+     * dal {@link }
      *
      * @param prenotazione da aggiungere nella lista
      * @return true se viene aggiunta correttamente,
@@ -49,7 +48,7 @@ public interface IHandlerPrenotazioniAttivitaClienti {
      * Metodo che permette di eliminare una
      * prenotazione di un'attivit&agrave;, effettuata
      * dal cliente, dalla lista delle prenotazioni gestite
-     * dal {@link Receptionist}
+     * dal {@link }
      *
      * @param prenotazione da eliminare
      * @return true se la rimozione prevede il rimborso,

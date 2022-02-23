@@ -19,7 +19,7 @@ public interface IClienteAttività {
      *                           di accedere alle attivit&agrave;
      * @return lista di attivit&agrave; visualizzate
      */
-    List<Attivita> visualizzaAttivita(IControllerClienteAttivita controllerAttivita);
+    List<Event> visualizzaAttivita(IControllerClienteAttivita controllerAttivita);
 
     /**
      * Metodo che permette al cliente di selezionare
@@ -30,7 +30,7 @@ public interface IClienteAttività {
      *                           selezionata
      * @param attivita attivit&agrave; da selezionare
      */
-    Attivita selezionaAttivita(IControllerClienteAttivita controllerAttivita, Attivita attivita);
+    Event selezionaAttivita(IControllerClienteAttivita controllerAttivita, Event attivita);
 
     /**
      * Metodo che permette al cliente di prenotare
@@ -43,7 +43,7 @@ public interface IClienteAttività {
      * @return true se l'attivit&agrave; risulta prenotata,
      * false altrimenti
      */
-    boolean prenotaAttivita(IControllerClienteAttivita controllerAttivita, Attivita attivita);
+    boolean prenotaAttivita(IControllerClienteAttivita controllerAttivita, Event attivita);
 
     /**
      * Metodo che ritorna tutte le attivit&agrave;
@@ -51,7 +51,7 @@ public interface IClienteAttività {
      *
      * @return lista delle attivit&agrave; prenotate
      */
-    List<Attivita> getAttivitaPrenotate();
+    List<Event> getAttivitaPrenotate();
 
     /**
      * Metodo che permette di selezionare un'attivit&agrave;
@@ -61,7 +61,7 @@ public interface IClienteAttività {
      *                 dal cliente
      * @return l'attivit&agrave; selezionata
      */
-    Attivita selezionaAttivitaPrenotata(Attivita attivita);
+    Event selezionaAttivitaPrenotata(Event attivita);
 
     /**
      * Metodo che permette di eliminare un'attivit&agrave;
@@ -72,5 +72,5 @@ public interface IClienteAttività {
      *                           selezionata
      * @param attivita attivit&agrave; prenotata da eliminare
      */
-    void eliminaAttivitaPrenotata(IControllerClienteAttivita controllerAttivita, Attivita attivita);
+    void eliminaAttivitaPrenotata(IControllerClienteAttivita controllerAttivita, Event attivita);
 }

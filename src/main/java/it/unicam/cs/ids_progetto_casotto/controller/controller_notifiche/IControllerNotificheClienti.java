@@ -1,12 +1,5 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_notifiche;
 
-import it.unicam.cs.ids_progetto_casotto.model.Cliente;
-import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
-import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
-import it.unicam.cs.ids_progetto_casotto.model.newsletter.Oggetto;
-
-import java.util.List;
-
 /**
  * Interfaccia che definisce un controller,
  * {@link ControllerNotifiche}, per gestire

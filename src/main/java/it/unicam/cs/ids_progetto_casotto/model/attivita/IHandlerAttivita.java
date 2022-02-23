@@ -42,7 +42,7 @@ public interface IHandlerAttivita {
      * @return true se l'attivit&agrave; risulta eliminate correttamente,
      * false altrimenti
      */
-    boolean eliminaAttivita(IControllerGestoreAttivita controllerGestoreAttivita, Attivita attivita);
+    boolean eliminaAttivita(IControllerGestoreAttivita controllerGestoreAttivita, Event attivita);
 
     /**
      * Metodo che permette al gestore
@@ -59,5 +59,5 @@ public interface IHandlerAttivita {
      * @return true se l'attivit&agrave; risulta rimandata correttamente,
      * false altrimenti
      */
-    boolean rimandaAttivita(IControllerGestoreAttivita controllerGestoreAttivita, IHandlerNewsletter receptionist, Attivita attivita, String nuovaData);
+    boolean rimandaAttivita(IControllerGestoreAttivita controllerGestoreAttivita, IHandlerNewsletter receptionist, Event attivita, String nuovaData);
 }

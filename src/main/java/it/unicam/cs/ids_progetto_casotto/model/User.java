@@ -1,9 +1,22 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Prenotazione;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-@MappedSuperclass
-public abstract class Persona implements IUtente{
+import javax.persistence.*;
+import java.util.Set;
+
+/**
+ * Classe che rappresenta un
+ * generico cliente che utilizzer&agrave;
+ * il sistema
+ */
+@Entity
+@Table(name = "user")
+@JsonIgnoreProperties(value = {"prenotazioni"})
+public class User implements IUtente{
 
     @Column
     @Id
@@ -22,7 +35,11 @@ public abstract class Persona implements IUtente{
     @Column
     private String email;
 
-    public Persona(){
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(targetEntity = Prenotazione.class, mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Prenotazione> prenotazioni;
+
+    public User(){
 
     }
 
@@ -66,4 +83,7 @@ public abstract class Persona implements IUtente{
     public void setEmail(String newEmail) {
         this.email = newEmail;
     }
+
+
+
 }

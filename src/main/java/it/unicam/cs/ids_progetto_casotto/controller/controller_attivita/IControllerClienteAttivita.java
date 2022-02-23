@@ -1,12 +1,9 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
-import it.unicam.cs.ids_progetto_casotto.model.attivita.Attivita;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Event;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Interfaccia che definisce un generico
@@ -21,7 +18,7 @@ public interface IControllerClienteAttivita {
      *
      * @return lista di attivit&agrave;
      */
-    List<Attivita> getAttivita();
+    List<Event> getAttivita();
 
     /**
      * Metodo che ritorna una singola attività
@@ -29,7 +26,7 @@ public interface IControllerClienteAttivita {
      * @param id l'id dell'attività
      * @return l'attività
      */
-    Attivita getSingolaAttivita(Integer id);
+    Event getSingolaAttivita(Integer id);
 
     /**
      * Metodo che ritorna il numero di
