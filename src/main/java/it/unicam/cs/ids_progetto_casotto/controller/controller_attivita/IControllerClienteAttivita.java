@@ -1,7 +1,6 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Event;
-import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Prenotazione;
 
 import java.util.List;
@@ -53,18 +52,5 @@ public interface IControllerClienteAttivita {
      */
     Prenotazione creaPrenotazioneAttivitaCliente(Prenotazione prenotazione);
 
-    /**
-     * Metodo che permette al cliente
-     * di eliminare una prenotazione di un'
-     * attivit&agrave; da lui effettuata e
-     * di avvisare il receptionist dell'eliminazione
-     * di tale attivit&agrave;
-     *
-     * @param receptionist da avvisare dell'eventuale
-     *                     cancellazione della prenotazione
-     * @param prenotazione da rimuovere
-     * @return true se la rimozione prevede il rimborso, false altrimenti
-     */
-    PrenotazioneAttivitaCliente eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, Integer id);
 
 }

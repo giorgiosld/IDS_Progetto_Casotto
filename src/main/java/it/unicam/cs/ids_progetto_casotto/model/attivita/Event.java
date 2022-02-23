@@ -2,7 +2,9 @@ package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,6 +20,8 @@ import java.util.*;
  */
 
 @Entity
+@Getter
+@Setter
 @Table(name="event")
 @JsonIgnoreProperties(value = {"prenotazione"}, allowSetters = true)
 public class Event {

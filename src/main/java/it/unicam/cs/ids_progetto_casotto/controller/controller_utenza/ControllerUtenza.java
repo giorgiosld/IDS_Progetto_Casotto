@@ -18,47 +18,67 @@ public class ControllerUtenza {
     @Autowired
     private ServiceUtenza serviceUtenza;
 
-    @Autowired
-    private ServicePeriodoUtenze servicePeriodoUtenze;
+    @GetMapping("/list")
+    public List<Utenza> getAllUtenze(){
+        return this.serviceUtenza.getAllUtenze();
+    }
 
-    @GetMapping
-    public List<Utenza> getAllUtenze() { return this.serviceUtenza.getAllUtenze(); }
+    @PostMapping("/addUtenza")
+    public Utenza addUtenza(@RequestBody Utenza utenza){
+        Optional<Utenza> toAdd = this.serviceUtenza.createUtenza(utenza);
+        return this.getUtenzaOrTrhownExecption(toAdd, HttpStatus.BAD_REQUEST);
+    }
 
     @GetMapping("/{id}")
-    public Utenza getUtenzaById(@PathVariable(value = "id") Integer id) {
-        Optional<Utenza> get = this.serviceUtenza.getUtenzaById(id);
-        return this.getUtenzaOrTrhownExecption(get, HttpStatus.NOT_FOUND);
+    public Utenza getOne(@PathVariable("id") Integer id){
+        Optional<Utenza> toGet = this.serviceUtenza.getUtenzaById(id);
+        return this.getUtenzaOrTrhownExecption(toGet, HttpStatus.NOT_FOUND);
+
     }
 
-    @GetMapping("/{tipo}")
-    public List<Utenza> getUtenzaByTipo(@PathVariable(value = "tipo")Tipo tipo) {
-        Optional<List<Utenza>> get = this.serviceUtenza.getUtenzaByTipo(tipo);
-        return this.getUtenzeOrThrownExecption(get, HttpStatus.NOT_FOUND);
+    @DeleteMapping("/{id}/elimina")
+    public Utenza delete(@PathVariable Integer id){
+        Optional<Utenza> removed = this.serviceUtenza.removeUtenza(id);
+        return this.getUtenzaOrTrhownExecption(removed, HttpStatus.NOT_FOUND);
     }
-
-    @GetMapping("/{idPeriodo}")
-    public List<Utenza> getUtenzeByPeriodo(@PathVariable(value = "idPeriodo")Integer idPeriodo) {
-        Optional<List<Utenza>> get = this.serviceUtenza.getUtenzeByPeriodo(idPeriodo);
-        return this.getUtenzeOrThrownExecption(get, HttpStatus.NOT_FOUND);
-    }
-
-    @PostMapping("/{tipo}")
-    public Utenza createUtenza(@PathVariable(value = "tipo")@RequestBody Tipo tipo) {
-        Optional<Utenza> added = this.serviceUtenza.createUtenza(tipo);
-        return this.getUtenzaOrTrhownExecption(added, HttpStatus.BAD_REQUEST);
-    }
-
-    @PostMapping("/{idPeriodo}/utenza")
-    public Utenza addUtenzaInPeriodo(@PathVariable(value = "idPeriodo") Integer idPeriodo, @RequestBody Utenza utenza) {
-        Optional<Utenza> added = this.serviceUtenza.addUtenzaInPeriodo(idPeriodo, utenza);
-        return this.getUtenzaOrTrhownExecption(added, HttpStatus.BAD_REQUEST);
-    }
-
-    @DeleteMapping("/periodo/{idPeriodo}/utenza/{idUtenza}")
-    public Utenza deleteUtenzaFromPeriodo(@PathVariable(value = "idPeriodo")Integer idPeriodo, @RequestBody Integer idUtenza) {
-        return null;
-    }
-
+//    @GetMapping
+//    public List<Utenza> getAllUtenze() { return this.serviceUtenza.getAllUtenze(); }
+//
+//    @GetMapping("/{id}")
+//    public Utenza getUtenzaById(@PathVariable(value = "id") Integer id) {
+//        Optional<Utenza> get = this.serviceUtenza.getUtenzaById(id);
+//        return this.getUtenzaOrTrhownExecption(get, HttpStatus.NOT_FOUND);
+//    }
+//
+//    @GetMapping("/{tipo}")
+//    public List<Utenza> getUtenzaByTipo(@PathVariable(value = "tipo")Tipo tipo) {
+//        Optional<List<Utenza>> get = this.serviceUtenza.getUtenzaByTipo(tipo);
+//        return this.getUtenzeOrThrownExecption(get, HttpStatus.NOT_FOUND);
+//    }
+//
+//    @GetMapping("/{idPeriodo}")
+//    public List<Utenza> getUtenzeByPeriodo(@PathVariable(value = "idPeriodo")Integer idPeriodo) {
+//        Optional<List<Utenza>> get = this.serviceUtenza.getUtenzeByPeriodo(idPeriodo);
+//        return this.getUtenzeOrThrownExecption(get, HttpStatus.NOT_FOUND);
+//    }
+//
+//    @PostMapping("/{tipo}")
+//    public Utenza createUtenza(@PathVariable(value = "tipo")@RequestBody Tipo tipo) {
+//        Optional<Utenza> added = this.serviceUtenza.createUtenza(tipo);
+//        return this.getUtenzaOrTrhownExecption(added, HttpStatus.BAD_REQUEST);
+//    }
+//
+//    @PostMapping("/{idPeriodo}/utenza")
+//    public Utenza addUtenzaInPeriodo(@PathVariable(value = "idPeriodo") Integer idPeriodo, @RequestBody Utenza utenza) {
+//        Optional<Utenza> added = this.serviceUtenza.addUtenzaInPeriodo(idPeriodo, utenza);
+//        return this.getUtenzaOrTrhownExecption(added, HttpStatus.BAD_REQUEST);
+//    }
+//
+//    @DeleteMapping("/periodo/{idPeriodo}/utenza/{idUtenza}")
+//    public Utenza deleteUtenzaFromPeriodo(@PathVariable(value = "idPeriodo")Integer idPeriodo, @RequestBody Integer idUtenza) {
+//        return null;
+//    }
+//
     private Utenza getUtenzaOrTrhownExecption(Optional<Utenza> utenza, HttpStatus status) {
         if (utenza.isEmpty()) {
             throw new ResponseStatusException(status);

@@ -1,82 +1,58 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_utenza;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Prenotazione;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.Periodo;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.Tariffa;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Classe che rappresenta una prenotazione
  * del cliente che viene gestita da
- * {@link ControllerPeriodo} e {@link it.unicam.cs.ids_progetto_casotto.model.Receptionist}
+ *
  */
 
+@Entity
+@Table(name = "prenotazione_utenza")
+@Getter
+@Setter
+@JsonIgnoreProperties(value = {"prenotazione"}, allowSetters = true)
 public class PrenotazioneUtenzaCliente {
 
-    private final int idCliente;
-    private final Periodo periodoPermanenza;
-    private final Utenza utenza;
-    private final Tariffa tariffa;
-    private final String orarioPrenotazione;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    public PrenotazioneUtenzaCliente(int idCliente, Periodo periodoPermanenza, Utenza utenza, Tariffa tariffa, String orarioPrenotazione) {
-        this.idCliente = idCliente;
-        this.periodoPermanenza = periodoPermanenza;
-        this.utenza = utenza;
-        this.tariffa = tariffa;
-        this.orarioPrenotazione = orarioPrenotazione;
+    @Column
+    private String tipo;
+
+    @Column
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime checkin;
+
+    @Column
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime checkout;
+
+    @ManyToOne(targetEntity = Utenza.class)
+    private Utenza utenza;
+
+    @ManyToOne(targetEntity = Prenotazione.class)
+    private Prenotazione prenotazione;
+
+    public PrenotazioneUtenzaCliente(){
+
     }
 
-    /**
-     * Metodo che ritorna
-     * l'id del cliente prenotato
-     *
-     * @return id cliente
-     */
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    /**
-     * Metodo che ritorna
-     * il periodo di permanenza
-     * del cliente
-     *
-     * @return periodo permamenza
-     */
-    public Periodo getPeriodoPermanenza() {
-        return periodoPermanenza;
-    }
-
-    /**
-     * Metodo che ritorna
-     * l'utenza prenotata
-     *
-     * @return utenza prenotata
-     */
-    public Utenza getUtenza() {
-        return utenza;
-    }
-
-    /**
-     * Metodo che ritorna
-     * la tariffa selezionata
-     *
-     * @return tariffa selezionata
-     */
-    public Tariffa getTariffa() {
-        return tariffa;
-    }
-
-    /**
-     * Metodo che ritorna
-     * l'orario in cui viene
-     * effettuata la prenotazione
-     *
-     * @return orario prenotazione
-     */
-    public LocalDate getOrarioPrenotazione() {
-        return LocalDate.parse(this.orarioPrenotazione);
-    }
 }

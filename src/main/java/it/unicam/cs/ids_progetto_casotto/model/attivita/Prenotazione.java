@@ -2,6 +2,7 @@ package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.ControllerAttivita;
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.PrenotazioneUtenzaCliente;
 import it.unicam.cs.ids_progetto_casotto.model.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,8 +38,13 @@ public class Prenotazione {
     @ManyToMany(targetEntity = Event.class, cascade = CascadeType.ALL)
     private Set<Event> eventiPrenotatiList;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(targetEntity = PrenotazioneUtenzaCliente.class, mappedBy = "prenotazione")
+    private Set<PrenotazioneUtenzaCliente> utenzaPrenotazioneList;
+
     public Prenotazione() {
-        eventiPrenotatiList = new HashSet<>();
+        this.eventiPrenotatiList = new HashSet<>();
+        this.utenzaPrenotazioneList = new HashSet<>();
     }
 
     public Integer getId() {
@@ -63,5 +69,13 @@ public class Prenotazione {
 
     public void setEventiPrenotatiList(Set<Event> eventiPrenotatiList) {
         this.eventiPrenotatiList = eventiPrenotatiList;
+    }
+
+    public Set<PrenotazioneUtenzaCliente> getUtenzaPrenotazioneList() {
+        return utenzaPrenotazioneList;
+    }
+
+    public void setUtenzaPrenotazioneList(Set<PrenotazioneUtenzaCliente> utenzaPrenotazioneList) {
+        this.utenzaPrenotazioneList = utenzaPrenotazioneList;
     }
 }

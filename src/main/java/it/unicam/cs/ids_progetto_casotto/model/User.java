@@ -2,6 +2,8 @@ package it.unicam.cs.ids_progetto_casotto.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Prenotazione;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -14,6 +16,8 @@ import java.util.Set;
  * il sistema
  */
 @Entity
+@Getter
+@Setter
 @Table(name = "user")
 @JsonIgnoreProperties(value = {"prenotazioni"}, allowSetters = true)
 public class User implements IUtente{

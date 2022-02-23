@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface RepositoryUtenze extends JpaRepository<Utenza,Integer> {
 
-    @Query("SELECT u FROM Utenza u WHERE u.id = ?1")
-    List<Utenza> findUtenzaByPeriodoId(Integer id);
+//    @Query("SELECT u FROM Utenza u WHERE u.id = ?1")
+//    List<Utenza> findUtenzaByPeriodoId(Integer id);
 }
