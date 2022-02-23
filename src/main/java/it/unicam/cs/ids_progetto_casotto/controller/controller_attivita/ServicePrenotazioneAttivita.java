@@ -24,7 +24,9 @@ public class ServicePrenotazioneAttivita {
     public Optional<Prenotazione> creaPrenotazioneAttivita(Prenotazione prenotazione) {
 
         Set<PrenotazioneUtenzaCliente> toAdd = prenotazione.getUtenzaPrenotazioneList();
-        this.repositoryPrenotazioneUtenza.saveAll(toAdd);
+        for (PrenotazioneUtenzaCliente prenotazionesingol: toAdd){
+            this.repositoryPrenotazioneUtenza.save(prenotazionesingol);
+        }
         return Optional.of(this.repositoryPrenotazione.save(prenotazione));
 
     }
