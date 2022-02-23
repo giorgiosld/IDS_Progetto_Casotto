@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "user")
-@JsonIgnoreProperties(value = {"prenotazioni"})
+@JsonIgnoreProperties(value = {"prenotazioni"}, allowSetters = true)
 public class User implements IUtente{
 
     @Column

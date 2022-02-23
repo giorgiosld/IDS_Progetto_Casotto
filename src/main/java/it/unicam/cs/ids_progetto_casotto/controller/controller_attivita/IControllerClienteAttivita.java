@@ -2,6 +2,7 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Event;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Prenotazione;
 
 import java.util.List;
 
@@ -47,13 +48,10 @@ public interface IControllerClienteAttivita {
      * di avvisare il receptionist di tale
      * prenotazione
      *
-     * @param receptionist a cui inviare la prenotazione
-     *                     effettuata dal cliente
-     * @param idCliente id del cliente che si &egrave; prenotato
-     * @param id attivit&agrave; che il cliente ha prenotato
-     * @return true se la prenotazione avviene con successo, false altrimenti
+     *
+     * @param prenotazione@return true se la prenotazione avviene con successo, false altrimenti
      */
-    PrenotazioneAttivitaCliente creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, Integer id);
+    Prenotazione creaPrenotazioneAttivitaCliente(Prenotazione prenotazione);
 
     /**
      * Metodo che permette al cliente

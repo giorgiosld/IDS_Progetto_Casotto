@@ -1,28 +1,27 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Prenotazione;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ServicePrenotazioneAttivita {
 
-    public ServicePrenotazioneAttivita(){
+    private RepositoryPrenotazione repositoryPrenotazione;
 
+    public ServicePrenotazioneAttivita(RepositoryPrenotazione repositoryPrenotazione){
+        this.repositoryPrenotazione = repositoryPrenotazione;
     }
 
-    public Optional<PrenotazioneAttivitaCliente> creaPrenotazioneAttivita(int idCliente, Integer id) {
+    public Optional<Prenotazione> creaPrenotazioneAttivita(Prenotazione prenotazione) {
 
-        /*Optional<Attivita> attivitaSelezionata = this.repositoryAttivita.findById(id);
-        PrenotazioneAttivitaCliente nuovaPrenotazione = new PrenotazioneAttivitaCliente();
-        nuovaPrenotazione.setAttivitaPrenotata(attivitaSelezionata.get());
-        nuovaPrenotazione.setIdCliente(idCliente);
-        nuovaPrenotazione.setOrarioPrenotazione();
-        nuovaPrenotazione.setIdCliente(id);
+        return Optional.of(this.repositoryPrenotazione.save(prenotazione));
+    }
 
-
-        return Optional.of(this.repositoryPrenotazioneAttivita.save(nuovaPrenotazione));*/
-        return Optional.empty();
+    public List<Prenotazione> getAll(){
+        return this.repositoryPrenotazione.findAll();
     }
 
     public Optional<PrenotazioneAttivitaCliente> eliminaPrenotazioneAttivitaCliente(Integer idPrenotazione) {

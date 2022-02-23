@@ -2,6 +2,7 @@ package it.unicam.cs.ids_progetto_casotto.controller.controller_attivita;
 
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Event;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.IHandlerPrenotazioniAttivitaClienti;
+import it.unicam.cs.ids_progetto_casotto.model.attivita.Prenotazione;
 import it.unicam.cs.ids_progetto_casotto.model.newsletter.IHandlerNewsletter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,63 +76,35 @@ public class ControllerAttivita implements IControllerClienteAttivita,IControlle
     }
 
     @Override
-    @PostMapping("/prenota/{id}")
-    public PrenotazioneAttivitaCliente creaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, int idCliente, @PathVariable("id")Integer id) {
-//         LocalDate t1 = LocalDate.now();
-//        String str = t1.toString();
-//        PrenotazioneAttivitaCliente prenotazioneAttivitaCliente = new PrenotazioneAttivitaCliente(idCliente, );
-//        if (!receptionist.aggiungiPrenotazioneAttivita(prenotazioneAttivitaCliente)) {
-//            System.out.println("Prenotazione di: " + prenotazioneAttivitaCliente + " non effettuata");
-//            return null;
-//
-//
-//        }
-//        receptionist.aggiungiPrenotazioneAttivita(prenotazioneAttivitaCliente);
-//        System.out.println("Prenotazione di: " + prenotazioneAttivitaCliente +" effettuata");
-//        return null;
-        PrenotazioneAttivitaCliente attivitaPrenotata = this.servicePrenotazioneAttivita.creaPrenotazioneAttivita(idCliente,id).get();
+    @PostMapping("/prenota")
+    public Prenotazione creaPrenotazioneAttivitaCliente(@RequestBody Prenotazione prenotazione) {
+        Optional<Prenotazione> booked = this.servicePrenotazioneAttivita.creaPrenotazioneAttivita(prenotazione);
+        return this.getPrenotazioneOrThrownException(booked, HttpStatus.BAD_REQUEST);
+    }
 
-
-        return attivitaPrenotata;
+    @GetMapping("/booked")
+    public List<Prenotazione> getAllPrenotazioni(){
+        return this.servicePrenotazioneAttivita.getAll();
     }
 
     @Override
     @DeleteMapping("/elimina/{id}")
     public PrenotazioneAttivitaCliente eliminaPrenotazioneAttivitaCliente(IHandlerPrenotazioniAttivitaClienti receptionist, @PathVariable("id") Integer idPrenotazione) {
 
-       /* receptionist.eliminaPrenotazioneAttivita(prenotazione);
-        if (checkRimborso(prenotazione)) {
-            System.out.println("Rimborso consentito!");
-            return null;
-        }
-        System.out.println("Rimborso negato!");
-        return null;
-        */
         PrenotazioneAttivitaCliente attivitaEliminata = this.servicePrenotazioneAttivita.eliminaPrenotazioneAttivitaCliente(idPrenotazione).get();
         return attivitaEliminata;
     }
 
-    private boolean checkRimborso(LocalDate primaData ) {
-        /*LocalDate dataSvolgimento = prenotazioneAttivita.getAttivitaPrenotata().getDataSvolgimento();
-        LocalDate now = LocalDate.now();
-        Period difference = Period.between(now,dataSvolgimento);
-        if (difference.getYears() >= 0 || difference.getMonths() >= 0 || difference.getDays() >= 2) {
-            return true;
-        }
-        return false;
-         */
-        LocalDate now = LocalDate.now();
-        Period difference = Period.between(now,primaData);
-        if (difference.getYears() >= 0 || difference.getMonths() >= 0 || difference.getDays() >= 2) {
-            return true;
-        }
-        return false;
-
-    }
 
     private Event getAttivitaOrThrownException(Optional<Event> attivita, HttpStatus status) {
         if (attivita.isEmpty())
             throw new ResponseStatusException(status);
         return attivita.get();
+    }
+
+    private Prenotazione getPrenotazioneOrThrownException(Optional<Prenotazione> prenotazione, HttpStatus status) {
+        if (prenotazione.isEmpty())
+            throw new ResponseStatusException(status);
+        return prenotazione.get();
     }
 }
