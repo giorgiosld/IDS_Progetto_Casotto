@@ -15,40 +15,31 @@ public class ServiceUtente {
         this.repositoryUtente = repositoryUtente;
     }
 
-    public List<User> getAll(){
-        return this.repositoryUtente.findAll();
+    public Optional<List<User>> getAllUser() {
+        List<User> utenti = this.repositoryUtente.findAll();
+        if (utenti.isEmpty()) { return Optional.empty(); }
+        return Optional.of(utenti);
     }
 
-    public Optional<User> getOne(Integer id){
-        Optional<User> toGet = this.repositoryUtente.findById(id);
-        if(toGet.isEmpty()){
-            return Optional.empty();
-        }
-        return toGet;
-    }
-    public Optional<User> addCliente(User cliente){
-        if((cliente.getNomeUtente().isEmpty())||(cliente.getCognomeUtente().isEmpty())||(cliente.getEmail().isEmpty())){
-            return Optional.empty();
-        }
-        return Optional.of(this.repositoryUtente.save(cliente));
+    public Optional<User> getUserById(Integer id) {
+        return this.repositoryUtente.findById(id);
     }
 
-    public Optional<User> removeCliente(Integer id){
-        Optional<User> toRemove = this.repositoryUtente.findById(id);
-        if(toRemove.isEmpty()){
-            return Optional.empty();
-        }
+    public Optional<User> getUserByIdPrenotazione(Integer idPrenotazione) {
+        Optional<User> user = Optional.of(this.repositoryUtente.findUserByPrenotazioneUtenzaSetId(idPrenotazione));
+        return user;
+    }
+
+    public Optional<User> addUserInRepo(User user) {
+        if (user == null || user.getNome() == null || user.getCognome() == null ||
+                user.getEmail() == null) { return Optional.empty(); }
+        return Optional.of(this.repositoryUtente.save(user));
+    }
+
+    public Optional<User> removeUserInRepo(Integer id) {
+        Optional<User> deleted = this.repositoryUtente.findById(id);
+        if (deleted.isEmpty()) { return Optional.empty(); }
         this.repositoryUtente.deleteById(id);
-        return toRemove;
-    }
-    public Optional<User> updateCliente(Integer id, User cliente){
-        if((cliente.getNomeUtente().isEmpty()) || (cliente.getCognomeUtente().isEmpty()) || (cliente.getEmail().isEmpty())){
-            return Optional.empty();
-        }
-        User toUpdate = this.repositoryUtente.getById(id);
-        toUpdate.setNome(cliente.getNomeUtente());
-        toUpdate.setCognome(cliente.getCognomeUtente());
-        toUpdate.setEmail(cliente.getEmail());
-        return Optional.of(this.repositoryUtente.save(toUpdate));
+        return deleted;
     }
 }

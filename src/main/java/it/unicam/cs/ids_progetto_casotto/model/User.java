@@ -1,7 +1,9 @@
 package it.unicam.cs.ids_progetto_casotto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import it.unicam.cs.ids_progetto_casotto.model.attivita.Prenotazione;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.PrenotazioneUtenza;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
@@ -42,6 +44,10 @@ public class User implements IUtente{
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(targetEntity = Prenotazione.class, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Prenotazione> prenotazioni;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<PrenotazioneUtenza> prenotazioneUtenzaSet;
 
     public User(){
 

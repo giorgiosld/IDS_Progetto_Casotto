@@ -1,5 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_utenza;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utente.RepositoryUtente;
+import it.unicam.cs.ids_progetto_casotto.model.User;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.PeriodoDisponibilita;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.PrenotazioneUtenza;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.Tariffa;
@@ -17,12 +19,12 @@ public class ServicePrenotazioneUtenze {
     private RepositoryPrenotazioneUtenza repositoryPrenotazioneUtenza;
     private RepositoryUtenza repositoryUtenza;
     private RepositoryTariffa repositoryTariffa;
-    private RepositoryUser repositoryUser;
+    private RepositoryUtente repositoryUser;
     private RepositoryPeriodo repositoryPeriodo;
 
     public ServicePrenotazioneUtenze(RepositoryPrenotazioneUtenza repositoryPrenotazioneUtenza,
                                      RepositoryUtenza repositoryUtenza, RepositoryTariffa repositoryTariffa,
-                                     RepositoryUser repositoryUser, RepositoryPeriodo repositoryPeriodo) {
+                                     RepositoryUtente repositoryUser, RepositoryPeriodo repositoryPeriodo) {
         this.repositoryPrenotazioneUtenza = repositoryPrenotazioneUtenza;
         this.repositoryUtenza = repositoryUtenza;
         this.repositoryTariffa = repositoryTariffa;

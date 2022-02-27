@@ -19,43 +19,33 @@ public class ControllerUtente implements IControllerUtente {
     @Autowired
     private ServiceUtente serviceUtente;
 
-
     @Override
-    @GetMapping("/list")
+    @GetMapping
     public List<User> getClienti() {
-        return this.serviceUtente.getAll();
+        return this.getClientiOrThrownException(this.serviceUtente.getAllUser(), HttpStatus.NOT_FOUND);
     }
 
     @Override
     @GetMapping("/{id}")
     public User getCliente(@PathVariable("id") Integer id) {
-        Optional<User> got = this.serviceUtente.getOne(id);
-        return this.getClienteOrThrownException(got,HttpStatus.NOT_FOUND);
+        return this.getClienteOrThrownException(this.serviceUtente.getUserById(id), HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/booking/{id}")
+    public User getUserByPrenotazioneId(@PathVariable("id") Integer id) {
+        return this.getClienteOrThrownException(this.serviceUtente.getUserByIdPrenotazione(id), HttpStatus.NOT_FOUND);
     }
 
     @Override
     @PostMapping("/register")
     public User addCliente(@RequestBody User cliente) {
-        Optional<User>added = this.serviceUtente.addCliente(cliente);
-        return this.getClienteOrThrownException(added,HttpStatus.BAD_REQUEST);
+        return this.getClienteOrThrownException(this.serviceUtente.addUserInRepo(cliente), HttpStatus.BAD_REQUEST);
     }
 
     @Override
     @DeleteMapping("/delete/{id}")
     public User removeCliente(@PathVariable("id") Integer id) {
-        Optional<User>removed = this.serviceUtente.removeCliente(id);
-        return this.getClienteOrThrownException(removed,HttpStatus.BAD_REQUEST);
-    }
-
-    @Override
-    @PutMapping("/update/{id}")
-    public User updateCliente(@PathVariable("id") Integer id, @RequestBody User cliente ) {
-        Optional<User> got = this.serviceUtente.getOne(id);
-        if(got.isEmpty()){
-            throw  new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        Optional<User> updated =this.serviceUtente.updateCliente(id,cliente);
-        return this.getClienteOrThrownException(updated,HttpStatus.BAD_REQUEST);
+        return this.getClienteOrThrownException(this.serviceUtente.removeUserInRepo(id), HttpStatus.NOT_FOUND);
     }
 
     private User getClienteOrThrownException(Optional<User> cliente, HttpStatus status){
@@ -63,6 +53,12 @@ public class ControllerUtente implements IControllerUtente {
             throw new ResponseStatusException(status);
         }
         return cliente.get();
+    }
+
+    private List<User> getClientiOrThrownException(Optional<List<User>> user, HttpStatus status) {
+        if (user.isEmpty())
+            throw new ResponseStatusException(status);
+        return user.get();
     }
 }
 

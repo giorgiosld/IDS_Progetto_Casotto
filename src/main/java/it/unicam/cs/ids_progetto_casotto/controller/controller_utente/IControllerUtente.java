@@ -43,5 +43,5 @@ public interface IControllerUtente {
      * @param id il cliente cercato
      * @return il cliente modificato
      */
-    public User updateCliente(Integer id, User cliente);
+    public User getUserByPrenotazioneId(Integer id);
 }

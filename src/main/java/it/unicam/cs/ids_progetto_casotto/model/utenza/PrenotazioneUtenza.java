@@ -1,6 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import it.unicam.cs.ids_progetto_casotto.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
