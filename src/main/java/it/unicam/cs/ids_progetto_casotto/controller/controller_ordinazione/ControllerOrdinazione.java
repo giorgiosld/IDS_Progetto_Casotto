@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,11 +62,9 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
     }
 
     @Override
-    @PostMapping("/ordina")
-    //public Comanda creaComanda(@RequestBody List<Consumazione> consumazioni, int idUtenza) {
-    public Comanda creaComanda(@RequestBody List<Consumazione> consumazioni){
-        //return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni, idUtenza).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST))
-        return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+    @PostMapping("/ordina/{id}")
+    public Comanda creaComanda(@RequestBody List<Consumazione> consumazioni,@PathVariable("id") Integer idUtenza) {
+        return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni, idUtenza).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
 

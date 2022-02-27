@@ -1,8 +1,10 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione;
 
+import it.unicam.cs.ids_progetto_casotto.controller.controller_utenza.RepositoryUtenza;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Comanda;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Consumazione;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.StatoComanda;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -11,14 +13,15 @@ import java.util.Optional;
 public class ServiceOrdinazioni {
 
     private RepositoryOrdinazioni repositoryOrdinazioni;
+    private RepositoryUtenza repositoryUtenza;
 
-    public ServiceOrdinazioni(RepositoryOrdinazioni repositoryOrdinazioni){
+    public ServiceOrdinazioni(RepositoryOrdinazioni repositoryOrdinazioni, RepositoryUtenza repositoryUtenza){
         this.repositoryOrdinazioni = repositoryOrdinazioni;
+        this.repositoryUtenza = repositoryUtenza;
     }
 
-    //Optional<Comanda> ordinaConsumazioni(List<Consumazione> consumazioni, int idUtenza){
-    public Optional<Comanda> ordinaConsumazioni(List<Consumazione> consumazioni){
-        //TODO finire una volta creato serviceUtenza
+    Optional<Comanda> ordinaConsumazioni(List<Consumazione> consumazioni, Integer idUtenza){
+    //public Optional<Comanda> ordinaConsumazioni(List<Consumazione> consumazioni){
         if (consumazioni == null) { Optional.empty(); }
         //add controllo utenza
         double prezzoTot = consumazioni.stream()
