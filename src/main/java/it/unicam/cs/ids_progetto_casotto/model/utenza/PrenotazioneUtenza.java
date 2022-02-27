@@ -1,63 +1,59 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
-/**
- * Classe che rappresenta una prenotazione
- * effettuata dall'utente
- */
+@Entity
+@Getter
+@Setter
+@Table(name = "prenotazione_utenza")
 public class PrenotazioneUtenza {
 
-    private final Periodo periodo;
-    private final Utenza utenza;
-    private final Tariffa tariffa;
-    private final String orarioPrenotazione;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    public PrenotazioneUtenza(Periodo periodo, Utenza utenza, Tariffa tariffa, String orarioPrenotazione) {
-        this.periodo = periodo;
-        this.utenza = utenza;
+    @Column(name = "check_in")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate checkIn;
+
+    @Column(name = "check_out")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate checkOut;
+
+    @ManyToOne(targetEntity = User.class,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    private User user;
+
+    @ManyToOne(targetEntity = Utenza.class,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "utenza_id", referencedColumnName = "id")
+    private Utenza utenza;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "tariffa_id", referencedColumnName = "id")
+    private Tariffa tariffa;
+
+
+    public PrenotazioneUtenza() {}
+
+    public void assegnaTariffa(Tariffa tariffa) {
         this.tariffa = tariffa;
-        this.orarioPrenotazione = orarioPrenotazione;
     }
 
-    /**
-     * Metodo che ritorna il
-     * periodo di permanenza
-     *
-     * @return periodo di permanenza
-     */
-    public Periodo getPeriodoPermamenza() {
-        return this.periodo;
+    public void assegnaUtente(User user) {
+        this.user = user;
     }
 
-    /**
-     * Metodo che ritorna l'
-     * utenza prenotata
-     *
-     * @return utenza prenotata
-     */
-    public Utenza getUtenza() {
-        return this.utenza;
+    public void assegnaUtenza(Utenza utenza) {
+        this.utenza = utenza;
     }
 
-    /**
-     * Metodo che ritorna la
-     * tariffa prenotata
-     *
-     * @return tariffa
-     */
-    public Tariffa getTariffa() {
-        return this.tariffa;
-    }
 
-    /**
-     * Metodo che ritorna l'
-     * orario in cui viene  effettuata
-     * la prenotazione
-     *
-     * @return orario della prenotazione
-     */
-    public LocalDate getOrarioPrenotazione() {
-        return LocalDate.parse(this.orarioPrenotazione);
-    }
 }

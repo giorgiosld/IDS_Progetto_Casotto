@@ -1,13 +1,13 @@
 package it.unicam.cs.ids_progetto_casotto.controller.controller_utenza;
 
-import it.unicam.cs.ids_progetto_casotto.model.utenza.Tipo;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,78 +18,73 @@ public class ControllerUtenza {
     @Autowired
     private ServiceUtenza serviceUtenza;
 
-    @GetMapping("/list")
-    public List<Utenza> getAllUtenze(){
+    @GetMapping
+    public List<Utenza> getAll() {
         return this.serviceUtenza.getAllUtenze();
     }
 
-    @PostMapping("/addUtenza")
-    public Utenza addUtenza(@RequestBody Utenza utenza){
-        Optional<Utenza> toAdd = this.serviceUtenza.createUtenza(utenza);
-        return this.getUtenzaOrTrhownExecption(toAdd, HttpStatus.BAD_REQUEST);
+    @GetMapping("/id_periodo/{idPeriodo}")
+    public List<Utenza> getUtenzaByIdPeriodo(@PathVariable("idPeriodo")Integer idPeriodo) {
+        return this.getUtenzeOrThrownException(this.serviceUtenza.getUtenzeByIdPeriodo(idPeriodo),HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{id}")
-    public Utenza getOne(@PathVariable("id") Integer id){
-        Optional<Utenza> toGet = this.serviceUtenza.getUtenzaById(id);
-        return this.getUtenzaOrTrhownExecption(toGet, HttpStatus.NOT_FOUND);
-
+    @GetMapping("/giorno/{giorno}")
+    public List<Utenza> getUtenzaByGiorno(@PathVariable("giorno")
+                                           @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                           LocalDate giorno) {
+        return this.getUtenzeOrThrownException(this.serviceUtenza.getUtenzeByGiorno(giorno), HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping("/{id}/elimina")
-    public Utenza delete(@PathVariable Integer id){
-        Optional<Utenza> removed = this.serviceUtenza.removeUtenza(id);
-        return this.getUtenzaOrTrhownExecption(removed, HttpStatus.NOT_FOUND);
+    @GetMapping("/giorno/{giorno}/orario/{orario}")
+    public List<Utenza> getUtenzeByGiornoByOrario(@PathVariable("giorno")
+                                                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+                                                              LocalDate giorno,
+                                                  @PathVariable("orario") String orario) {
+        return this.getUtenzeOrThrownException(this.serviceUtenza.getUtenzeByGiornoByOrario(giorno,orario), HttpStatus.NOT_FOUND);
     }
-//    @GetMapping
-//    public List<Utenza> getAllUtenze() { return this.serviceUtenza.getAllUtenze(); }
-//
-//    @GetMapping("/{id}")
-//    public Utenza getUtenzaById(@PathVariable(value = "id") Integer id) {
-//        Optional<Utenza> get = this.serviceUtenza.getUtenzaById(id);
-//        return this.getUtenzaOrTrhownExecption(get, HttpStatus.NOT_FOUND);
-//    }
-//
-//    @GetMapping("/{tipo}")
-//    public List<Utenza> getUtenzaByTipo(@PathVariable(value = "tipo")Tipo tipo) {
-//        Optional<List<Utenza>> get = this.serviceUtenza.getUtenzaByTipo(tipo);
-//        return this.getUtenzeOrThrownExecption(get, HttpStatus.NOT_FOUND);
-//    }
-//
-//    @GetMapping("/{idPeriodo}")
-//    public List<Utenza> getUtenzeByPeriodo(@PathVariable(value = "idPeriodo")Integer idPeriodo) {
-//        Optional<List<Utenza>> get = this.serviceUtenza.getUtenzeByPeriodo(idPeriodo);
-//        return this.getUtenzeOrThrownExecption(get, HttpStatus.NOT_FOUND);
-//    }
-//
-//    @PostMapping("/{tipo}")
-//    public Utenza createUtenza(@PathVariable(value = "tipo")@RequestBody Tipo tipo) {
-//        Optional<Utenza> added = this.serviceUtenza.createUtenza(tipo);
-//        return this.getUtenzaOrTrhownExecption(added, HttpStatus.BAD_REQUEST);
-//    }
-//
-//    @PostMapping("/{idPeriodo}/utenza")
-//    public Utenza addUtenzaInPeriodo(@PathVariable(value = "idPeriodo") Integer idPeriodo, @RequestBody Utenza utenza) {
-//        Optional<Utenza> added = this.serviceUtenza.addUtenzaInPeriodo(idPeriodo, utenza);
-//        return this.getUtenzaOrTrhownExecption(added, HttpStatus.BAD_REQUEST);
-//    }
-//
-//    @DeleteMapping("/periodo/{idPeriodo}/utenza/{idUtenza}")
-//    public Utenza deleteUtenzaFromPeriodo(@PathVariable(value = "idPeriodo")Integer idPeriodo, @RequestBody Integer idUtenza) {
-//        return null;
-//    }
-//
-    private Utenza getUtenzaOrTrhownExecption(Optional<Utenza> utenza, HttpStatus status) {
-        if (utenza.isEmpty()) {
+
+    @PostMapping()
+    public Utenza addUtenzaInRepo(@RequestBody Utenza utenza) {
+        return this.getUtenzaOrThrownException(this.serviceUtenza.addUtenzaInRepo(utenza), HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping("/add_utenza/{giorno}/fascia_oraria/{orario}/utenza/{id}")
+    public Utenza addUtenzaInPeriodo(@PathVariable("giorno")
+                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate giorno,
+                                     @PathVariable("orario") String orario,
+                                     @PathVariable Integer id) {
+        return this.getUtenzaOrThrownException(this.serviceUtenza.addUtenzaInPeriodo(giorno,orario,id), HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/periodo/{idPeriodo}/utenza/{id}")
+    public Utenza deleteUtenzaFromPeriodo(@PathVariable("idPeriodo")Integer idPeriodo, @PathVariable Integer id) {
+        return this.getUtenzaOrThrownException(this.serviceUtenza.removeUtenzaFromPeriodo(idPeriodo,id), HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/remove_utenza/{id}")
+    public Utenza deleteUtenza(@PathVariable("id") Integer id) {
+        return this.getUtenzaOrThrownException(this.serviceUtenza.removeUtenza(id), HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/remove_all_utenze/from_all_periodi")
+    public void deleteAllUtenzeFromAllPeriodi() {
+        this.serviceUtenza.removeAllUtenzeFromPeriodi();
+    }
+
+    @DeleteMapping("/remove_all_utenze")
+    public List<Utenza> deleteAllUtenze() {
+        return this.getUtenzeOrThrownException(this.serviceUtenza.removeAllUtenze(), HttpStatus.NOT_FOUND);
+    }
+
+    private Utenza getUtenzaOrThrownException(Optional<Utenza> utenza, HttpStatus status) {
+        if (utenza.isEmpty())
             throw new ResponseStatusException(status);
-        }
         return utenza.get();
     }
 
-    private List<Utenza> getUtenzeOrThrownExecption(Optional<List<Utenza>> utenze, HttpStatus status) {
-        if (utenze.isEmpty()) {
+    private List<Utenza> getUtenzeOrThrownException(Optional<List<Utenza>> utenza, HttpStatus status) {
+        if (utenza.isEmpty())
             throw new ResponseStatusException(status);
-        }
-        return utenze.get();
+        return utenza.get();
     }
 }
