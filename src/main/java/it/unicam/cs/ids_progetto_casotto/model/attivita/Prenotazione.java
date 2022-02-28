@@ -3,10 +3,13 @@ package it.unicam.cs.ids_progetto_casotto.model.attivita;
 
 import it.unicam.cs.ids_progetto_casotto.controller.controller_attivita.ControllerAttivita;
 import it.unicam.cs.ids_progetto_casotto.model.User;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -29,17 +32,21 @@ public class Prenotazione {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToOne(targetEntity = User.class)
+    @ManyToOne(optional = false,
+            targetEntity = User.class,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private User user;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(targetEntity = Event.class, cascade = CascadeType.ALL)
-    private Set<Event> eventiPrenotatiList;
+    @ManyToOne(targetEntity = Utenza.class,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "utenza_id", referencedColumnName = "id")
+    private Event attivita;
+
+
 
 
     public Prenotazione() {
-        this.eventiPrenotatiList = new HashSet<>();
     }
 
     public Integer getId() {
@@ -58,12 +65,10 @@ public class Prenotazione {
         this.user = user;
     }
 
-    public Set<Event> getEventiPrenotatiList() {
-        return eventiPrenotatiList;
+    public Event getEventiPrenotatiList() {
+        return attivita;
     }
 
-    public void setEventiPrenotatiList(Set<Event> eventiPrenotatiList) {
-        this.eventiPrenotatiList = eventiPrenotatiList;
-    }
+
 
 }

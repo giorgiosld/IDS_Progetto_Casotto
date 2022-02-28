@@ -40,10 +40,9 @@ public class User implements IUtente{
     @Column
     private String email;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(targetEntity = Prenotazione.class, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     @JsonIgnore
-    private Set<Prenotazione> prenotazioni;
+    private Set<Prenotazione> prenotazioneAttivita;
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore

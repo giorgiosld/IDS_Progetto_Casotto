@@ -64,11 +64,8 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
 
     @Override
     @PostMapping("/ordina/{id}")
-    //@PostMapping("/ordina")
     public Comanda creaComanda(@RequestBody Set<Consumazione> consumazioni,@PathVariable("id") Integer idUtenza) {
-    //public Comanda creaComanda(@RequestBody Set<Consumazione> consumazioni){
         return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni, idUtenza).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-        //return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
 

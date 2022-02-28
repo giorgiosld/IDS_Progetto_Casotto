@@ -74,10 +74,10 @@ public class ControllerAttivita{ //implements IControllerClienteAttivita,IContro
     }
 
     //@Override
-    @PostMapping("/prenota")
-    public Prenotazione creaPrenotazioneAttivitaCliente(@RequestBody Prenotazione prenotazione) {
-        Optional<Prenotazione> booked = this.servicePrenotazioneAttivita.creaPrenotazioneAttivita(prenotazione);
-        return this.getPrenotazioneOrThrownException(booked, HttpStatus.BAD_REQUEST);
+    @GetMapping("/prenota/user/{idUtente}/attivita/{id}")
+    public Prenotazione creaPrenotazioneAttivitaCliente(@PathVariable("idUtente")Integer idUser,
+                                                        @PathVariable("id") Integer idAttivita) {
+        return this.getPrenotazioneOrThrownException(this.servicePrenotazioneAttivita.creaPrenotazioneAttivita(idUser,idAttivita), HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/booked")
