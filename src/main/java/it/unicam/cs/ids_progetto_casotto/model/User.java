@@ -42,6 +42,7 @@ public class User implements IUtente{
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(targetEntity = Prenotazione.class, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Prenotazione> prenotazioni;
 
     @OneToMany(mappedBy = "user")

@@ -38,6 +38,11 @@ public class ControllerPrenotazioneUtenza {
         return this.getPrenotazioneOrThrownException(this.servicePrenotazioneUtenze.addPrenotazioneUtenza(idUtente,idTariffa,idUtenza,prenotazioneUtenza), HttpStatus.BAD_REQUEST);
     }
 
+    @DeleteMapping("/remove_prenotazione/{id}")
+    public PrenotazioneUtenza deletePrenotazioneById(@PathVariable("id")Integer id) {
+        return this.getPrenotazioneOrThrownException(this.servicePrenotazioneUtenze.deletePrenotazione(id), HttpStatus.NOT_FOUND);
+    }
+
     private PrenotazioneUtenza getPrenotazioneOrThrownException(Optional<PrenotazioneUtenza> prenotazioneUtenza, HttpStatus status) {
         if (prenotazioneUtenza.isEmpty())
             throw new ResponseStatusException(status);

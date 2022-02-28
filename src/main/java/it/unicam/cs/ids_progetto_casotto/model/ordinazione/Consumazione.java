@@ -1,12 +1,19 @@
 package it.unicam.cs.ids_progetto_casotto.model.ordinazione;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.lang.NonNull;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Classe astratta rappresentante una generica consumazione
  */
 @Entity
+@Getter
+@Setter
 @Table(name = "ArticoloBar")
 public class Consumazione {
 
@@ -22,7 +29,16 @@ public class Consumazione {
     @Column(length = 500)
     private double prezzo;
 
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.ALL},
+            mappedBy = "consumazioni")
+    @JsonIgnore
+    private Set<Comanda> comande;
+
     public Consumazione(){
+        this.comande = new HashSet<>();
     }
 
     /**

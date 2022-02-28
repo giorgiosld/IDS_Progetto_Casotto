@@ -1,6 +1,7 @@
 package it.unicam.cs.ids_progetto_casotto.model.utenza;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Comanda;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,9 +35,14 @@ public class Utenza {
     @JsonIgnore
     private Set<PrenotazioneUtenza> prenotazioneUtenzaSet;
 
+    @OneToMany(mappedBy = "utenza")
+    @JsonIgnore
+    private Set<Comanda> comande;
+
 
     public Utenza() {
         this.periodi = new HashSet<>();
         this.prenotazioneUtenzaSet = new HashSet<>();
+        this.comande = new HashSet<>();
     }
 }

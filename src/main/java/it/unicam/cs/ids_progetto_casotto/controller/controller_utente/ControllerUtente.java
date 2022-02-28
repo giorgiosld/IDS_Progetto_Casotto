@@ -20,7 +20,7 @@ public class ControllerUtente implements IControllerUtente {
     private ServiceUtente serviceUtente;
 
     @Override
-    @GetMapping
+    @GetMapping()
     public List<User> getClienti() {
         return this.getClientiOrThrownException(this.serviceUtente.getAllUser(), HttpStatus.NOT_FOUND);
     }

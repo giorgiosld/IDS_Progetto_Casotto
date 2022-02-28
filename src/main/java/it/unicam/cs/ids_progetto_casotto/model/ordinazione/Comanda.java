@@ -1,41 +1,62 @@
 package it.unicam.cs.ids_progetto_casotto.model.ordinazione;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.unicam.cs.ids_progetto_casotto.controller.controller_ordinazione.ControllerOrdinazione;
+import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Classe che rappresenta una generica comanda contenuta all'interno del {@link ControllerOrdinazione}
  */
 @Entity
+@Getter
+@Setter
+@Table(name = "comanda")
 public class Comanda {
 
     @Id
     @Column
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer idComanda;
+
     @Column
     private double prezzoTotale;
-    @Column
-    @NonNull
-    @OneToMany
-    @JoinColumn
-    private List<Consumazione> consumazioni;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.ALL})
+    @JoinTable(
+            name = "consumazioni_disponibile",
+            joinColumns = @JoinColumn(name = "idComanda"),
+            inverseJoinColumns = @JoinColumn(name = "id_")
+    )
+    private Set<Consumazione> consumazioni;
+
     @Column
     @Enumerated(EnumType.STRING)
     private StatoComanda statoComanda;
+
     @Column
     private LocalDateTime orarioCreazione;
 
+    @ManyToOne(targetEntity = Utenza.class,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "utenza_id", referencedColumnName = "id")
+    private Utenza utenza;
 
     public Comanda(){
         this.orarioCreazione = LocalDateTime.now();
         this.statoComanda = StatoComanda.CREATA;
-        this.consumazioni = new ArrayList<>();
+        this.consumazioni = new HashSet<>();
     }
 
 
@@ -48,7 +69,7 @@ public class Comanda {
         return this.idComanda;
     }
 
-    public void setConsumazioni(List<Consumazione> consumazioniToAdd){
+    public void setConsumazioni(Set<Consumazione> consumazioniToAdd){
         this.consumazioni.addAll(consumazioniToAdd);
     }
 
@@ -57,7 +78,7 @@ public class Comanda {
      *
      * @return lista consumazioni scelte dal cliente
      */
-    public List<Consumazione> getConsumazioni() {
+    public Set<Consumazione> getConsumazioni() {
         return consumazioni;
     }
 
@@ -105,4 +126,5 @@ public class Comanda {
                 ", data creazione=" + orarioCreazione +
                 '}';
     }
+
 }

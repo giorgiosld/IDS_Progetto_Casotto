@@ -76,6 +76,8 @@ public class ControllerUtenza {
         return this.getUtenzeOrThrownException(this.serviceUtenza.removeAllUtenze(), HttpStatus.NOT_FOUND);
     }
 
+
+
     private Utenza getUtenzaOrThrownException(Optional<Utenza> utenza, HttpStatus status) {
         if (utenza.isEmpty())
             throw new ResponseStatusException(status);

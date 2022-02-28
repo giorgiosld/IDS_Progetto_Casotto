@@ -61,6 +61,67 @@ public class ServicePrenotazioneUtenze {
         return Optional.of(this.repositoryPrenotazioneUtenza.save(this.setPrenotazione(utente.get(), tariffa.get(), utenza.get(), prenotazioneUtenza)));
     }
 
+    public Optional<PrenotazioneUtenza> deletePrenotazione(Integer id) {
+        Optional<PrenotazioneUtenza> deleted = this.repositoryPrenotazioneUtenza.findById(id);
+        if (deleted.isEmpty()) { return Optional.empty(); }
+        PrenotazioneUtenza prenotazioneUtenza = deleted.get();
+        this.resetRepos(prenotazioneUtenza);
+        if (prenotazioneUtenza.getCheckIn().equals(prenotazioneUtenza.getCheckOut())) {
+            this.deletePrenotazioneUnGiorno(prenotazioneUtenza);
+        } else {
+            this.deletePrenotazionePiuGiorni(prenotazioneUtenza);
+        }
+        this.repositoryPrenotazioneUtenza.deleteById(id);
+        return deleted;
+    }
+
+    private void deletePrenotazionePiuGiorni(PrenotazioneUtenza prenotazioneUtenza) {
+        for (LocalDate date = prenotazioneUtenza.getCheckIn(); date.isBefore(prenotazioneUtenza.getCheckOut().plusDays(1)); date = date.plusDays(1)) {
+            PeriodoDisponibilita giornata = this.repositoryPeriodo.findByGiornoAndFasciaOraria(date,"giornata");
+            giornata.addUtenza(prenotazioneUtenza.getUtenza());
+            this.repositoryPeriodo.save(giornata);
+            PeriodoDisponibilita mattino = this.repositoryPeriodo.findByGiornoAndFasciaOraria(date,"mattino");
+            mattino.addUtenza(prenotazioneUtenza.getUtenza());
+            this.repositoryPeriodo.save(mattino);
+            PeriodoDisponibilita pomeriggio = this.repositoryPeriodo.findByGiornoAndFasciaOraria(date,"pomeriggio");
+            pomeriggio.addUtenza(prenotazioneUtenza.getUtenza());
+            this.repositoryPeriodo.save(pomeriggio);
+        }
+    }
+
+    private void deletePrenotazioneUnGiorno(PrenotazioneUtenza prenotazioneUtenza) {
+        PeriodoDisponibilita periodo = this.repositoryPeriodo.findByGiornoAndFasciaOraria(prenotazioneUtenza.getCheckIn(),prenotazioneUtenza.getTariffa().getFasciaOraria());
+        periodo.addUtenza(prenotazioneUtenza.getUtenza());
+        this.repositoryPeriodo.save(periodo);
+        if (prenotazioneUtenza.getTariffa().getFasciaOraria().equals("giornata")) {
+            PeriodoDisponibilita mattino = this.repositoryPeriodo.findByGiornoAndFasciaOraria(prenotazioneUtenza.getCheckIn(),"mattino");
+            mattino.addUtenza(prenotazioneUtenza.getUtenza());
+            this.repositoryPeriodo.save(mattino);
+            PeriodoDisponibilita pomeriggio = this.repositoryPeriodo.findByGiornoAndFasciaOraria(prenotazioneUtenza.getCheckIn(),"pomeriggio");
+            pomeriggio.addUtenza(prenotazioneUtenza.getUtenza());
+            this.repositoryPeriodo.save(pomeriggio);
+        } else {
+            PeriodoDisponibilita giornata = this.repositoryPeriodo.findByGiornoAndFasciaOraria(prenotazioneUtenza.getCheckIn(),"giornata");
+            giornata.addUtenza(prenotazioneUtenza.getUtenza());
+            this.repositoryPeriodo.save(giornata);
+        }
+    }
+
+    private void resetRepos(PrenotazioneUtenza prenotazioneUtenza) {
+        Tariffa tariffa = prenotazioneUtenza.getTariffa();
+        prenotazioneUtenza.setTariffa(null);
+        tariffa.getPrenotazioneUtenzaSet().remove(prenotazioneUtenza);
+        this.repositoryTariffa.save(tariffa);
+        User user = prenotazioneUtenza.getUser();
+        prenotazioneUtenza.setUser(null);
+        user.getPrenotazioneUtenzaSet().remove(prenotazioneUtenza);
+        this.repositoryUser.save(user);
+        Utenza utenza = prenotazioneUtenza.getUtenza();
+        prenotazioneUtenza.setUtenza(null);
+        utenza.getPrenotazioneUtenzaSet().remove(prenotazioneUtenza);
+        this.repositoryUtenza.save(utenza);
+    }
+
     private PrenotazioneUtenza setPrenotazione(User user, Tariffa tariffa, Utenza utenza, PrenotazioneUtenza prenotazioneUtenza) {
         prenotazioneUtenza.assegnaUtente(user);
         user.getPrenotazioneUtenzaSet().add(prenotazioneUtenza);

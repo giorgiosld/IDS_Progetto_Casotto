@@ -5,13 +5,16 @@ import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Comanda;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.Consumazione;
 import it.unicam.cs.ids_progetto_casotto.model.ordinazione.StatoComanda;
 import it.unicam.cs.ids_progetto_casotto.model.utenza.Utenza;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ServiceOrdinazioni {
 
+    private Integer idComanda = 1;
     private RepositoryOrdinazioni repositoryOrdinazioni;
     private RepositoryUtenza repositoryUtenza;
 
@@ -20,18 +23,20 @@ public class ServiceOrdinazioni {
         this.repositoryUtenza = repositoryUtenza;
     }
 
-    Optional<Comanda> ordinaConsumazioni(List<Consumazione> consumazioni, Integer idUtenza){
-    //public Optional<Comanda> ordinaConsumazioni(List<Consumazione> consumazioni){
+    Optional<Comanda> ordinaConsumazioni(Set<Consumazione> consumazioni, Integer idUtenza){
+    //public Optional<Comanda> ordinaConsumazioni(Set<Consumazione> consumazioni){
         if (consumazioni == null) { Optional.empty(); }
-        //add controllo utenza
+        if(this.repositoryUtenza.existsById(idUtenza))
+            Optional.empty();
         double prezzoTot = consumazioni.stream()
                 .mapToDouble(Consumazione::getPrezzo)
                 .sum();
         Comanda nuovaComanda = new Comanda();
+        nuovaComanda.setIdComanda(idComanda++);
         nuovaComanda.setConsumazioni(consumazioni);
         nuovaComanda.setPrezzoTotale(prezzoTot);
-        return Optional.of(repositoryOrdinazioni.save(nuovaComanda));
-
+        this.repositoryOrdinazioni.save(nuovaComanda);
+        return Optional.of(nuovaComanda);
     }
 
     public Optional<Comanda> getComanda(Integer id){

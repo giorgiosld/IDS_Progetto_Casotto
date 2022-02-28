@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Classe che implementa un controller per le ordinazioni. Si possono effettuare varie operazioni tutte ineresnti alla
@@ -63,8 +64,11 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
 
     @Override
     @PostMapping("/ordina/{id}")
-    public Comanda creaComanda(@RequestBody List<Consumazione> consumazioni,@PathVariable("id") Integer idUtenza) {
+    //@PostMapping("/ordina")
+    public Comanda creaComanda(@RequestBody Set<Consumazione> consumazioni,@PathVariable("id") Integer idUtenza) {
+    //public Comanda creaComanda(@RequestBody Set<Consumazione> consumazioni){
         return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni, idUtenza).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        //return this.serviceOrdinazioni.ordinaConsumazioni(consumazioni).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
 
@@ -90,7 +94,6 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
         return this.serviceOrdinazioni.getStatus(id);
     }
 
-    //TODO sistemare problema del non modifica stato
     @Override
     @PutMapping("/ordinazione{id}/setstato")
     public StatoComanda setStatoComanda(@PathVariable Integer id,@RequestBody StatoComanda nuovoStato) {
@@ -98,7 +101,6 @@ public class ControllerOrdinazione implements IControllerStaffOrdinazione, ICont
         if(got.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return this.serviceOrdinazioni.setStatus(id, nuovoStato);
-        //return this.getStatoConsumazioneOrThrownExcpetion(updated, HttpStatus.BAD_REQUEST);
     }
 
     private Consumazione getConsumazioneOrThrownException(Optional<Consumazione> consumazione, HttpStatus status) {
