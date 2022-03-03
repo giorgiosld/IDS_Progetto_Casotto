@@ -49,7 +49,7 @@ public class Prenotazione {
     public Prenotazione() {
     }
 
-    public Integer getId() {
+    /*public Integer getId() {
         return id;
     }
 
@@ -67,7 +67,7 @@ public class Prenotazione {
 
     public Event getEventiPrenotatiList() {
         return attivita;
-    }
+    }*/
 
 
 
